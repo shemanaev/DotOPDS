@@ -1,0 +1,31 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+@using DotOPDS.Utils
+@{
+    ViewBag.Title = "Search";
+    Layout = "_Layout.cshtml";
+}
+
+<style>
+* {font-family: Open Sans;}
+h3 {font-family: Lobster;}
+</style>
+
+<h3>Библиотека</h3>
+<span>@Html.CurrentLocale</span>
+
+@if (Model != null) {
+	foreach (var book in Model)
+	{
+		@{
+			// TODO: use first author for filename
+			var filename = string.Format("author-{0}", book.Book.Title);
+			filename = UrlNameEncoder.Encode(filename);
+		}
+		<div>
+			<b>@book.Book.File</b> &nbsp; <span>@book.Book.Title</span>
+			<a href="/download/@(book.Id)/@filename.@(book.Book.Ext)">Download</a>
+		</div>
+	}
+} else {
+	<div>no qiery</div>
+}

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DADC4B48-D96A-47D6-A88B-EA764F91C57B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DotOPDS.Assets</RootNamespace>
+    <AssemblyName>DotOPDS.Assets</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Noop.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="css\fonts.css" />
+    <EmbeddedResource Include="opensearch.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fonts\lobster-v16-latin_cyrillic-regular.woff" />
+    <EmbeddedResource Include="fonts\lobster-v16-latin_cyrillic-regular.woff2" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-700.woff" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-700.woff2" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-700italic.woff" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-700italic.woff2" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-italic.woff" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-italic.woff2" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-regular.woff" />
+    <EmbeddedResource Include="fonts\open-sans-v13-latin_cyrillic-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="default.conf.example" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\InternalServerError.html" />
+    <EmbeddedResource Include="Views\NotFound.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Search.cshtml" />
+    <EmbeddedResource Include="Views\_Layout.cshtml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

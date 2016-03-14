@@ -1,0 +1,3 @@
+[submodule "external/Nancy.EmbeddedContent"]
+	path = external/Nancy.EmbeddedContent
+	url = https://github.com/jugglingnutcase/Nancy.EmbeddedContent.git

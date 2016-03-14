@@ -1,0 +1,9 @@
+; Top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = CRLF
+
+[*.{conf, conf.example}]
+indent_style = space
+indent_size = 2

@@ -1,0 +1,25 @@
+# -*-mode: yaml -*-
+
+port: 8080
+
+database: test.db # %APPDATA%/DotOPDS/test.db
+
+log:
+  enabled: true
+  path: logs # %APPDATA%/DotOPDS/logs
+  level: debug
+
+authentication:
+  enabled: true
+  attempts: 3
+  users:
+    - login: nis
+      pass: 123
+  banned:
+    - 192.168.0.254
+
+pagination: 30
+
+libraries:
+  - id: 2f363c85-adb9-4608-bccd-092f99191d51
+    path: c:/lib

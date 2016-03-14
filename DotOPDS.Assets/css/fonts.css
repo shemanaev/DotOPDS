@@ -1,0 +1,46 @@
+/* open-sans-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'),
+       url('/static/fonts/open-sans-v13-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+ */
+       url('/static/fonts/open-sans-v13-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-italic - latin_cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('OpenSans-Italic'),
+       url('/static/fonts/open-sans-v13-latin_cyrillic-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+ */
+       url('/static/fonts/open-sans-v13-latin_cyrillic-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-700 - latin_cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'),
+       url('/static/fonts/open-sans-v13-latin_cyrillic-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+ */
+       url('/static/fonts/open-sans-v13-latin_cyrillic-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-700italic - latin_cyrillic */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'),
+       url('/static/fonts/open-sans-v13-latin_cyrillic-700italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+ */
+       url('/static/fonts/open-sans-v13-latin_cyrillic-700italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* lobster-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Lobster';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lobster'), local('Lobster-Regular'),
+       url('/static/fonts/lobster-v16-latin_cyrillic-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+ */
+       url('/static/fonts/lobster-v16-latin_cyrillic-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}

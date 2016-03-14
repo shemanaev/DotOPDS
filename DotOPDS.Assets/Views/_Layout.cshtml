@@ -1,0 +1,12 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+	<link rel="stylesheet" href="/static/css/fonts.css">
+</head>
+<body>
+    <div id="container">
+        @RenderBody()
+    </div>
+</body>
+</html>
