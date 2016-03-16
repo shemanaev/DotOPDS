@@ -14,7 +14,7 @@ namespace DotOPDS.Commands
             var opts = (ServeOptions)options;
             Settings.Load(opts.Config);
 
-            var endpoint = new IPEndPoint(IPAddress.Loopback, Settings.Instance.Port);
+            var endpoint = new IPEndPoint(IPAddress.Any, Settings.Instance.Port);
             var server = new Web.WebServer(endpoint);
 
             Log.Debug("Web server started at {Endpoint}", endpoint);
