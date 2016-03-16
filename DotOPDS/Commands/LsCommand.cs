@@ -11,7 +11,7 @@ namespace DotOPDS.Commands
             Console.WriteLine("Libraries available:");
             foreach (var lib in Settings.Instance.Libraries)
             {
-                Console.WriteLine("\t{0}", lib.Path);
+                Console.WriteLine("\t{0}", lib.Value);
             }
 
             return 0;

@@ -82,7 +82,7 @@ namespace DotOPDS.Commands
             importerRunning = false;
             watch.Stop();
 
-            Settings.Instance.Libraries.Add(new SettingsLibrary { Id = libId, Path = libPath });
+            Settings.Instance.Libraries.Add(libId, libPath);
             Settings.Save();
 
             status.Update("Done in {0}", watch.Elapsed);

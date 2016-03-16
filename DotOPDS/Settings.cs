@@ -14,7 +14,8 @@ namespace DotOPDS
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; }
         public int Pagination { get; set; }
-        public List<SettingsLibrary> Libraries { get; set; }
+        public List<SettingsConverter> Converters { get; set; }
+        public Dictionary<Guid, string> Libraries { get; set; }
 
         #region Static routines
         public static string FileName { get; private set; }
@@ -68,7 +69,7 @@ namespace DotOPDS
             }
             if (instance.Libraries == null)
             {
-                instance.Libraries = new List<SettingsLibrary>();
+                instance.Libraries = new Dictionary<Guid, string>();
             }
         }
         #endregion
@@ -95,9 +96,9 @@ namespace DotOPDS
         public string Pass { get; set; }
     }
 
-    public class SettingsLibrary
+    public class SettingsConverter
     {
-        public Guid Id { get; set; }
-        public string Path { get; set; }
+        public string Ext { get; set; }
+        public string Command { get; set; }
     }
 }
