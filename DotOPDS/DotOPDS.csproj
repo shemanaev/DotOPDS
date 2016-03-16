@@ -171,15 +171,18 @@
     <Compile Include="Utils\ConsoleStatus.cs" />
     <Compile Include="Utils\InpxParser.cs" />
     <Compile Include="Utils\PathUtil.cs" />
+    <Compile Include="Utils\Helpers.cs" />
     <Compile Include="Utils\Resource.cs" />
-    <Compile Include="Utils\UrlNameEncoder.cs" />
     <Compile Include="Web\Bootstrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\Controllers\BaseRoute.cs" />
+    <Compile Include="Web\Controllers\Download.cs" />
+    <Compile Include="Web\Controllers\Index.cs" />
     <Compile Include="Web\Controllers\InternalServerError.cs" />
     <Compile Include="Web\Controllers\PageNotFound.cs" />
     <Compile Include="Web\Controllers\Search.cs" />
+    <Compile Include="Web\RazorConfig.cs" />
     <Compile Include="Web\WebServer.cs" />
   </ItemGroup>
   <ItemGroup>

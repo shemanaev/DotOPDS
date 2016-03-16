@@ -1,12 +1,56 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>@ViewBag.Title</title>
-	<link rel="stylesheet" href="/static/css/fonts.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/fonts.css">
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    <div id="container">
-        @RenderBody()
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="/">
+                    <h3 class="title">Библиотека</h3>
+                </a>
+            </div>
+        </div>
+
+        <form method="get" action="/search">
+            <div class="row">
+                <div class="col-sm-10 col-xs-12">
+                    <div class="input-group" id="search-holder">
+                        <input class="form-control" type="text" name="q" value="@(Request.Query.q ?? "")" placeholder="Поиск по книгам, сериям, авторам..." autofocus onfocus="this.value = this.value;">
+                        <span class="input-group-btn hidden-lg hidden-md hidden-sm">
+                            <button class="btn btn-info" type="submit">Искать!</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-2 hidden-xs">
+                    <button class="btn btn-info form-control" type="submit">Искать!</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-xs-12">
+                @RenderBody()
+            </div>
+        </div>
     </div>
+    <script src="/static/vendor/jquery/jquery-2.2.1.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+@if (ViewBag.LuceneQuery != null)
+{
+<!--
+Query:	@Html.Raw(ViewBag.LuceneQuery)
+Time:	@Html.Raw(ViewBag.LuceneQueryTime)
+@Html.CurrentLocale
+-->
+}

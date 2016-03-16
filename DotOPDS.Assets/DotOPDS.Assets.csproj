@@ -63,15 +63,45 @@
     <EmbeddedResource Include="default.conf.example" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\InternalServerError.html" />
-    <EmbeddedResource Include="Views\NotFound.html" />
+    <EmbeddedResource Include="views\InternalServerError.html" />
+    <EmbeddedResource Include="views\NotFound.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Search.cshtml" />
-    <EmbeddedResource Include="Views\_Layout.cshtml" />
+    <EmbeddedResource Include="views\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="views\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="css\main.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="views\_Book.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="vendor\bootstrap\css\bootstrap.min.css" />
+    <EmbeddedResource Include="vendor\bootstrap\js\bootstrap.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <EmbeddedResource Include="views\Pager.cshtml" />
+    <EmbeddedResource Include="views\Search\Genre.cshtml" />
+    <EmbeddedResource Include="views\Search\Search.cshtml" />
+    <EmbeddedResource Include="views\Search\Author.cshtml" />
+    <EmbeddedResource Include="views\Search\Series.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="vendor\jquery\jquery-2.2.1.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

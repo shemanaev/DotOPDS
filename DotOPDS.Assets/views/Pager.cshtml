@@ -1,0 +1,70 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@helper Maybe(bool condition, Func<HelperResult> f)
+{
+    @if (condition)
+    {
+        @f()
+    }
+}
+
+@helper SearchQuery(string query, int page = 0)
+{
+    var res = query;
+    @if (page > 0)
+    {
+        res += "&page=" + page;
+    }
+    @:href="@res"
+}
+
+@helper PageDisabled()
+{
+    @:class="disabled"
+}
+
+@helper Pager(int page, int total, string query)
+{
+    var maxPages = 5;
+    int sp = 1;
+
+    // Starting point
+    @if (page < maxPages)
+    {
+        sp = 1;
+    }
+    else if (page >= (total - (int)Math.Floor((double)maxPages / 2)))
+    {
+        sp = total - maxPages + 1;
+    }
+    else if (page >= maxPages)
+    {
+        sp = page - (int)Math.Floor((double)maxPages / 2);
+    }
+
+    @if (total > 1)
+    {
+        <nav class="pagination-fix">
+          <ul class="pagination">
+            <li @Maybe(page <= 1, PageDisabled)>
+              <a aria-label="Previous" @Maybe(page > 1, () => SearchQuery(query, page - 1))>
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+            @for (var i = sp; i <= (sp + maxPages - 1); i++)
+            {
+                <li @Maybe(page == i, PageDisabled)>
+                    <a @Maybe(page != i, () => SearchQuery(query, i))>@i</a>
+                </li>
+            }
+
+            <li @Maybe(page + 1 > total, PageDisabled)>
+              <a aria-label="Next" @Maybe(page < total, () => SearchQuery(query, page + 1))>
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+    }
+}
