@@ -6,11 +6,13 @@ using Nancy.Diagnostics;
 using Nancy.EmbeddedContent;
 using Nancy.EmbeddedContent.Conventions;
 using Nancy.TinyIoc;
-using Nancy.ViewEngines;
+using Serilog;
+using System;
+using System.IO;
 
 namespace DotOPDS.Web
 {
-    class Bootstrapper : DefaultNancyBootstrapper
+    public class Bootstrapper : DefaultNancyBootstrapper
     {
         private byte[] favicon;
 
@@ -37,6 +39,8 @@ namespace DotOPDS.Web
 
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
+            base.ApplicationStartup(container, pipelines);
+            StaticConfiguration.DisableErrorTraces = false;
             StaticConfiguration.EnableRequestTracing = true;
         }
 #else
@@ -49,7 +53,16 @@ namespace DotOPDS.Web
         {
             base.ConfigureConventions(conventions);
 
+#if DEBUG
+            conventions.StaticContentsConventions.AddDirectory("/static", ".");
+#else
             conventions.StaticContentsConventions.AddEmbeddedDirectory("/static", Resource.Assembly, "..");
+#endif
+        }
+
+        protected override IRootPathProvider RootPathProvider
+        {
+            get { return new DebugPathProvider(); }
         }
 
         protected override void ConfigureApplicationContainer(TinyIoCContainer container)
@@ -71,6 +84,16 @@ namespace DotOPDS.Web
         void OnConfigurationBuilder(NancyInternalConfiguration x)
         {
             x.ViewLocationProvider = typeof(EmbeddedViewLocationProvider);
+        }
+    }
+
+    class DebugPathProvider : IRootPathProvider
+    {
+        private static string basePath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"../../../DotOPDS.Assets/"));
+
+        public string GetRootPath()
+        {
+            return basePath;
         }
     }
 }
