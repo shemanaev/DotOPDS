@@ -20,3 +20,6 @@ authentication:
 
 pagination: 30
 
+converters:
+  - ext: epub
+    command: converters/fb2epub/fb2epub.exe {src} {dest}
