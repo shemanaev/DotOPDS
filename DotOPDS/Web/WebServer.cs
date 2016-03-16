@@ -22,7 +22,8 @@ namespace DotOPDS.Web
 
             var builder = ServerBuilder.New()
                 .SetEndPoint(endpoint)
-                .SetOwinApp(appFunc);
+                .SetOwinApp(appFunc)
+                .SetServerHeader("DotOPDS");
 
             server = builder.Start();
         }

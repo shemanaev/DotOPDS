@@ -34,7 +34,6 @@ namespace DotOPDS.Web.Controllers
                     await Task.Delay(0); // FIXME
                     watchRequest.Stop();
 
-                    ctx.Response.Headers["Server"] = "DotOPDS";
                     ctx.Response.Headers["x-request-time"] = string.Format("{0}ms", watchRequest.ElapsedMilliseconds);
                     if (watchQuery != null)
                     {
