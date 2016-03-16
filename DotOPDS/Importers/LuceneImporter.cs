@@ -51,6 +51,7 @@ namespace DotOPDS.Importers
             document.Add(new Field("LibraryId", libId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Title", book.Title, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Series", book.Series ?? "", Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field("Series.Exact", book.Series ?? "", Field.Store.NO, Field.Index.NOT_ANALYZED));
             document.Add(new Field("SeriesNo", book.SeriesNo.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("File", book.File, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Size", book.Size.ToString(), Field.Store.YES, Field.Index.NO));
@@ -64,8 +65,11 @@ namespace DotOPDS.Importers
             {
                 var fullName = string.Format("{0} {1} {2}", author.FirstName, author.MiddleName, author.LastName);
                 var fullNameStore = string.Format("{0},{1},{2}", author.FirstName, author.MiddleName, author.LastName);
+                var searchName = author.LastName ?? author.FirstName ?? author.MiddleName ?? "";
                 document.Add(new Field("Author", fullName, Field.Store.NO, Field.Index.ANALYZED));
+                document.Add(new Field("Author.Exact", fullName, Field.Store.NO, Field.Index.NOT_ANALYZED));
                 document.Add(new Field("Author.FullName", fullNameStore, Field.Store.YES, Field.Index.NO));
+                document.Add(new Field("Author.SearchName", searchName, Field.Store.NO, Field.Index.NOT_ANALYZED));
                 //document.Add(new Field("Author.FirstName", author.FirstName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
                 //document.Add(new Field("Author.MiddleName", author.MiddleName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
                 //document.Add(new Field("Author.LastName", author.LastName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
