@@ -17,28 +17,22 @@ namespace DotOPDS.Web.Controllers
 {
     public class BaseRoute : NancyModule
     {
-        private Stopwatch watchRequest;
-        private Stopwatch watchQuery;
+        private Stopwatch watchResponse;
 
         public BaseRoute()
         {
             Before += async (ctx, ct) =>
                 {
                     await Task.Delay(0); // FIXME
-                    watchRequest = Stopwatch.StartNew();
+                    watchResponse = Stopwatch.StartNew();
                     return null;
                 };
 
             After += async (ctx, ct) =>
                 {
                     await Task.Delay(0); // FIXME
-                    watchRequest.Stop();
-
-                    ctx.Response.Headers["x-request-time"] = string.Format("{0}ms", watchRequest.ElapsedMilliseconds);
-                    if (watchQuery != null)
-                    {
-                        ctx.Response.Headers["x-query-time"] = string.Format("{0}ms", watchQuery.ElapsedMilliseconds);
-                    }
+                    watchResponse.Stop();
+                    ctx.Response.Headers["X-Response-Time"] = string.Format("{0}ms", watchResponse.ElapsedMilliseconds);
                 };
         }
 
@@ -52,7 +46,7 @@ namespace DotOPDS.Web.Controllers
         {
             Log.Debug("Lucene query: {0}", query);
 
-            watchQuery = Stopwatch.StartNew();
+            var watch = Stopwatch.StartNew();
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(Settings.Instance.Database)))
             using (var searcher = new IndexSearcher(directory))
             {
@@ -109,7 +103,10 @@ namespace DotOPDS.Web.Controllers
                     books.Add(meta);
                 }
 
-                watchQuery.Stop();
+                watch.Stop();
+                ViewBag.LuceneQuery = query.ToString();
+                ViewBag.LuceneQueryTime = string.Format("{0}ms", watch.ElapsedMilliseconds);
+
                 return books;
             }
         }
