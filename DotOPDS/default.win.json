@@ -1,0 +1,20 @@
+{
+    "port": 8080,
+    "title":  "DotOPDS Library",
+    "database": "%APPDATA%/DotOPDS/database",
+    "log": {
+        "enabled": true,
+        "path": "%APPDATA%/DotOPDS/logs",
+        "level": "info"
+    },
+    "authentication": {
+        "enabled": false,
+        "attempts": 3,
+        "users": {},
+        "banned": []
+    },
+    "pagination": 10,
+    "converters": {
+        "epub": "converters/fb2epub/fb2epub.exe {src} {dest}"
+    }
+}

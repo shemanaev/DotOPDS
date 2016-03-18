@@ -42,7 +42,7 @@ namespace DotOPDS
             FileName = PathUtil.Normalize(filename);
             if (!File.Exists(FileName))
             {
-                Resource.SaveToFile("default.json", FileName);
+                Resource.SaveToFile("default.win.json", FileName);
             }
             using (var reader = File.OpenText(FileName))
             {
