@@ -32,14 +32,14 @@ namespace DotOPDS.Utils
         }
 
         [JsonRpcMethod]
-        private bool import(string library, string input)
+        private bool import(string library, string input, string covers = null)
         {
             if (importTask == null)
             {
                 Task.Factory.StartNew(() =>
                 {
                     importTask = new ImportTask();
-                    importTask.Run(library, input);
+                    importTask.Run(library, input, covers);
                     importTask = null;
                 });
                 return true;

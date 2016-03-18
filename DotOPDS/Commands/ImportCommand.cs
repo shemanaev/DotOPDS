@@ -23,6 +23,10 @@ namespace DotOPDS.Commands
             HelpText = "Import contents into internal index.")]
         public string Input { get; set; }
 
+        [Option('r', "covers",
+            HelpText = "Covers resolver.")]
+        public string Covers { get; set; }
+
         [Usage]
         public static IEnumerable<Example> Examples
         {
@@ -49,7 +53,7 @@ namespace DotOPDS.Commands
             var task = new ImportTask();
             Task.Factory.StartNew(() =>
             {
-                task.Run(opts.Library, opts.Input);
+                task.Run(opts.Library, opts.Input, opts.Covers);
             });
             
             while (task.EntriesProcessed == 0)

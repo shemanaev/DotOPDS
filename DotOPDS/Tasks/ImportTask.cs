@@ -18,7 +18,7 @@ namespace DotOPDS.Tasks
         public int EntriesTotal { get; private set; }
         public int EntriesProcessed { get { return entriesProcessed; } }
 
-        public int Run(string library, string input)
+        public int Run(string library, string input, string covers)
         {
             // TODO: check for library path existance and duplication in settings
             var libPath = PathUtil.Normalize(library);
@@ -42,7 +42,7 @@ namespace DotOPDS.Tasks
 
             running = false;
 
-            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = libPath, Covers = "" });
+            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = libPath, Covers = covers });
             Settings.Save();
 
             importer.Dispose();
