@@ -56,7 +56,7 @@ namespace DotOPDS.Importers
 
             foreach (var author in book.Authors)
             {
-                var fullName = string.Format("{0} {1} {2}", author.FirstName, author.MiddleName, author.LastName);
+                var fullName = author.GetScreenName();
                 var fullNameStore = string.Format("{0},{1},{2}", author.FirstName, author.MiddleName, author.LastName);
                 var searchName = author.LastName ?? author.FirstName ?? author.MiddleName ?? "";
                 document.Add(new Field("Author", fullName, Field.Store.NO, Field.Index.ANALYZED));

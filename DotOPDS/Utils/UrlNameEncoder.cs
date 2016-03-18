@@ -40,7 +40,7 @@ namespace DotOPDS.Utils
             { 'э', "e" },
             { 'ю', "yu" },
             { 'я', "ya" },
-            { ' ', "_" },
+            { ' ', "+" },
             { ':', "_" },
             { ',', "" },
             { '\'', "" },
@@ -57,7 +57,7 @@ namespace DotOPDS.Utils
                 if (translit.ContainsKey(c)) res += translit[c];
                 else res += c;
             }
-            return HttpUtility.UrlEncode(res);
+            return res;
         }
     }
 }

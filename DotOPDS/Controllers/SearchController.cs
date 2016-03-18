@@ -71,7 +71,7 @@ namespace DotOPDS.Controllers
 
         [Route("genre/{genre}")]
         [HttpGet]
-        public Feed SearchByGenre(string genre, [FromUri] int page)
+        public Feed SearchByGenre(string genre, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
             int total;
@@ -91,9 +91,9 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
-        [Route("author/{author}")]
+        [Route("search")]
         [HttpGet]
-        public Feed SearchByAuthor(string author, [FromUri] int page)
+        public Feed SearchByAuthor([FromUri] string author, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
             int total;
@@ -113,9 +113,9 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
-        [Route("series/{series}")]
+        [Route("search")]
         [HttpGet]
-        public Feed SearchBySeries(string series, [FromUri] int page)
+        public Feed SearchBySeries([FromUri] string series, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
             int total;
@@ -138,9 +138,20 @@ namespace DotOPDS.Controllers
 
         private string ChangePage(string url, int page = 0)
         {
-            var r = @"([\?&]page=)(\d+)";
-            var value = page <= 1 ? "" : "${1}" + page;
-            return Regex.Replace(url, r, value);
+            string result = url;
+            if (url.Contains("page="))
+            {
+                var r = @"([\?&]page=)(\d+)";
+                var value = page <= 1 ? "" : "${1}" + page;
+                result = Regex.Replace(url, r, value);
+            }
+            else
+            {
+                if (url.Contains("?")) result += "&";
+                else result += "?";
+                result += "page=" + page;
+            }
+            return result;
         }
 
         private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneSearcher searcher = null)
@@ -175,22 +186,13 @@ namespace DotOPDS.Controllers
 #endif
         }
 
-        private string GetAuthorName(Author author)
-        {
-            string format = "";
-            if (!string.IsNullOrEmpty(author.FirstName)) format += "{0}";
-            if (!string.IsNullOrEmpty(author.MiddleName)) format += " {1}";
-            if (!string.IsNullOrEmpty(author.LastName)) format += " {2}";
-            return string.Format(format, author.FirstName, author.MiddleName, author.LastName).Trim();
-        }
-
         private FeedEntry GetBook(Book book)
         {
             var entry = new FeedEntry();
             var filename = book.Title;
             if (book.Authors.Length > 0)
             {
-                filename = string.Format("{0}-{1}", GetAuthorName(book.Authors[0]), filename);
+                filename = string.Format("{0} - {1}", book.Authors[0].GetScreenName(), filename);
             }
             filename = UrlNameEncoder.Encode(filename);
 
@@ -199,17 +201,17 @@ namespace DotOPDS.Controllers
 
             foreach (var author in book.Authors)
             {
-                var name = GetAuthorName(author);
+                var name = author.GetScreenName();
                 entry.Authors.Add(new FeedAuthor
                 {
                     Name = name,
-                    Uri = string.Format("/author/{0}", HttpUtility.UrlEncode(name))
+                    Uri = string.Format("/search?author={0}", HttpUtility.UrlEncode(name))
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
-                    Type = FeedLinkType.Atom,
-                    Href = string.Format("/author/{0}", HttpUtility.UrlEncode(name)),
+                    Type = FeedLinkType.AtomNavigation,
+                    Href = string.Format("/search?author={0}", HttpUtility.UrlEncode(name)),
                     Title = string.Format("Все книги автора {0}", name)
                 });
             }
@@ -229,8 +231,8 @@ namespace DotOPDS.Controllers
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
-                    Type = FeedLinkType.Atom,
-                    Href = string.Format("/series/{0}", HttpUtility.UrlEncode(book.Series)),
+                    Type = FeedLinkType.AtomNavigation,
+                    Href = string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
                     Title = string.Format(@"Все книги серии ""{0}""", book.Series)
                 });
             }
@@ -239,7 +241,7 @@ namespace DotOPDS.Controllers
             {
                 Rel = FeedLinkRel.Acquisition,
                 Type = FeedLinkType.Fb2,
-                Href = string.Format("/download/{0}/{1}.fb2.zip", book.Id, filename)
+                Href = string.Format("/get/{0}/{1}.fb2", book.Id, filename)
             });
 
             foreach (var converter in Settings.Instance.Converters)
@@ -248,7 +250,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Acquisition,
                     Type = string.Format("application/{0}+zip", converter.Key),
-                    Href = string.Format("/download/{0}/{1}.{2}", book.Id, filename, converter.Key)
+                    Href = string.Format("/get/{0}/{1}.{2}", book.Id, filename, converter.Key)
                 });
             }
 

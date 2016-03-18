@@ -49,6 +49,8 @@ namespace DotOPDS.Controllers
             var entry = zip[filename];
 
             // TODO: handle extensions for converting
+            // TODO: zip fb2 book?
+            // TODO: Content-Disposition:attachment; filename="friendy file name.fb2"
             var result = new HttpResponseMessage(HttpStatusCode.OK);
             var pushStreamContent = new PushStreamContent((stream, content, context) =>
             {
