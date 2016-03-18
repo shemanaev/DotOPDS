@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS", "DotOPDS\DotOPDS.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Tests", "DotOPDS.Tests\DotOPDS.Tests.csproj", "{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Web", "DotOPDS.Web\DotOPDS.Web.csproj", "{D33D034E-0976-4AEF-9E11-F630358A874A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D33D034E-0976-4AEF-9E11-F630358A874A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D33D034E-0976-4AEF-9E11-F630358A874A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D33D034E-0976-4AEF-9E11-F630358A874A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D33D034E-0976-4AEF-9E11-F630358A874A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
