@@ -78,12 +78,5 @@ namespace DotOPDS.Utils
             }
             return res;
         }
-
-        [JsonRpcMethod]
-        private double add(double l, double r)
-        {
-            // {"jsonrpc": "2.0", "method": "add", "params": [42, 23], "id": 1}
-            return l + r;
-        }
     }
 }
