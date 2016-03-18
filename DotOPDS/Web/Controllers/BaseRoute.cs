@@ -1,4 +1,5 @@
 using DotOPDS.Importers;
+using DotOPDS.Models;
 using DotOPDS.Utils;
 using Lucene.Net.Analysis.Ru;
 using Lucene.Net.QueryParsers;
@@ -26,7 +27,7 @@ namespace DotOPDS.Web.Controllers
                 {
                     await Task.Delay(0); // FIXME
                     watchResponse = Stopwatch.StartNew();
-                    
+
                     int page;
                     if (!int.TryParse(Request.Query["page"], out page)) page = 1;
                     ctx.ViewBag.CurrentPage = page;
@@ -48,7 +49,7 @@ namespace DotOPDS.Web.Controllers
             return new QueryParser(Version.LUCENE_30, f, analyzer);
         }
 
-        protected List<MetaBook> Search(Query query,/* int skip, int take,*/ out int count)
+        protected List<Book> Search(Query query,/* int skip, int take,*/ out int count)
         {
             int skip = Settings.Instance.Pagination * (ViewBag.CurrentPage - 1);
             int take = Settings.Instance.Pagination;
@@ -64,33 +65,33 @@ namespace DotOPDS.Web.Controllers
                     var parser = new QueryParser(Version.LUCENE_30, "Title", analyzer);
 
                     var keywordsQuery = parser.Parse(keywords);*/
-                    //var termQuery = new TermQuery(new Term("Name", keywords));
+                //var termQuery = new TermQuery(new Term("Name", keywords));
 
-                    //var phraseQuery = new PhraseQuery();
-                    //phraseQuery.Add(new Term("Name", keywords));
-                    //phraseQuery.Add(new Term("Name", "guitar"));
-                    /*var phraseQuery = new MultiPhraseQuery();
-                    string[] words = keywords.Split(' ');
-                    var w = new List<Term>();
-                    foreach (var word in words)
-                    {
-                        w.Add(new Term("Name", word));
-                        //phraseQuery.Add(new Term("Name", word));
-                    }
-                    phraseQuery.Add(w.ToArray());*/
-                 //   query.Add(keywordsQuery, Occur.MUST);
-                    //query.Add(termQuery, Occur.MUST);
-                    //query.Add(phraseQuery, Occur.SHOULD);
-                    //Console.WriteLine("query: {0}", query);
+                //var phraseQuery = new PhraseQuery();
+                //phraseQuery.Add(new Term("Name", keywords));
+                //phraseQuery.Add(new Term("Name", "guitar"));
+                /*var phraseQuery = new MultiPhraseQuery();
+                string[] words = keywords.Split(' ');
+                var w = new List<Term>();
+                foreach (var word in words)
+                {
+                    w.Add(new Term("Name", word));
+                    //phraseQuery.Add(new Term("Name", word));
+                }
+                phraseQuery.Add(w.ToArray());*/
+                //   query.Add(keywordsQuery, Occur.MUST);
+                //query.Add(termQuery, Occur.MUST);
+                //query.Add(phraseQuery, Occur.SHOULD);
+                //Console.WriteLine("query: {0}", query);
 
 
-                    //return query; // +Name:ibanez -Brand:Fender Name:"electric guitar"
+                //return query; // +Name:ibanez -Brand:Fender Name:"electric guitar"
                 //}
 
                 var docs = searcher.Search(query, null, skip + take);
                 count = docs.TotalHits;
 
-                var books = new List<MetaBook>();
+                var books = new List<Book>();
                 //foreach (var scoreDoc in docs.ScoreDocs)
                 //{
                 for (int i = skip; i < docs.TotalHits; i++)
@@ -108,25 +109,23 @@ namespace DotOPDS.Web.Controllers
                     var genres = doc.GetFields("Genre")
                         .Select(x => x.StringValue)
                         .ToArray();
-                    var meta = new MetaBook
+                    var meta = new Book
                     {
                         Id = Guid.Parse(doc.Get("Guid")),
                         LibraryId = Guid.Parse(doc.Get("LibraryId")),
-                        Book = new Book
-                        {
-                            Title = doc.Get("Title"),
-                            Series = doc.Get("Series"),
-                            SeriesNo = int.Parse(doc.Get("SeriesNo")),
-                            File = doc.Get("File"),
-                            Size = int.Parse(doc.Get("Size")),
-                            LibId = int.Parse(doc.Get("LibId")),
-                            Del = bool.Parse(doc.Get("Del")),
-                            Ext = doc.Get("Ext"),
-                            Date = DateTime.Parse(doc.Get("Date")),
-                            Archive = doc.Get("Archive"),
-                            Authors = authors,
-                            Genres = genres,
-                        }
+                        Title = doc.Get("Title"),
+                        Series = doc.Get("Series"),
+                        SeriesNo = int.Parse(doc.Get("SeriesNo")),
+                        File = doc.Get("File"),
+                        Size = int.Parse(doc.Get("Size")),
+                        LibId = int.Parse(doc.Get("LibId")),
+                        Del = bool.Parse(doc.Get("Del")),
+                        Ext = doc.Get("Ext"),
+                        Date = DateTime.Parse(doc.Get("Date")),
+                        Archive = doc.Get("Archive"),
+                        Authors = authors,
+                        Genres = genres,
+
                     };
                     books.Add(meta);
                 }

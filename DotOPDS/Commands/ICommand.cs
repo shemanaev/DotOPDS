@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace DotOPDS.Commands
+﻿namespace DotOPDS.Commands
 {
-    interface ICommand : IDisposable
+    interface ICommand
     {
-        int Run(SharedOptions options);
+        int Run(BaseOptions options);
     }
 }

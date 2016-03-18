@@ -3,8 +3,6 @@ using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Diagnostics;
-using Nancy.EmbeddedContent;
-using Nancy.EmbeddedContent.Conventions;
 using Nancy.TinyIoc;
 using Serilog;
 using System;
@@ -70,7 +68,7 @@ namespace DotOPDS.Web
             base.ConfigureApplicationContainer(container);
 
             //var ns = string.Format("{0}.Views", Resource.Assembly.GetName().Name);
-            EmbeddedViewLocationProvider.RootNamespaces.Add(Resource.Assembly, Resource.Assembly.GetName().Name);
+            //EmbeddedViewLocationProvider.RootNamespaces.Add(Resource.Assembly, Resource.Assembly.GetName().Name);
         }
 
         protected override NancyInternalConfiguration InternalConfiguration
@@ -83,7 +81,7 @@ namespace DotOPDS.Web
 
         void OnConfigurationBuilder(NancyInternalConfiguration x)
         {
-            x.ViewLocationProvider = typeof(EmbeddedViewLocationProvider);
+           // x.ViewLocationProvider = typeof(EmbeddedViewLocationProvider);
         }
     }
 

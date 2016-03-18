@@ -2,11 +2,14 @@
 using DotOPDS.Commands;
 using Serilog;
 using System;
+using System.Threading;
 
 namespace DotOPDS
 {
     class Program
     {
+        private static ManualResetEvent exitEvent = new ManualResetEvent(false);
+        public static ManualResetEvent Exit { get { return exitEvent; } }
 
         static int Main(string[] args)
         {
@@ -16,53 +19,41 @@ namespace DotOPDS
                 .CreateLogger();
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            Console.CancelKeyPress += Console_CancelKeyPress;
 
             var result = Parser.Default.ParseArguments<
                 ImportOptions,
                 ServeOptions,
-                LsOptions
-#if DEBUG
-                , FixtureOptions
-#endif
+                LsOptions,
+                RpcOptions,
+                FixtureOptions
                 >(args).MapResult(
                     (ImportOptions opts) => RunCommand(typeof(ImportCommand), opts),
                     (ServeOptions opts) => RunCommand(typeof(ServeCommand), opts),
                     (LsOptions opts) => RunCommand(typeof(LsCommand), opts),
-#if DEBUG
+                    (RpcOptions opts) => RunCommand(typeof(RpcCommand), opts),
                     (FixtureOptions opts) => RunCommand(typeof(FixtureCommand), opts),
-#endif
                     errs => 1);
 
             return result;
         }
 
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine(e.ExceptionObject);
-            // FIXME
+            e.Cancel = true;
+            exitEvent.Set();
         }
 
-        static int RunCommand(Type command, SharedOptions options)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            int result = 1;
-#if !DEBUG
-            try
-            {
-#endif
-            using (var cmd = (ICommand)Activator.CreateInstance(command))
-            {
-                result = cmd.Run(options);
-            }
-#if !DEBUG
+            Log.Error((Exception)e.ExceptionObject, "Unhandled exception");
+            exitEvent.Set();
         }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error occured: {0}", e.Message);
-                // TODO: save trace to file
-            }
-#endif
-            return result;
+
+        private static int RunCommand(Type command, BaseOptions options)
+        {
+            var cmd = (ICommand)Activator.CreateInstance(command);
+            return cmd.Run(options);
         }
     }
 }

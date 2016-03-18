@@ -1,25 +1,27 @@
 ﻿using DotOPDS.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace DotOPDS
 {
     public class Settings
     {
-        public int Port { get; set; }
+        public string Listen { get; set; }
         public string Database { get; set; }
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; }
         public int Pagination { get; set; }
-        public List<SettingsConverter> Converters { get; set; }
-        public Dictionary<Guid, string> Libraries { get; set; }
+        public List<string> Modules { get; set; }
+        public Dictionary<string, string> Converters { get; set; }
+        public Dictionary<Guid, SettingsLibrary> Libraries { get; set; }
 
         #region Static routines
         public static string FileName { get; private set; }
         private static Settings instance;
+        private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
 
         public static Settings Instance
         {
@@ -40,22 +42,21 @@ namespace DotOPDS
             FileName = PathUtil.Normalize(filename);
             if (!File.Exists(FileName))
             {
-                Resource.SaveToFile("default.conf.example", FileName);
+                Resource.SaveToFile("default.json", FileName);
             }
             using (var reader = File.OpenText(FileName))
             {
-                var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
-                instance = deserializer.Deserialize<Settings>(reader);
+                instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
             }
             Normalize();
         }
 
         public static void Save()
         {
-            using (var reader = File.CreateText(FileName))
+            using (var writer = File.CreateText(FileName))
             {
-                var serializer = new Serializer(namingConvention: new CamelCaseNamingConvention());
-                serializer.Serialize(reader, instance);
+                var s = JsonConvert.SerializeObject(instance, Formatting.Indented, jsonSettings);
+                writer.Write(s);
             }
         }
 
@@ -67,9 +68,13 @@ namespace DotOPDS
                 if (instance.Log.Path != null)
                     instance.Log.Path = PathUtil.Normalize(instance.Log.Path);
             }
+            if (instance.Modules == null)
+            {
+                instance.Modules = new List<string>();
+            }
             if (instance.Libraries == null)
             {
-                instance.Libraries = new Dictionary<Guid, string>();
+                instance.Libraries = new Dictionary<Guid, SettingsLibrary>();
             }
         }
         #endregion
@@ -86,19 +91,13 @@ namespace DotOPDS
     {
         public bool Enabled { get; set; }
         public int Attempts { get; set; }
-        public List<SettingsAuthenticationUser> Users { get; set; }
+        public Dictionary<string, string> Users { get; set; }
         public List<string> Banned { get; set; }
     }
 
-    public class SettingsAuthenticationUser
+    public class SettingsLibrary
     {
-        public string Login { get; set; }
-        public string Pass { get; set; }
-    }
-
-    public class SettingsConverter
-    {
-        public string Ext { get; set; }
-        public string Command { get; set; }
+        public string Path { get; set; }
+        public string Covers { get; set; }
     }
 }

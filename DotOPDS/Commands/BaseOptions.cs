@@ -4,17 +4,17 @@ using System.IO;
 
 namespace DotOPDS.Commands
 {
-    class SharedOptions
+    class BaseOptions
     {
         [Option('c', "config",
             HelpText = "Configuration file.")]
         public string Config { get; set; }
 
-        public SharedOptions()
+        public BaseOptions()
         {
             Config = Path.GetFullPath(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "DotOPDS/default.conf"));
+                "DotOPDS/default.json"));
         }
     }
 }

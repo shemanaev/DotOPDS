@@ -1,4 +1,4 @@
-﻿using DotOPDS.Utils;
+﻿using DotOPDS.Models;
 using System;
 
 namespace DotOPDS.Importers

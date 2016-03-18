@@ -1,4 +1,4 @@
-﻿using DotOPDS.Utils;
+﻿using DotOPDS.Models;
 using Lucene.Net.Analysis.Ru;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
@@ -8,13 +8,6 @@ using Version = Lucene.Net.Util.Version;
 
 namespace DotOPDS.Importers
 {
-    public class MetaBook
-    {
-        public Book Book { get; set; }
-        public Guid Id { get; set; }
-        public Guid LibraryId { get; set; }
-    }
-
     class LuceneImporter : IBookImporter
     {
         private IndexWriter writer;
@@ -70,9 +63,6 @@ namespace DotOPDS.Importers
                 document.Add(new Field("Author.Exact", fullName, Field.Store.NO, Field.Index.NOT_ANALYZED));
                 document.Add(new Field("Author.FullName", fullNameStore, Field.Store.YES, Field.Index.NO));
                 document.Add(new Field("Author.SearchName", searchName, Field.Store.NO, Field.Index.NOT_ANALYZED));
-                //document.Add(new Field("Author.FirstName", author.FirstName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
-                //document.Add(new Field("Author.MiddleName", author.MiddleName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
-                //document.Add(new Field("Author.LastName", author.LastName ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
             }
 
             foreach (var genre in book.Genres)

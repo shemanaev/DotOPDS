@@ -1,4 +1,5 @@
-﻿using Ionic.Zip;
+﻿using DotOPDS.Models;
+using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,31 +9,6 @@ using System.Threading.Tasks;
 
 namespace DotOPDS.Utils
 {
-    public class Author
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-    }
-
-    public class Book
-    {
-        public Author[] Authors { get; set; }
-        public string[] Genres { get; set; }
-        public string Title { get; set; }
-        public string Series { get; set; }
-        public int SeriesNo { get; set; }
-        public string File { get; set; }
-        public int Size { get; set; }
-        public int LibId { get; set; }
-        public bool Del { get; set; }
-        public string Ext { get; set; }
-        public DateTime Date { get; set; }
-        public string Language { get; set; }
-        public string[] Keywords { get; set; }
-        public string Archive { get; set; }
-    }
-
     public class NewEntryEventArgs : EventArgs
     {
         public Book Book;
@@ -108,6 +84,7 @@ namespace DotOPDS.Utils
                         }
                         var args = new Book
                         {
+                            Id = Guid.Empty,
                             Authors = authors.ToArray(),
                             Genres = GetDelimArray(':', line[structure.Genre]),
                             Title = line[structure.Title],

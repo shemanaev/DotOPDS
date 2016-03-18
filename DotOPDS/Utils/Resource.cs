@@ -5,12 +5,11 @@ namespace DotOPDS.Utils
 {
     class Resource
     {
-        public static Assembly Assembly { get { return typeof(Assets.Noop).Assembly; } }
-
         public static Stream AsStream(string name)
         {
-            var resourceName = string.Format("{0}.{1}", Assembly.GetName().Name, name);
-            return Assembly.GetManifestResourceStream(resourceName);
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = string.Format("{0}.{1}", assembly.GetName().Name, name);
+            return assembly.GetManifestResourceStream(resourceName);
         }
 
         public static void SaveToFile(string name, string output)

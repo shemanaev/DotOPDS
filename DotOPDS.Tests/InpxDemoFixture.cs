@@ -1,4 +1,5 @@
-﻿using DotOPDS.Utils;
+﻿using DotOPDS.Models;
+using DotOPDS.Utils;
 using System;
 using System.Collections.Generic;
 

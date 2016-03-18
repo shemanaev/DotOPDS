@@ -122,6 +122,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NGettext, Version=0.5.0.0, Culture=neutral, PublicKeyToken=08d3d1c89dfd2985, processorArchitecture=MSIL">
+      <HintPath>..\packages\NGettext.0.5.0\lib\net45\NGettext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Nowin, Version=0.22.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Nowin.0.22.2.0\lib\net45\Nowin.dll</HintPath>
       <Private>True</Private>
@@ -140,6 +144,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
       <Private>True</Private>
@@ -148,31 +153,40 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+    <Reference Include="Unosquare.Labs.EmbedIO, Version=1.0.14.18014, Culture=neutral, PublicKeyToken=871377f68111dbd2, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmbedIO.1.0.14\lib\Unosquare.Labs.EmbedIO.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\FixtureCommand.cs" />
-    <Compile Include="Commands\FixtureOptions.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ImportCommand.cs" />
-    <Compile Include="Commands\ImportOptions.cs" />
     <Compile Include="Commands\LsCommand.cs" />
-    <Compile Include="Commands\LsOptions.cs" />
-    <Compile Include="Commands\SharedOptions.cs" />
+    <Compile Include="Commands\RpcCommand.cs" />
+    <Compile Include="Commands\BaseOptions.cs" />
     <Compile Include="Commands\ServeCommand.cs" />
-    <Compile Include="Commands\ServeOptions.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Importers\IBookImporter.cs" />
     <Compile Include="Importers\LuceneImporter.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Feed.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Tasks\ImportTask.cs" />
+    <Compile Include="Tasks\ServeTask.cs" />
     <Compile Include="Utils\ApiService.cs" />
     <Compile Include="Utils\ConsoleStatus.cs" />
+    <Compile Include="Utils\EmbedioBranding.cs" />
+    <Compile Include="Utils\EmbedioExtensions.cs" />
+    <Compile Include="Utils\EmbedioLog.cs" />
     <Compile Include="Utils\InpxParser.cs" />
     <Compile Include="Utils\PathUtil.cs" />
-    <Compile Include="Utils\Helpers.cs" />
+    <Compile Include="Utils\T.cs" />
+    <Compile Include="Utils\UrlNameEncoder.cs" />
     <Compile Include="Utils\Resource.cs" />
+    <Compile Include="Utils\LuceneSearcher.cs" />
     <Compile Include="Web\Bootstrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="default.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -202,14 +217,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DotOPDS.Assets\DotOPDS.Assets.csproj">
-      <Project>{dadc4b48-d96a-47d6-a88b-ea764f91c57b}</Project>
-      <Name>DotOPDS.Assets</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\external\Nancy.EmbeddedContent\Nancy.EmbeddedContent\Nancy.EmbeddedContent.csproj">
-      <Project>{d8eba39b-63ae-4a66-bd0e-f7f95e572135}</Project>
-      <Name>Nancy.EmbeddedContent</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="opensearch.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets" Condition="Exists('..\packages\Nancy.Viewengines.Razor.1.4.3\build\Nancy.ViewEngines.Razor.targets')" />

@@ -27,13 +27,13 @@ namespace DotOPDS.Web.Controllers
                 }
                 Log.Debug("search done {0}", x.id);
                 var book = books[0];
-                var archive = Path.Combine(Settings.Instance.Libraries[book.LibraryId], book.Book.Archive);
+                var archive = Path.Combine(Settings.Instance.Libraries[book.LibraryId].Path, book.Archive);
                 if (!File.Exists(archive))
                 {
                     Log.Warning("Archive {0} not found.", archive);
                     return Negotiate.WithStatusCode(404);
                 }
-                var filename = string.Format("{0}.{1}", book.Book.File, book.Book.Ext);
+                var filename = string.Format("{0}.{1}", book.File, book.Ext);
                 Log.Debug("archive before opened {0}", archive);
                 using (var zip = ZipFile.Read(archive))
                 {
