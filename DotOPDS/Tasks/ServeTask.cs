@@ -1,38 +1,22 @@
-﻿using DotOPDS.Controllers;
-using DotOPDS.Utils;
-using Serilog;
+﻿using DotOPDS.Web;
+using NLog;
 using System;
-using System.Reflection;
-using System.Threading;
-using Unosquare.Labs.EmbedIO;
+using System.Net;
 
 namespace DotOPDS.Tasks
 {
     class ServeTask : IDisposable
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private WebServer server;
 
         public int Run()
         {
-            server = WebServer
-                .Create(Settings.Instance.Listen, new EmbedioLog())
-                .EnableCors()
-                .WithBranding()
-                .WithWebApiController<SearchController>()
-                .WithWebApiController<DownloadController>();
+            server = new WebServer(new IPEndPoint(IPAddress.Any, Settings.Instance.Port));
 
-            foreach (var module in Settings.Instance.Modules)
-            {
-                LoadModule(module, server);
-            }
-
-            var cts = new CancellationTokenSource();
-            var task = server.RunAsync(cts.Token);
-
-            Log.Information("Web server started at {Listen}", Settings.Instance.Listen);
+            logger.Info("Web server started at http://localhost:{0}/", Settings.Instance.Port);
 
             Program.Exit.WaitOne();
-            cts.Cancel();
 
             return 0;
         }
@@ -40,23 +24,6 @@ namespace DotOPDS.Tasks
         public void Dispose()
         {
             server.Dispose();
-        }
-
-        private static void LoadModule(string path, WebServer server)
-        {
-            try
-            {
-                var assembly = Assembly.LoadFile(path);
-
-                if (assembly == null) return;
-
-                server.LoadApiControllers(assembly).LoadWebSockets(assembly);
-            }
-            catch (Exception ex)
-            {
-                server.Log.Error(ex.Message);
-                server.Log.Error(ex.StackTrace);
-            }
         }
     }
 }

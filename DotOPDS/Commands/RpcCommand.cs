@@ -1,7 +1,6 @@
 ﻿using AustinHarris.JsonRpc;
 using CommandLine;
 using DotOPDS.Utils;
-using Serilog;
 using System;
 using System.IO;
 using System.Text;
@@ -21,8 +20,7 @@ namespace DotOPDS.Commands
 
         public int Run(BaseOptions options)
         {
-            Log.Logger = new LoggerConfiguration().CreateLogger();
-            Settings.Load(options.Config);
+            Settings.Load(options.Config, false);
             input = Console.OpenStandardInput();
             ProcessInput();
             Program.Exit.WaitOne();

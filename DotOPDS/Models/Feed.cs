@@ -98,6 +98,7 @@ namespace DotOPDS.Models
 
     public static class FeedLinkRel
     {
+        public const string Debug = "debug";
         public const string Search = "search";
         public const string Self = "self";
         public const string Start = "start";

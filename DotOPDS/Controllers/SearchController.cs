@@ -1,57 +1,55 @@
-﻿using DotOPDS.Models;
+﻿using DotOPDS.Covers;
+using DotOPDS.Models;
 using DotOPDS.Utils;
-using System.Linq;
-using System.Net;
+using System;
+using System.Text.RegularExpressions;
 using System.Web;
-using Unosquare.Labs.EmbedIO;
-using Unosquare.Labs.EmbedIO.Modules;
+using System.Web.Http;
 
 namespace DotOPDS.Controllers
 {
-    class SearchController : WebApiController
+    public class SearchController : ApiController
     {
-        private const string RelativePath = "/opds";
-        private static FeedLink SearchLink = new FeedLink { Rel = "search", Type = FeedLinkType.Atom, Href = RelativePath + "/search?q={searchTerms}&amp;page={startPage?}" };
-        private static FeedLink StartLink = new FeedLink { Rel = "start", Type = FeedLinkType.AtomNavigation, Href = RelativePath };
+        private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = "/search?q={searchTerms}&amp;page={startPage?}" };
+        private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = "/" };
 
-        [WebApiHandler(HttpVerbs.Get, RelativePath)]
-        public bool Index(WebServer server, HttpListenerContext context)
+        [Route("")]
+        [HttpGet]
+        public Feed Index()
         {
-             var feed = new Feed();
-             feed.Id = "tag:root:root";
-             feed.Title = "DotOPDS catalog";
-             AddNavigation(context, feed);
+            var feed = new Feed();
+            feed.Id = "tag:root:root";
+            feed.Title = Settings.Instance.Title;
+            AddNavigation(Request.RequestUri, feed);
 
-             var entry = new FeedEntry();
-             entry.Id = "tag:root:authors";
-             entry.Title = "Книги по авторам";
-             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = RelativePath + "/authors" });
-             entry.Content = new FeedEntryContent { Text = "Просмотр книг по авторам" };
-             feed.Entries.Add(entry);
+            var entry = new FeedEntry();
+            entry.Id = "tag:root:authors";
+            entry.Title = "Книги по авторам";
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/authors" });
+            entry.Content = new FeedEntryContent { Text = "Просмотр книг по авторам" };
+            feed.Entries.Add(entry);
 
-             entry = new FeedEntry();
-             entry.Id = "tag:root:series";
-             entry.Title = "Книги по сериям";
-             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = RelativePath + "/series" });
-             entry.Content = new FeedEntryContent { Text = "Просмотр книг по сериям" };
-             feed.Entries.Add(entry);
+            entry = new FeedEntry();
+            entry.Id = "tag:root:series";
+            entry.Title = "Книги по сериям";
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/series" });
+            entry.Content = new FeedEntryContent { Text = "Просмотр книг по сериям" };
+            feed.Entries.Add(entry);
 
-             entry = new FeedEntry();
-             entry.Id = "tag:root:genres";
-             entry.Title = "Книги по жанрам";
-             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = RelativePath + "/genres" });
-             entry.Content = new FeedEntryContent { Text = "Просмотр книг по жанрам" };
-             feed.Entries.Add(entry);
+            entry = new FeedEntry();
+            entry.Id = "tag:root:genres";
+            entry.Title = "Книги по жанрам";
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genres" });
+            entry.Content = new FeedEntryContent { Text = "Просмотр книг по жанрам" };
+            feed.Entries.Add(entry);
 
-             return context.FeedResponse(feed);
+            return feed;
         }
 
-        [WebApiHandler(HttpVerbs.Get, RelativePath + "/search")]
-        public bool Search(WebServer server, HttpListenerContext context)
+        [Route("search")]
+        [HttpGet]
+        public Feed Search([FromUri] string q, [FromUri] int page = 1)
         {
-            var page = int.Parse(context.Query("page") ?? "1");
-            var q = context.Query("q");
-
             var searcher = new LuceneSearcher();
             int total;
             var query = string.Format(@"Title:""{0}"" OR Author:""{0}"" OR Series:""{0}""", searcher.Escape(q));
@@ -61,22 +59,20 @@ namespace DotOPDS.Controllers
             feed.Id = "tag:root:search:" + q;
             feed.Title = "Search results " + q;
             feed.Total = total;
-            AddNavigation(context, feed, page, total, searcher);
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
             foreach (var book in books)
             {
                 feed.Entries.Add(GetBook(book));
             }
 
-            return context.FeedResponse(feed);
+            return feed;
         }
 
-        [WebApiHandler(HttpVerbs.Get, RelativePath + "/genre/*")]
-        public bool SearchByGenre(WebServer server, HttpListenerContext context)
+        [Route("genre/{genre}")]
+        [HttpGet]
+        public Feed SearchByGenre(string genre, [FromUri] int page)
         {
-            var page = int.Parse(context.Query("page") ?? "1");
-            var genre = context.Request.Url.Segments.Last().TrimEnd('/');
-
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Genre", genre, page);
@@ -85,22 +81,20 @@ namespace DotOPDS.Controllers
             feed.Id = "tag:root:genre:" + genre;
             feed.Title = "Book by genre " + genre;
             feed.Total = total;
-            AddNavigation(context, feed, page, total, searcher);
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
             foreach (var book in books)
             {
                 feed.Entries.Add(GetBook(book));
             }
 
-            return context.FeedResponse(feed);
+            return feed;
         }
 
-        [WebApiHandler(HttpVerbs.Get, RelativePath + "/author/*")]
-        public bool SearchByAuthor(WebServer server, HttpListenerContext context)
+        [Route("author/{author}")]
+        [HttpGet]
+        public Feed SearchByAuthor(string author, [FromUri] int page)
         {
-            var page = int.Parse(context.Query("page") ?? "1");
-            var author = context.Request.Url.Segments.Last().TrimEnd('/');
-
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Author.Exact", author, page);
@@ -109,22 +103,20 @@ namespace DotOPDS.Controllers
             feed.Id = "tag:root:author:" + author;
             feed.Title = "Book by author " + author;
             feed.Total = total;
-            AddNavigation(context, feed, page, total, searcher);
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
             foreach (var book in books)
             {
                 feed.Entries.Add(GetBook(book));
             }
 
-            return context.FeedResponse(feed);
+            return feed;
         }
 
-        [WebApiHandler(HttpVerbs.Get, RelativePath + "/series/*")]
-        public bool SearchBySeries(WebServer server, HttpListenerContext context)
+        [Route("series/{series}")]
+        [HttpGet]
+        public Feed SearchBySeries(string series, [FromUri] int page)
         {
-            var page = int.Parse(context.Query("page") ?? "1");
-            var series = context.Segments().Last().TrimEnd('/');
-
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Series.Exact", series, page);
@@ -134,62 +126,51 @@ namespace DotOPDS.Controllers
             feed.Title = "Book by series " + series;
             feed.Total = total;
 
-            AddNavigation(context, feed, page, total, searcher);
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
             foreach (var book in books)
             {
                 feed.Entries.Add(GetBook(book));
             }
 
-            return context.FeedResponse(feed);
+            return feed;
         }
 
-        private void AddNavigation(HttpListenerContext context, Feed feed, int page = 0, int total = 0, LuceneSearcher searcher = null)
+        private string ChangePage(string url, int page = 0)
+        {
+            var r = @"([\?&]page=)(\d+)";
+            var value = page <= 1 ? "" : "${1}" + page;
+            return Regex.Replace(url, r, value);
+        }
+
+        private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneSearcher searcher = null)
         {
             feed.Links.Add(SearchLink);
             feed.Links.Add(StartLink);
-            feed.Links.Add(new FeedLink { Rel = "self", Type = FeedLinkType.AtomNavigation, Href = context.Request.RawUrl });
+            feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Self, Type = FeedLinkType.AtomNavigation, Href = uri.PathAndQuery });
             if (page > 1)
             {
-                var url = context.Request.RawUrl;
-                if (page - 1 != 1)
-                {
-                    var newPage = "page=" + (page - 1);
-
-                    if (url.Contains("page=")) url = url.Replace("page=" + page, newPage);
-                    else if (context.Request.Url.Query.Contains("?")) url += "&" + newPage;
-                    else url += "?" + newPage;
-                }
-                else
-                {
-                    url = url.Replace("&page=" + page, "");
-                }
                 feed.Links.Add(new FeedLink
                 {
-                    Rel = "prev",
+                    Rel = FeedLinkRel.Prev,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = url
+                    Href = ChangePage(uri.PathAndQuery, page - 1)
                 });
             }
             if (page * Settings.Instance.Pagination < total)
             {
-                var newPage = "page=" + (page + 1);
-                var url = context.Request.RawUrl;
-                if (url.Contains("page=")) url = url.Replace("page=" + page, newPage);
-                else if (context.Request.Url.Query.Contains("?")) url += "&" + newPage;
-                else url += "?" + newPage;
                 feed.Links.Add(new FeedLink
                 {
-                    Rel = "next",
+                    Rel = FeedLinkRel.Next,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = url
+                    Href = ChangePage(uri.PathAndQuery, page + 1)
                 });
             }
 #if DEBUG
             if (searcher != null)
             {
-                feed.Links.Add(new FeedLink { Rel = "debug", Type = "query", Title = searcher.Query });
-                feed.Links.Add(new FeedLink { Rel = "debug", Type = "time", Title = searcher.Time + "ms" });
+                feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Debug, Type = "query", Title = searcher.Query });
+                feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Debug, Type = "time", Title = searcher.Time + "ms" });
             }
 #endif
         }
@@ -222,23 +203,24 @@ namespace DotOPDS.Controllers
                 entry.Authors.Add(new FeedAuthor
                 {
                     Name = name,
-                    Uri = string.Format(RelativePath + "/author/{0}", HttpUtility.UrlEncode(name))
+                    Uri = string.Format("/author/{0}", HttpUtility.UrlEncode(name))
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.Atom,
-                    Href = string.Format(RelativePath + "/author/{0}", HttpUtility.UrlEncode(name)),
+                    Href = string.Format("/author/{0}", HttpUtility.UrlEncode(name)),
                     Title = string.Format("Все книги автора {0}", name)
                 });
             }
 
             foreach (var genre in book.Genres)
             {
+                var local = Genres.Instance.Localize(genre);
                 entry.Categories.Add(new FeedCategory
                 {
-                    Label = genre,
-                    Term = genre
+                    Label = local,
+                    Term = local
                 });
             }
 
@@ -246,16 +228,16 @@ namespace DotOPDS.Controllers
             {
                 entry.Links.Add(new FeedLink
                 {
-                    Rel = "related",
+                    Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.Atom,
-                    Href = string.Format(RelativePath + "/series/{0}", HttpUtility.UrlEncode(book.Series)),
+                    Href = string.Format("/series/{0}", HttpUtility.UrlEncode(book.Series)),
                     Title = string.Format(@"Все книги серии ""{0}""", book.Series)
                 });
             }
 
             entry.Links.Add(new FeedLink
             {
-                Rel = "http://opds-spec.org/acquisition/open-access",
+                Rel = FeedLinkRel.Acquisition,
                 Type = FeedLinkType.Fb2,
                 Href = string.Format("/download/{0}/{1}.fb2.zip", book.Id, filename)
             });
@@ -264,18 +246,29 @@ namespace DotOPDS.Controllers
             {
                 entry.Links.Add(new FeedLink
                 {
-                    Rel = "http://opds-spec.org/acquisition/open-access",
+                    Rel = FeedLinkRel.Acquisition,
                     Type = string.Format("application/{0}+zip", converter.Key),
                     Href = string.Format("/download/{0}/{1}.{2}", book.Id, filename, converter.Key)
                 });
             }
-            /*
-<link href="/i/3/427403/_0.jpg" rel="http://opds-spec.org/image" type="image/jpeg" />
-<link href="/i/3/427403/_0.jpg" rel="x-stanza-cover-image" type="image/jpeg" />
-<link href="/i/3/427403/_0.jpg" rel="http://opds-spec.org/thumbnail" type="image/jpeg" />
-<link href="/i/3/427403/_0.jpg" rel="x-stanza-cover-image-thumbnail" type="image/jpeg" />
-<link href="/b/427403" rel="alternate" type="text/html" title="Книга на сайте" />
-*/
+
+            var cover = CoverResolver.Instance.Get(book);
+            if (!string.IsNullOrEmpty(cover))
+            {
+                entry.Links.Add(new FeedLink
+                {
+                    Rel = FeedLinkRel.Image,
+                    Type = FeedLinkType.Jpeg,
+                    Href = cover
+                });
+                entry.Links.Add(new FeedLink
+                {
+                    Rel = FeedLinkRel.Thumbnail,
+                    Type = FeedLinkType.Jpeg,
+                    Href = cover
+                });
+            }
+
             return entry;
         }
     }

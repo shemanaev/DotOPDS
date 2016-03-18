@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 using DotOPDS.Commands;
-using Serilog;
+using NLog;
 using System;
 using System.Threading;
 
@@ -8,16 +8,12 @@ namespace DotOPDS
 {
     class Program
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private static ManualResetEvent exitEvent = new ManualResetEvent(false);
         public static ManualResetEvent Exit { get { return exitEvent; } }
 
         static int Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration() // FIXME: don't create logger in rpc mode
-                .WriteTo.ColoredConsole()
-                .MinimumLevel.Debug()
-                .CreateLogger();
-
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             Console.CancelKeyPress += Console_CancelKeyPress;
 
@@ -46,7 +42,7 @@ namespace DotOPDS
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Log.Error((Exception)e.ExceptionObject, "Unhandled exception");
+            logger.Error((Exception)e.ExceptionObject, "Unhandled exception");
             exitEvent.Set();
         }
 

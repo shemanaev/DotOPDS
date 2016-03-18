@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 using DotOPDS.Tasks;
-using Serilog;
+using NLog;
 
 namespace DotOPDS.Commands
 {
@@ -12,12 +12,14 @@ namespace DotOPDS.Commands
 
     class ServeCommand : ICommand
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public int Run(BaseOptions options)
         {
             var opts = (ServeOptions)options;
             Settings.Load(opts.Config);
 
-            Log.Information("Hit Ctrl+C to stop");
+            logger.Info("Hit Ctrl+C to stop");
             using (var task = new ServeTask())
             {
                 task.Run();
