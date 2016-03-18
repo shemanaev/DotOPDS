@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DotOPDS")]
-[assembly: AssemblyDescription("Fast OPDS server")]
+[assembly: AssemblyDescription("Lightweight OPDS server.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Denis Shemanaev")]
 [assembly: AssemblyProduct("DotOPDS")]
