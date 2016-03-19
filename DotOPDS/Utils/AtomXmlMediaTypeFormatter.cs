@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
@@ -9,9 +12,9 @@ using System.Xml.Serialization;
 
 namespace DotOPDS.Utils
 {
-    public class AtomXmlMediaTypeFormatter : XmlMediaTypeFormatter
+    public class AtomXmlMediaTypeFormatter : MediaTypeFormatter
     {
-        private readonly MediaTypeHeaderValue _mediaType = new MediaTypeHeaderValue("application/xml");
+        private readonly MediaTypeHeaderValue _mediaType = new MediaTypeHeaderValue("application/atom+xml");
         private readonly XmlWriterSettings _xmlWriterSettings;
         private readonly XmlSerializerNamespaces _serializerNamespaces;
 
@@ -24,11 +27,14 @@ namespace DotOPDS.Utils
 
             Serializers = new Dictionary<Type, XmlSerializer>();
 
-            _xmlWriterSettings = new XmlWriterSettings { OmitXmlDeclaration = true };
-
+            _xmlWriterSettings = new XmlWriterSettings
+            {
+                OmitXmlDeclaration = true,
+                Encoding = new UTF8Encoding(false), // no BOM, please
 #if DEBUG
-            _xmlWriterSettings.Indent = true;
+                Indent = true,
 #endif
+            };
 
             _serializerNamespaces = new XmlSerializerNamespaces();
             _serializerNamespaces.Add("dc", "http://purl.org/dc/terms/");
@@ -36,7 +42,7 @@ namespace DotOPDS.Utils
             _serializerNamespaces.Add("opds", "http://opds-spec.org/2010/catalog");
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, System.IO.Stream writeStream, System.Net.Http.HttpContent content, System.Net.TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
         {
             lock (Serializers)
             {
@@ -60,6 +66,16 @@ namespace DotOPDS.Utils
                     serializer.Serialize(writer, value, _serializerNamespaces);
                 }
             });
+        }
+
+        public override bool CanReadType(Type type)
+        {
+            return false;
+        }
+
+        public override bool CanWriteType(Type type)
+        {
+            return true;
         }
     }
 }

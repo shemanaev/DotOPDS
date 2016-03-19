@@ -42,6 +42,7 @@ namespace DotOPDS.Web
                 config.MessageHandlers.Add(new MessageLoggingHandler());
 
             config.Formatters.Remove(config.Formatters.JsonFormatter);
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
             var xmlFormatter = new AtomXmlMediaTypeFormatter();
             config.Formatters.Insert(0, xmlFormatter);
 
