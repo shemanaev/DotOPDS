@@ -1,4 +1,5 @@
-﻿using DotOPDS.Utils;
+﻿using DotOPDS.Models;
+using DotOPDS.Utils;
 using Ionic.Zip;
 using NLog;
 using System;
@@ -39,6 +40,7 @@ namespace DotOPDS.Controllers
             var filename = string.Format("{0}.{1}", book.File, book.Ext);
 
             var zip = ZipFile.Read(archive);
+            Request.RegisterForDispose(zip);
             logger.Debug("Archive {0} opened", archive);
             if (!zip.ContainsEntry(filename))
             {
@@ -66,7 +68,7 @@ namespace DotOPDS.Controllers
                 }
             });
             result.Content = pushStreamContent;
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/fb2+zip");
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(FeedLinkType.Fb2);
 
             logger.Debug("File {0} sent", id);
             return result;
