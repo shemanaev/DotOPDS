@@ -48,14 +48,15 @@ namespace DotOPDS.Commands
             var opts = (ImportOptions)options;
             Settings.Load(opts.Config);
 
+            var library = Util.Normalize(opts.Library);
             var watch = Stopwatch.StartNew();
             var status = new ConsoleStatus();
             var task = new ImportTask();
             Task.Factory.StartNew(() =>
             {
-                task.Run(opts.Library, opts.Input, opts.Covers);
+                task.Run(library, Util.Normalize(opts.Input), opts.Covers);
             });
-            
+
             while (task.EntriesProcessed == 0)
             {
                 status.Update("Parsing file, elapsed {0}", watch.Elapsed);

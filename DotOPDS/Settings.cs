@@ -53,7 +53,7 @@ namespace DotOPDS
                 instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
             }
             InitLog(console);
-            Normalize();
+            //T.ChangeLanguage(instance.Language); // FIXME
         }
 
         public static void Save()
@@ -65,21 +65,8 @@ namespace DotOPDS
             }
         }
 
-        private static void Normalize()
-        {
-            instance.Database = PathUtil.Normalize(instance.Database);
-
-            //T.ChangeLanguage(instance.Language); // FIXME
-        }
-
         private static void InitLog(bool console)
         {
-            if (instance.Log != null)
-            {
-                if (instance.Log.Path != null)
-                    instance.Log.Path = PathUtil.Normalize(instance.Log.Path);
-            }
-
             var config = new LoggingConfiguration();
 
             var debuggerTarget = new DebuggerTarget();
@@ -103,7 +90,7 @@ namespace DotOPDS
                 var fileTarget = new FileTarget();
                 config.AddTarget("file", fileTarget);
 
-                fileTarget.FileName = instance.Log.Path + "/${shortdate}.log";
+                fileTarget.FileName = Path.Combine(Util.Normalize(instance.Log.Path), "${shortdate}.log");
                 // fileTarget.Layout = "${message}";
                 config.LoggingRules.Add(new LoggingRule("*", LogLevel.FromString(instance.Log.Level), fileTarget));
             }

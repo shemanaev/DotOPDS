@@ -58,7 +58,7 @@ namespace DotOPDS.Utils
             Query = query.ToString();
             watch = Stopwatch.StartNew();
 
-            using (var directory = new SimpleFSDirectory(new DirectoryInfo(Settings.Instance.Database)))
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
             using (var searcher = new IndexSearcher(directory))
             {
                 var docs = searcher.Search(query, null, skip + take);

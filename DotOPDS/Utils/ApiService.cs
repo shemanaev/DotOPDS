@@ -36,10 +36,11 @@ namespace DotOPDS.Utils
         {
             if (importTask == null)
             {
+                // TODO: check for library path existance and duplication in settings
                 Task.Factory.StartNew(() =>
                 {
                     importTask = new ImportTask();
-                    importTask.Run(library, input, covers);
+                    importTask.Run(Util.Normalize(library), Util.Normalize(input), covers);
                     importTask = null;
                 });
                 return true;

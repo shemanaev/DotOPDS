@@ -20,15 +20,12 @@ namespace DotOPDS.Tasks
 
         public int Run(string library, string input, string covers)
         {
-            // TODO: check for library path existance and duplication in settings
-            var libPath = PathUtil.Normalize(library);
-
-            var parser = new InpxParser(PathUtil.Normalize(input));
+            var parser = new InpxParser(input);
             parser.OnNewEntry += Parser_OnNewEntry;
             parser.Parse().Wait();
 
             var libId = Guid.NewGuid();
-            importer.Open(Settings.Instance.Database, libId);
+            importer.Open(Util.Normalize(Settings.Instance.Database), libId);
 
             for (var i = 0; i < Environment.ProcessorCount; i++)
             {
@@ -42,7 +39,7 @@ namespace DotOPDS.Tasks
 
             running = false;
 
-            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = libPath, Covers = covers });
+            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = library, Covers = covers });
             Settings.Save();
 
             importer.Dispose();

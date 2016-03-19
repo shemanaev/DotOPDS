@@ -14,7 +14,7 @@ namespace DotOPDS.Utils
 
         public static void SaveToFile(string name, string output)
         {
-            output = PathUtil.Normalize(output);
+            output = Util.Normalize(output);
             var dir = Path.GetDirectoryName(output);
 
             if (!Directory.Exists(dir))
