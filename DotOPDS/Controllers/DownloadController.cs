@@ -17,6 +17,7 @@ namespace DotOPDS.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [Route("get/{id:guid}/{name}.{ext}")]
+        [HttpGet]
         public HttpResponseMessage GetFile(Guid id, string name, string ext)
         {
             var searcher = new LuceneSearcher();
