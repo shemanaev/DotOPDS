@@ -1,15 +1,15 @@
 {
     "port": 8080,
     "title":  "DotOPDS Library",
-    "database": "%APPDATA%/DotOPDS/database",
+    "database": "%HOME%/.config/DotOPDS/database",
     "log": {
         "level": "info",
         "enabled": true,
-        "path": "%APPDATA%/DotOPDS/logs"
+        "path": "%HOME%/.config/DotOPDS/logs"
     },
     "authentication": {
         "enabled": false,
-        "attempts": 3,
+        "attempts": 10,
         "users": {},
         "banned": []
     },

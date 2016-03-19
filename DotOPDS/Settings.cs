@@ -42,10 +42,11 @@ namespace DotOPDS
 
         public static void Load(string filename, bool console = true)
         {
-            FileName = PathUtil.Normalize(filename);
+            FileName = Util.Normalize(filename);
             if (!File.Exists(FileName))
             {
-                Resource.SaveToFile("default.win.json", FileName);
+                var resource = string.Format("default.{0}.json", Util.IsLinux ? "nix" : "win");
+                Resource.SaveToFile(resource, FileName);
             }
             using (var reader = File.OpenText(FileName))
             {

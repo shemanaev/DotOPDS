@@ -193,6 +193,7 @@
     <None Include="App.config" />
     <EmbeddedResource Include="default.win.json" />
     <Content Include="FodyWeavers.xml" />
+    <EmbeddedResource Include="default.nix.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
