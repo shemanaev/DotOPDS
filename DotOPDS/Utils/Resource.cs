@@ -9,7 +9,14 @@ namespace DotOPDS.Utils
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = string.Format("{0}.{1}", assembly.GetName().Name, name);
-            return assembly.GetManifestResourceStream(resourceName);
+            try
+            {
+                return assembly.GetManifestResourceStream(resourceName);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
 
         public static void SaveToFile(string name, string output)
