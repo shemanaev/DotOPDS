@@ -15,6 +15,7 @@ namespace DotOPDS
         public int Port { get; set; }
         public string Title { get; set; }
         public string Database { get; set; }
+        public string Language { get; set; } = "en";
         public string Web { get; set; } = "";
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
@@ -54,7 +55,7 @@ namespace DotOPDS
                 instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
             }
             InitLog(console);
-            //T.ChangeLanguage(instance.Language); // FIXME
+            T.ChangeLanguage(instance.Language);
         }
 
         public static void Save()

@@ -196,6 +196,7 @@
     <Content Include="FodyWeavers.xml" />
     <EmbeddedResource Include="default.nix.json" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="Translations\ru.mo" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

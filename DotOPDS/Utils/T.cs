@@ -8,7 +8,11 @@ namespace DotOPDS.Utils
 
         public static void ChangeLanguage(string name)
         {
-            _Catalog = new Catalog(Resource.AsStream(string.Format("Translations.{0}.po", name)));
+            var lang = Resource.AsStream(string.Format("Translations.{0}.mo", name));
+            if (lang != null)
+            {
+                _Catalog = new Catalog(lang);
+            }
         }
 
         public static string _(string text)
