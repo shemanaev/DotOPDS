@@ -38,6 +38,9 @@ namespace DotOPDS.Web
         {
             var config = new HttpConfiguration();
 
+            if (Settings.Instance.Log.Level == "trace")
+                config.MessageHandlers.Add(new MessageLoggingHandler());
+
             config.Formatters.Remove(config.Formatters.JsonFormatter);
             var xmlFormatter = new AtomXmlMediaTypeFormatter();
             config.Formatters.Insert(0, xmlFormatter);
