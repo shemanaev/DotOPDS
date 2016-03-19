@@ -22,25 +22,26 @@ namespace DotOPDS.Controllers
             feed.Title = Settings.Instance.Title;
             AddNavigation(Request.RequestUri, feed);
 
+            /* TODO: add alphabet indexes by authors and series
             var entry = new FeedEntry();
             entry.Id = "tag:root:authors";
-            entry.Title = "Книги по авторам";
+            entry.Title = T._("Books by authros"); // Книги по авторам
             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/authors" });
-            entry.Content = new FeedEntryContent { Text = "Просмотр книг по авторам" };
+            entry.Content = new FeedEntryContent { Text = T._("Browse books by authors") }; // Просмотр книг по авторам
             feed.Entries.Add(entry);
 
             entry = new FeedEntry();
             entry.Id = "tag:root:series";
-            entry.Title = "Книги по сериям";
+            entry.Title = T.("Books by series"); // Книги по сериям
             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/series" });
-            entry.Content = new FeedEntryContent { Text = "Просмотр книг по сериям" };
+            entry.Content = new FeedEntryContent { Text = T._("Browse books by series") }; // Просмотр книг по сериям
             feed.Entries.Add(entry);
-
-            entry = new FeedEntry();
+            */
+            var entry = new FeedEntry();
             entry.Id = "tag:root:genres";
-            entry.Title = "Книги по жанрам";
+            entry.Title = T._("Books by genres"); // Книги по жанрам
             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genres" });
-            entry.Content = new FeedEntryContent { Text = "Просмотр книг по жанрам" };
+            entry.Content = new FeedEntryContent { Text = T._("Browse books by genres") }; // Просмотр книг по жанрам
             feed.Entries.Add(entry);
 
             return feed;
@@ -57,7 +58,7 @@ namespace DotOPDS.Controllers
 
             var feed = new Feed();
             feed.Id = "tag:root:search:" + q;
-            feed.Title = "Search results " + q;
+            feed.Title = T._("Search results: {0}", q);
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
@@ -79,7 +80,7 @@ namespace DotOPDS.Controllers
 
             var feed = new Feed();
             feed.Id = "tag:root:genre:" + genre;
-            feed.Title = "Book by genre " + genre;
+            feed.Title = T._("Books in the genre of {0}", Genres.Instance.Localize(genre));
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
@@ -101,7 +102,7 @@ namespace DotOPDS.Controllers
 
             var feed = new Feed();
             feed.Id = "tag:root:author:" + author;
-            feed.Title = "Book by author " + author;
+            feed.Title = T._("Books by {0}", author);
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
@@ -123,7 +124,7 @@ namespace DotOPDS.Controllers
 
             var feed = new Feed();
             feed.Id = "tag:root:series:" + series;
-            feed.Title = "Book by series " + series;
+            feed.Title = T._("Books in the series {0}", series);
             feed.Total = total;
 
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
@@ -212,7 +213,7 @@ namespace DotOPDS.Controllers
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
                     Href = string.Format("/search?author={0}", HttpUtility.UrlEncode(name)),
-                    Title = string.Format("Все книги автора {0}", name)
+                    Title = T._("All books by {0}", name) // Все книги автора {0}
                 });
             }
 
@@ -233,7 +234,7 @@ namespace DotOPDS.Controllers
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
                     Href = string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
-                    Title = string.Format(@"Все книги серии ""{0}""", book.Series)
+                    Title = T._("All books in the series") // Все книги из серии
                 });
             }
 
