@@ -1,6 +1,6 @@
 {
     "port": 8080,
-    "title":  "DotOPDS Library",
+    "title": "DotOPDS Library",
     "database": "%HOME%/.config/DotOPDS/database",
     "log": {
         "level": "info",
