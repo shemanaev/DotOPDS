@@ -5,6 +5,7 @@ using DotOPDS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DotOPDS.Commands
@@ -49,6 +50,21 @@ namespace DotOPDS.Commands
             Settings.Load(opts.Config);
 
             var library = Util.Normalize(opts.Library);
+            if (!Directory.Exists(library))
+            {
+                Console.Error.WriteLine("Library directory {0} not found.", library);
+                return 1;
+            }
+
+            foreach (var lib in Settings.Instance.Libraries)
+            {
+                if (library.Equals(lib.Value.Path, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Console.Error.WriteLine("Library with path {0} already imported!", library);
+                    return 1;
+                }
+            }
+
             var watch = Stopwatch.StartNew();
             var status = new ConsoleStatus();
             var task = new ImportTask();
