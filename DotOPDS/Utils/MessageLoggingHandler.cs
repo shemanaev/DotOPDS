@@ -26,7 +26,7 @@ namespace DotOPDS.Utils
             if (response.IsSuccessStatusCode)
             {
                 var respBytes = await response.Content.ReadAsByteArrayAsync();
-                if (response.Content.Headers.ContentType.MediaType == "application/atom+xml")
+                if (response.Content.Headers.ContentType?.MediaType == "application/atom+xml")
                     responseMessage = Encoding.UTF8.GetString(respBytes);
                 else
                     responseMessage = string.Format("[BLOB SIZE: {0}]", respBytes.LongLength);
