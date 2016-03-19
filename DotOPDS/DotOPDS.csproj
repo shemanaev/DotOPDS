@@ -161,6 +161,7 @@
     <Compile Include="Commands\ServeCommand.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Covers\CoverResolver.cs" />
     <Compile Include="Covers\FlibustaResolver.cs" />
     <Compile Include="Covers\ICoverResolver.cs" />

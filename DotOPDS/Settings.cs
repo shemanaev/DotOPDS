@@ -15,6 +15,7 @@ namespace DotOPDS
         public int Port { get; set; }
         public string Title { get; set; }
         public string Database { get; set; }
+        public string Web { get; set; } = "";
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
         public int Pagination { get; set; }
