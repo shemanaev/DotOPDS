@@ -157,6 +157,7 @@
     <Compile Include="Commands\ImportCommand.cs" />
     <Compile Include="Commands\LsCommand.cs" />
     <Compile Include="Commands\MvCommand.cs" />
+    <Compile Include="Commands\RmCommand.cs" />
     <Compile Include="Commands\RpcCommand.cs" />
     <Compile Include="Commands\BaseOptions.cs" />
     <Compile Include="Commands\ServeCommand.cs" />
