@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DotOPDS 1.0\n"
-"POT-Creation-Date: 2016-03-19 17:08+0300\n"
-"PO-Revision-Date: 2016-03-19 22:26+0300\n"
+"POT-Creation-Date: 2016-03-21 19:14+0300\n"
+"PO-Revision-Date: 2016-03-21 19:16+0300\n"
 "Last-Translator: Denis Shemanaev <denis.shemanaev@gmail.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -19,1035 +19,1140 @@ msgstr ""
 "_p:1c,2;_pn:1c,2,3\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: Controllers/SearchController.cs:42
+#: Controllers/SearchController.cs:43
 msgid "Books by genres"
 msgstr "Книги по жанрам"
 
-#: Controllers/SearchController.cs:44
+#: Controllers/SearchController.cs:45
 msgid "Browse books by genres"
 msgstr "Просмотр книг по жанрам"
 
-#: Controllers/SearchController.cs:61
+#: Controllers/SearchController.cs:62
 #, csharp-format
 msgid "Search results: {0}"
 msgstr "Результаты поиска: {0}"
 
-#: Controllers/SearchController.cs:83
+#: Controllers/SearchController.cs:84
 #, csharp-format
 msgid "Books in the genre of {0}"
 msgstr "Книги жанра {0}"
 
-#: Controllers/SearchController.cs:105
+#: Controllers/SearchController.cs:106
 #, csharp-format
 msgid "Books by {0}"
 msgstr "Книги автора {0}"
 
-#: Controllers/SearchController.cs:127
+#: Controllers/SearchController.cs:128
 #, csharp-format
 msgid "Books in the series {0}"
 msgstr "Книги серии {0}"
 
-#: Controllers/SearchController.cs:216
+#: Controllers/SearchController.cs:223
 #, csharp-format
 msgid "All books by {0}"
 msgstr "Все книги автора {0}"
 
-#: Controllers/SearchController.cs:237
+#: Controllers/SearchController.cs:244
 msgid "All books in the series"
 msgstr "Все книги из серии"
 
-#: Utils/Genres.cs:30
+#: Utils/Genres.cs:36
 msgid "Accounting"
 msgstr "Бухучет и аудит"
 
-#: Utils/Genres.cs:31
+#: Utils/Genres.cs:37
 msgid "Nature & Animals"
 msgstr "Природа и животные"
 
-#: Utils/Genres.cs:32
+#: Utils/Genres.cs:38
 msgid "Travel & Geography"
 msgstr "Путешествия и география"
 
-#: Utils/Genres.cs:33
+#: Utils/Genres.cs:39
 msgid "Historical adventures"
 msgstr "Исторические приключения"
 
-#: Utils/Genres.cs:34
+#: Utils/Genres.cs:40
 msgid "Indians"
 msgstr "Приключения про индейцев"
 
-#: Utils/Genres.cs:35
+#: Utils/Genres.cs:41
 msgid "Maritime Fiction"
 msgstr "Морские приключения"
 
-#: Utils/Genres.cs:36
+#: Utils/Genres.cs:42
 msgid "Western"
 msgstr "Вестерн"
 
-#: Utils/Genres.cs:37
+#: Utils/Genres.cs:43
 msgid "Misk Adventures"
 msgstr "Приключения: прочее"
 
-#: Utils/Genres.cs:38
+#: Utils/Genres.cs:44
 msgid "Other Antique"
 msgstr "Старинная литература: прочее"
 
-#: Utils/Genres.cs:39
+#: Utils/Genres.cs:45
 msgid "Antique Literature"
 msgstr "Античная литература"
 
-#: Utils/Genres.cs:40
+#: Utils/Genres.cs:46
 msgid "Antique East Literature"
 msgstr "Древневосточная литература"
 
-#: Utils/Genres.cs:41
+#: Utils/Genres.cs:47
 msgid "Antique European Literature"
 msgstr "Древнеевропейская литература"
 
-#: Utils/Genres.cs:42
+#: Utils/Genres.cs:48
 msgid "Myths. Legends. Epos"
 msgstr "Мифы. Легенды. Эпос"
 
-#: Utils/Genres.cs:43
+#: Utils/Genres.cs:49
 msgid "Antique Russian Literature"
 msgstr "Древнерусская литература"
 
-#: Utils/Genres.cs:44
+#: Utils/Genres.cs:50
 msgid "Aphorisms"
 msgstr "Афоризмы"
 
-#: Utils/Genres.cs:45
+#: Utils/Genres.cs:51
 msgid "Architecture"
 msgstr "Архитектура"
 
-#: Utils/Genres.cs:46
+#: Utils/Genres.cs:52
 msgid "Astrology"
 msgstr "Астрология"
 
-#: Utils/Genres.cs:47
+#: Utils/Genres.cs:53
 msgid "Auto regulations"
 msgstr "Автомобили и ПДД"
 
-#: Utils/Genres.cs:48
+#: Utils/Genres.cs:54
 msgid "Banking"
 msgstr "Банковское дело"
 
-#: Utils/Genres.cs:49
+#: Utils/Genres.cs:55
 msgid "Adventures for Kids"
 msgstr "Детские приключения"
 
-#: Utils/Genres.cs:50
+#: Utils/Genres.cs:56
 msgid "Detective for Kids"
 msgstr "Детские остросюжетные"
 
-#: Utils/Genres.cs:51
+#: Utils/Genres.cs:57
 msgid "Education for Kids"
 msgstr "Образовательная литература"
 
-#: Utils/Genres.cs:52
+#: Utils/Genres.cs:58
 msgid "Child Folklore"
 msgstr "Детский фольклор"
 
-#: Utils/Genres.cs:53
+#: Utils/Genres.cs:59
 msgid "Prose for Kids"
 msgstr "Детская проза"
 
-#: Utils/Genres.cs:54
+#: Utils/Genres.cs:60
 msgid "Science Fiction for Kids"
 msgstr "Детская фантастика"
 
-#: Utils/Genres.cs:55
+#: Utils/Genres.cs:61
 msgid "Fairy Tales"
 msgstr "Сказка"
 
-#: Utils/Genres.cs:56
+#: Utils/Genres.cs:62
 msgid "Verses for Kids"
 msgstr "Детские стихи"
 
-#: Utils/Genres.cs:57
+#: Utils/Genres.cs:63
 msgid "For Kids: Misk"
 msgstr "Детская литература: прочее"
 
-#: Utils/Genres.cs:58
+#: Utils/Genres.cs:64
 msgid "Cine"
 msgstr "Кино"
 
-#: Utils/Genres.cs:59
+#: Utils/Genres.cs:65
 msgid "Comedy"
 msgstr "Комедия"
 
-#: Utils/Genres.cs:60
+#: Utils/Genres.cs:66
 msgid "Databases"
 msgstr "Базы данных"
 
-#: Utils/Genres.cs:61
+#: Utils/Genres.cs:67
 msgid "DSP"
 msgstr "Цифровая обработка сигналов"
 
-#: Utils/Genres.cs:62
+#: Utils/Genres.cs:68
 msgid "Hardware"
 msgstr "Аппаратное обеспечение"
 
-#: Utils/Genres.cs:63
+#: Utils/Genres.cs:69
 msgid "OS & Networking"
 msgstr "ОС и Сети"
 
-#: Utils/Genres.cs:64
+#: Utils/Genres.cs:70
 msgid "Programming"
 msgstr "Программирование"
 
-#: Utils/Genres.cs:65
+#: Utils/Genres.cs:71
 msgid "Software"
 msgstr "Программы"
 
-#: Utils/Genres.cs:66
+#: Utils/Genres.cs:72
 msgid "Internet"
 msgstr "Интернет"
 
-#: Utils/Genres.cs:67
+#: Utils/Genres.cs:73
 msgid "Computers: Misk"
 msgstr "Околокомпьютерная литература"
 
-#: Utils/Genres.cs:68
+#: Utils/Genres.cs:74
 msgid "Art, Design"
 msgstr "Искусство и Дизайн"
 
-#: Utils/Genres.cs:69
+#: Utils/Genres.cs:75
 msgid "Action"
 msgstr "Боевик"
 
-#: Utils/Genres.cs:70
+#: Utils/Genres.cs:76
 msgid "Classical Detective"
 msgstr "Классический детектив"
 
-#: Utils/Genres.cs:71
+#: Utils/Genres.cs:77
 msgid "Cozy Mysteries"
 msgstr "Дамский детективный роман"
 
-#: Utils/Genres.cs:72
+#: Utils/Genres.cs:78
 msgid "Crime Detective"
 msgstr "Криминальный детектив"
 
-#: Utils/Genres.cs:73
+#: Utils/Genres.cs:79
 msgid "Espionage Detective"
 msgstr "Шпионский детектив"
 
-#: Utils/Genres.cs:74
+#: Utils/Genres.cs:80
 msgid "Hard-boiled Detective"
 msgstr "Крутой детектив"
 
-#: Utils/Genres.cs:75
+#: Utils/Genres.cs:81
 msgid "Historical Detective"
 msgstr "Исторический детектив"
 
-#: Utils/Genres.cs:76
+#: Utils/Genres.cs:82
 msgid "Ironical Detective"
 msgstr "Иронический детектив"
 
-#: Utils/Genres.cs:77
+#: Utils/Genres.cs:83
 msgid "Maniacs"
 msgstr "Маньяки"
 
-#: Utils/Genres.cs:78
+#: Utils/Genres.cs:84
 msgid "Police Stories"
 msgstr "Полицейский детектив"
 
-#: Utils/Genres.cs:79
+#: Utils/Genres.cs:85
 msgid "Political Detective"
 msgstr "Политический детектив"
 
-#: Utils/Genres.cs:80
+#: Utils/Genres.cs:86
 msgid "Detective"
 msgstr "Детективы: прочее"
 
-#: Utils/Genres.cs:81
+#: Utils/Genres.cs:87
 msgid "Anti-Soviet fiction"
 msgstr "Антисоветская литература"
 
-#: Utils/Genres.cs:82
+#: Utils/Genres.cs:88
 msgid "Drama"
 msgstr "Драма"
 
-#: Utils/Genres.cs:83
+#: Utils/Genres.cs:89
 msgid "Dramaturgy"
 msgstr "Драматургия: прочее"
 
-#: Utils/Genres.cs:84
+#: Utils/Genres.cs:90
 msgid "Economics"
 msgstr "Экономика"
 
-#: Utils/Genres.cs:85
+#: Utils/Genres.cs:91
 msgid "Epic"
 msgstr "Былины"
 
-#: Utils/Genres.cs:86
+#: Utils/Genres.cs:92
 msgid "Epic Poetry"
 msgstr "Эпическая поэзия"
 
-#: Utils/Genres.cs:87
+#: Utils/Genres.cs:93
 msgid "Epistolary"
 msgstr "Эпистолярная проза"
 
-#: Utils/Genres.cs:88
+#: Utils/Genres.cs:94
 msgid "Essay"
 msgstr "Эссе, очерк, этюд, набросок"
 
-#: Utils/Genres.cs:89
+#: Utils/Genres.cs:95
 msgid "Experimental Poetry"
 msgstr "Экспериментальная поэзия"
 
-#: Utils/Genres.cs:90
+#: Utils/Genres.cs:96
 msgid "Extravaganza"
 msgstr "Феерия"
 
-#: Utils/Genres.cs:91
+#: Utils/Genres.cs:97
 msgid "Fable"
 msgstr "Басни"
 
-#: Utils/Genres.cs:92
+#: Utils/Genres.cs:98
 msgid "Fairy SF"
 msgstr "Сказочная фантастика"
 
-#: Utils/Genres.cs:93
+#: Utils/Genres.cs:99
 msgid "Fan fiction"
 msgstr "Фанфик"
 
-#: Utils/Genres.cs:94
+#: Utils/Genres.cs:100
 msgid "Folk Songs"
 msgstr "Народные песни"
 
-#: Utils/Genres.cs:95
+#: Utils/Genres.cs:101
 msgid "Folk tales"
 msgstr "Народные сказки"
 
-#: Utils/Genres.cs:96
+#: Utils/Genres.cs:102
 msgid "Folklore"
 msgstr "Фольклор: прочее"
 
-#: Utils/Genres.cs:97
+#: Utils/Genres.cs:103
 msgid "Foreign languages"
 msgstr "Иностранные языки"
 
-#: Utils/Genres.cs:98
+#: Utils/Genres.cs:104
 msgid "Guides"
 msgstr "Путеводители"
 
-#: Utils/Genres.cs:99
+#: Utils/Genres.cs:105
 msgid "Global Economy"
 msgstr "Внешняя торговля"
 
-#: Utils/Genres.cs:100
+#: Utils/Genres.cs:106
 msgid "Gothic novel"
 msgstr "Готический роман"
 
-#: Utils/Genres.cs:101
+#: Utils/Genres.cs:107
 msgid "Great story"
 msgstr "Повесть"
 
-#: Utils/Genres.cs:102
+#: Utils/Genres.cs:108
 msgid "Historical fantasy"
 msgstr "Историческое фэнтези"
 
-#: Utils/Genres.cs:103
+#: Utils/Genres.cs:109
 msgid "Home: Other"
 msgstr "Домоводство"
 
-#: Utils/Genres.cs:104
+#: Utils/Genres.cs:110
 msgid "Collecting"
 msgstr "Коллекционирование"
 
-#: Utils/Genres.cs:105
+#: Utils/Genres.cs:111
 msgid "Cooking"
 msgstr "Кулинария"
 
-#: Utils/Genres.cs:106
+#: Utils/Genres.cs:112
 msgid "Hobbies & Crafts"
 msgstr "Хобби и ремесла"
 
-#: Utils/Genres.cs:107
+#: Utils/Genres.cs:113
 msgid "Do it yourself"
 msgstr "Сделай сам"
 
-#: Utils/Genres.cs:108
+#: Utils/Genres.cs:114
 msgid "Entertaining"
 msgstr "Развлечения"
 
-#: Utils/Genres.cs:109
+#: Utils/Genres.cs:115
 msgid "Garden"
 msgstr "Сад и огород"
 
-#: Utils/Genres.cs:110
+#: Utils/Genres.cs:116
 msgid "Health"
 msgstr "Здоровье"
 
-#: Utils/Genres.cs:111
+#: Utils/Genres.cs:117
 msgid "Pets"
 msgstr "Домашние животные"
 
-#: Utils/Genres.cs:112
+#: Utils/Genres.cs:118
 msgid "Erotica, Sex"
 msgstr "Эротика, Секс"
 
-#: Utils/Genres.cs:113
+#: Utils/Genres.cs:119
 msgid "Sports"
 msgstr "Спорт"
 
-#: Utils/Genres.cs:114
+#: Utils/Genres.cs:120
 msgid "Misk Humor"
 msgstr "Юмор: прочее"
 
-#: Utils/Genres.cs:115
+#: Utils/Genres.cs:121
 msgid "Anecdote"
 msgstr "Анекдоты"
 
-#: Utils/Genres.cs:116
+#: Utils/Genres.cs:122
 msgid "Humorous fantasy"
 msgstr "Юмористическое фэнтези"
 
-#: Utils/Genres.cs:117
+#: Utils/Genres.cs:123
 msgid "Humor Prose"
 msgstr "Юмористическая проза"
 
-#: Utils/Genres.cs:118
+#: Utils/Genres.cs:124
 msgid "Satire"
 msgstr "Сатира"
 
-#: Utils/Genres.cs:119
+#: Utils/Genres.cs:125
 msgid "Humor Verses"
 msgstr "Юмористические стихи"
 
-#: Utils/Genres.cs:120
+#: Utils/Genres.cs:126
 msgid "In verse"
 msgstr "В стихах"
 
-#: Utils/Genres.cs:121
+#: Utils/Genres.cs:127
 msgid "Industries"
 msgstr "Отраслевые издания"
 
-#: Utils/Genres.cs:122
+#: Utils/Genres.cs:128
 msgid "Job Hunting"
 msgstr "Поиск работы, карьера"
 
-#: Utils/Genres.cs:123
+#: Utils/Genres.cs:129
 msgid "Limerick"
 msgstr "Частушки, прибаутки, потешки"
 
-#: Utils/Genres.cs:124
+#: Utils/Genres.cs:130
 msgid "About love"
 msgstr "О любви"
 
-#: Utils/Genres.cs:125
+#: Utils/Genres.cs:131
 msgid "Contemporary Romance"
 msgstr "Современные любовные романы"
 
-#: Utils/Genres.cs:126
+#: Utils/Genres.cs:132
 msgid "Detective Romance"
 msgstr "Любовные детективы"
 
-#: Utils/Genres.cs:127
+#: Utils/Genres.cs:133
 msgid "Erotica"
 msgstr "Эротика"
 
-#: Utils/Genres.cs:128
+#: Utils/Genres.cs:134
 msgid "Porno"
 msgstr "Порно"
 
-#: Utils/Genres.cs:129
+#: Utils/Genres.cs:135
 msgid "Historical Romance"
 msgstr "Исторические любовные романы"
 
-#: Utils/Genres.cs:130
+#: Utils/Genres.cs:136
 msgid "Love SF"
 msgstr "Любовная фантастика"
 
-#: Utils/Genres.cs:131
+#: Utils/Genres.cs:137
 msgid "Short Romance"
 msgstr "Короткие любовные романы"
 
-#: Utils/Genres.cs:132
+#: Utils/Genres.cs:138
 msgid "Lyrics"
 msgstr "Лирика"
 
-#: Utils/Genres.cs:133
+#: Utils/Genres.cs:139
 msgid "Management"
 msgstr "Управление, подбор персонала"
 
-#: Utils/Genres.cs:134
+#: Utils/Genres.cs:140
 msgid "Marketing, PR, Adv"
 msgstr "Маркетинг, PR, реклама"
 
-#: Utils/Genres.cs:135
+#: Utils/Genres.cs:141
 msgid "Military"
 msgstr "Военное дело: прочее"
 
-#: Utils/Genres.cs:136
+#: Utils/Genres.cs:142
 msgid "Military Arts"
 msgstr "Боевые искусства"
 
-#: Utils/Genres.cs:137
+#: Utils/Genres.cs:143
 msgid "Military History"
 msgstr "Военная история"
 
-#: Utils/Genres.cs:138
+#: Utils/Genres.cs:144
 msgid "Military special"
 msgstr "Cпецслужбы"
 
-#: Utils/Genres.cs:139
+#: Utils/Genres.cs:145
 msgid "Weapon"
 msgstr "Военная техника и вооружение"
 
-#: Utils/Genres.cs:140
+#: Utils/Genres.cs:146
 msgid "Music"
 msgstr "Музыка"
 
-#: Utils/Genres.cs:141
+#: Utils/Genres.cs:147
 msgid "Mystery"
 msgstr "Мистерия"
 
-#: Utils/Genres.cs:142
+#: Utils/Genres.cs:148
 msgid "Biography & Memoirs"
 msgstr "Биографии и Мемуары"
 
-#: Utils/Genres.cs:143
+#: Utils/Genres.cs:149
 msgid "Criticism"
 msgstr "Критика"
 
-#: Utils/Genres.cs:144
+#: Utils/Genres.cs:150
 msgid "Military docs"
 msgstr "Военная документалистика"
 
-#: Utils/Genres.cs:145
+#: Utils/Genres.cs:151
 msgid "Publicism"
 msgstr "Публицистика"
 
-#: Utils/Genres.cs:146
+#: Utils/Genres.cs:152
 msgid "Misk Nonfiction"
 msgstr "Документальная литература"
 
-#: Utils/Genres.cs:147
+#: Utils/Genres.cs:153
 msgid "Notes"
 msgstr "Партитуры"
 
-#: Utils/Genres.cs:148
+#: Utils/Genres.cs:154
 msgid "Non Science Fiction"
 msgstr "Ненаучная фантастика"
 
-#: Utils/Genres.cs:149
+#: Utils/Genres.cs:155
 msgid "Corporate Culture"
 msgstr "Корпоративная культура"
 
-#: Utils/Genres.cs:150
+#: Utils/Genres.cs:156
 msgid "Other"
 msgstr "Неотсортированное"
 
-#: Utils/Genres.cs:151
+#: Utils/Genres.cs:157
 msgid "Palindromes"
 msgstr "Палиндромы"
 
-#: Utils/Genres.cs:152
+#: Utils/Genres.cs:158
 msgid "Palmistry"
 msgstr "Хиромантия"
 
-#: Utils/Genres.cs:153
+#: Utils/Genres.cs:159
 msgid "Paper Work"
 msgstr "Делопроизводство"
 
-#: Utils/Genres.cs:154
+#: Utils/Genres.cs:160
 msgid "Periodic"
 msgstr "Газеты и журналы"
 
-#: Utils/Genres.cs:155
+#: Utils/Genres.cs:161
 msgid "Personal Finance"
 msgstr "Личные финансы"
 
-#: Utils/Genres.cs:156
+#: Utils/Genres.cs:162
 msgid "Poetry"
 msgstr "Поэзия: прочее"
 
-#: Utils/Genres.cs:157
+#: Utils/Genres.cs:163
 msgid "Trappee"
 msgstr "Попаданцы"
 
-#: Utils/Genres.cs:158
+#: Utils/Genres.cs:164
 msgid "Popular Business"
 msgstr "О бизнесе популярно"
 
-#: Utils/Genres.cs:159
+#: Utils/Genres.cs:165
 msgid "Prose"
 msgstr "Проза"
 
-#: Utils/Genres.cs:160
+#: Utils/Genres.cs:166
 msgid "Classical Prose"
 msgstr "Классическая проза"
 
-#: Utils/Genres.cs:161
+#: Utils/Genres.cs:167
 msgid "Contemporary Prose"
 msgstr "Современная проза"
 
-#: Utils/Genres.cs:162
+#: Utils/Genres.cs:168
 msgid "Counterculture"
 msgstr "Контркультура"
 
-#: Utils/Genres.cs:163
+#: Utils/Genres.cs:169
 msgid "Epopee"
 msgstr "Эпопея"
 
-#: Utils/Genres.cs:164
+#: Utils/Genres.cs:170
 msgid "Game book"
 msgstr "Книга-игра"
 
-#: Utils/Genres.cs:165
+#: Utils/Genres.cs:171
 msgid "Historical Prose"
 msgstr "Историческая проза"
 
-#: Utils/Genres.cs:166
+#: Utils/Genres.cs:172
 msgid "Magic realism"
 msgstr "Магический реализм"
 
-#: Utils/Genres.cs:167
+#: Utils/Genres.cs:173
 msgid "Military Prose"
 msgstr "О войне"
 
-#: Utils/Genres.cs:168
+#: Utils/Genres.cs:174
 msgid "Russian Classics"
 msgstr "Русская классическая проза"
 
-#: Utils/Genres.cs:169
+#: Utils/Genres.cs:175
 msgid "Sentimental Prose"
 msgstr "Сентиментальная проза"
 
-#: Utils/Genres.cs:170
+#: Utils/Genres.cs:176
 msgid "Soviet Classics"
 msgstr "Советская классическая проза"
 
-#: Utils/Genres.cs:171
+#: Utils/Genres.cs:177
 msgid "Proverbs"
 msgstr "Пословицы, поговорки"
 
-#: Utils/Genres.cs:172
+#: Utils/Genres.cs:178
 msgid "Child Psychology"
 msgstr "Детская психология"
 
-#: Utils/Genres.cs:173
+#: Utils/Genres.cs:179
 msgid "Sex and family"
 msgstr "Секс и семейная психология"
 
-#: Utils/Genres.cs:174
+#: Utils/Genres.cs:180
 msgid "Psychotherapy and counselling"
 msgstr "Психотерапия и консультирование"
 
-#: Utils/Genres.cs:175
+#: Utils/Genres.cs:181
 msgid "Real Estate"
 msgstr "Недвижимость"
 
-#: Utils/Genres.cs:176
+#: Utils/Genres.cs:182
 msgid "Dictionaries"
 msgstr "Словари"
 
-#: Utils/Genres.cs:177
+#: Utils/Genres.cs:183
 msgid "Encyclopedias"
 msgstr "Энциклопедии"
 
-#: Utils/Genres.cs:178
+#: Utils/Genres.cs:184
 msgid "Guidebooks"
 msgstr "Руководства"
 
-#: Utils/Genres.cs:179
+#: Utils/Genres.cs:185
 msgid "Reference"
 msgstr "Справочники"
 
-#: Utils/Genres.cs:180
+#: Utils/Genres.cs:186
 msgid "Misk References"
 msgstr "Справочная литература"
 
-#: Utils/Genres.cs:181
+#: Utils/Genres.cs:187
 msgid "Religion: Other"
 msgstr "Религиозная литература: прочее"
 
-#: Utils/Genres.cs:182
+#: Utils/Genres.cs:188
 msgid "Buddha"
 msgstr "Буддизм"
 
-#: Utils/Genres.cs:183
+#: Utils/Genres.cs:189
 msgid "Catholicism"
 msgstr "Католицизм"
 
-#: Utils/Genres.cs:184
+#: Utils/Genres.cs:190
 msgid "Christianity"
 msgstr "Христианство"
 
-#: Utils/Genres.cs:185
+#: Utils/Genres.cs:191
 msgid "Esoterics"
 msgstr "Эзотерика"
 
-#: Utils/Genres.cs:186
+#: Utils/Genres.cs:192
 msgid "Hinduism"
 msgstr "Индуизм"
 
-#: Utils/Genres.cs:187
+#: Utils/Genres.cs:193
 msgid "Islam"
 msgstr "Ислам"
 
-#: Utils/Genres.cs:188
+#: Utils/Genres.cs:194
 msgid "Judaism"
 msgstr "Иудаизм"
 
-#: Utils/Genres.cs:189
+#: Utils/Genres.cs:195
 msgid "Orthodoxy"
 msgstr "Православие"
 
-#: Utils/Genres.cs:190
+#: Utils/Genres.cs:196
 msgid "Paganism"
 msgstr "Язычество"
 
-#: Utils/Genres.cs:191
+#: Utils/Genres.cs:197
 msgid "Protestantism"
 msgstr "Протестантизм"
 
-#: Utils/Genres.cs:192
+#: Utils/Genres.cs:198
 msgid "Religion"
 msgstr "Религия"
 
-#: Utils/Genres.cs:193
+#: Utils/Genres.cs:199
 msgid "Self-perfection"
 msgstr "Самосовершенствование"
 
-#: Utils/Genres.cs:194
+#: Utils/Genres.cs:200
 msgid "Riddles"
 msgstr "Загадки"
 
-#: Utils/Genres.cs:195
+#: Utils/Genres.cs:201
 msgid "Roman"
 msgstr "Роман"
 
-#: Utils/Genres.cs:196
+#: Utils/Genres.cs:202
 msgid "Sagas"
 msgstr "Семейный роман/Семейная сага"
 
-#: Utils/Genres.cs:197
+#: Utils/Genres.cs:203
 msgid "Scenarios"
 msgstr "Сценарии"
 
-#: Utils/Genres.cs:198
+#: Utils/Genres.cs:204
 msgid "Abstract"
 msgstr "Рефераты"
 
-#: Utils/Genres.cs:199
+#: Utils/Genres.cs:205
 msgid "Analitic Chemistry"
 msgstr "Аналитическая химия"
 
-#: Utils/Genres.cs:200
+#: Utils/Genres.cs:206
 msgid "Biochemistry"
 msgstr "Биохимия"
 
-#: Utils/Genres.cs:201
+#: Utils/Genres.cs:207
 msgid "Biology"
 msgstr "Биология"
 
-#: Utils/Genres.cs:202
+#: Utils/Genres.cs:208
 msgid "Biophysics"
 msgstr "Биофизика"
 
-#: Utils/Genres.cs:203
+#: Utils/Genres.cs:209
 msgid "Botany"
 msgstr "Ботаника"
 
-#: Utils/Genres.cs:204
+#: Utils/Genres.cs:210
 msgid "Building"
 msgstr "Строительство и сопромат"
 
-#: Utils/Genres.cs:205
+#: Utils/Genres.cs:211
 msgid "Business"
 msgstr "Деловая литература"
 
-#: Utils/Genres.cs:206
+#: Utils/Genres.cs:212
 msgid "Chemistry"
 msgstr "Химия"
 
-#: Utils/Genres.cs:207
+#: Utils/Genres.cs:213
 msgid "Cosmos"
 msgstr "Астрономия и Космос"
 
-#: Utils/Genres.cs:208
+#: Utils/Genres.cs:214
 msgid "Cribs"
 msgstr "Шпаргалки"
 
-#: Utils/Genres.cs:209
+#: Utils/Genres.cs:215
 msgid "Cultural Science"
 msgstr "Культурология"
 
-#: Utils/Genres.cs:210
+#: Utils/Genres.cs:216
 msgid "Ecology"
 msgstr "Экология"
 
-#: Utils/Genres.cs:211
+#: Utils/Genres.cs:217
 msgid "Economy"
 msgstr "Экономика"
 
-#: Utils/Genres.cs:212
+#: Utils/Genres.cs:218
 msgid "Geology"
 msgstr "Геология и география"
 
-#: Utils/Genres.cs:213
+#: Utils/Genres.cs:219
 msgid "History"
 msgstr "История"
 
-#: Utils/Genres.cs:214
+#: Utils/Genres.cs:220
 msgid "Jurisprudence"
 msgstr "Юриспруденция"
 
-#: Utils/Genres.cs:215
+#: Utils/Genres.cs:221
 msgid "Linguistics"
 msgstr "Языкознание"
 
-#: Utils/Genres.cs:216
+#: Utils/Genres.cs:222
 msgid "Mathematics"
 msgstr "Математика"
 
-#: Utils/Genres.cs:217
+#: Utils/Genres.cs:223
 msgid "Medicine"
 msgstr "Медицина"
 
-#: Utils/Genres.cs:218
+#: Utils/Genres.cs:224
 msgid "Alternative medicine"
 msgstr "Альтернативная медицина"
 
-#: Utils/Genres.cs:219
+#: Utils/Genres.cs:225
 msgid "Metallurgy"
 msgstr "Металлургия"
 
-#: Utils/Genres.cs:220
+#: Utils/Genres.cs:226
 msgid "Organic Chemistry"
 msgstr "Органическая химия"
 
-#: Utils/Genres.cs:221
+#: Utils/Genres.cs:227
 msgid "Pedagogy"
 msgstr "Педагогика"
 
-#: Utils/Genres.cs:222
+#: Utils/Genres.cs:228
 msgid "Philology"
 msgstr "Литературоведение"
 
-#: Utils/Genres.cs:223
+#: Utils/Genres.cs:229
 msgid "Philosophy"
 msgstr "Философия"
 
-#: Utils/Genres.cs:224
+#: Utils/Genres.cs:230
 msgid "Physics"
 msgstr "Физика"
 
-#: Utils/Genres.cs:225
+#: Utils/Genres.cs:231
 msgid "Physical chemistry"
 msgstr "Физическая химия"
 
-#: Utils/Genres.cs:226
+#: Utils/Genres.cs:232
 msgid "Politics"
 msgstr "Политика"
 
-#: Utils/Genres.cs:227
+#: Utils/Genres.cs:233
 msgid "Science popular"
 msgstr "Научпоп"
 
-#: Utils/Genres.cs:228
+#: Utils/Genres.cs:234
 msgid "Psychology"
 msgstr "Психология"
 
-#: Utils/Genres.cs:229
+#: Utils/Genres.cs:235
 msgid "Radio"
 msgstr "Радиоэлектроника"
 
-#: Utils/Genres.cs:230
+#: Utils/Genres.cs:236
 msgid "Religious Studies"
 msgstr "Религиоведение"
 
-#: Utils/Genres.cs:231
+#: Utils/Genres.cs:237
 msgid "Social studies"
 msgstr "Обществознание"
 
-#: Utils/Genres.cs:232
+#: Utils/Genres.cs:238
 msgid "State science"
 msgstr "Государство и право"
 
-#: Utils/Genres.cs:233
+#: Utils/Genres.cs:239
 msgid "Technical"
 msgstr "Технические науки"
 
-#: Utils/Genres.cs:234
+#: Utils/Genres.cs:240
 msgid "Textbook"
 msgstr "Учебники"
 
-#: Utils/Genres.cs:235
+#: Utils/Genres.cs:241
 msgid "Transport"
 msgstr "Транспорт и авиация"
 
-#: Utils/Genres.cs:236
+#: Utils/Genres.cs:242
 msgid "Veterinary"
 msgstr "Ветеринария"
 
-#: Utils/Genres.cs:237
+#: Utils/Genres.cs:243
 msgid "Zoology"
 msgstr "Зоология"
 
-#: Utils/Genres.cs:238
+#: Utils/Genres.cs:244
 msgid "Misk Science, Education"
 msgstr "Научная литература: прочее"
 
-#: Utils/Genres.cs:239
+#: Utils/Genres.cs:245
 msgid "Screenplays"
 msgstr "Киносценарии"
 
-#: Utils/Genres.cs:240
+#: Utils/Genres.cs:246
 msgid "Science Fiction"
 msgstr "Научная фантастика"
 
-#: Utils/Genres.cs:241
+#: Utils/Genres.cs:247
 msgid "Action SF"
 msgstr "Боевая фантастика"
 
-#: Utils/Genres.cs:242
+#: Utils/Genres.cs:248
 msgid "Cyberpunk"
 msgstr "Киберпанк"
 
-#: Utils/Genres.cs:243
+#: Utils/Genres.cs:249
 msgid "Detective SF"
 msgstr "Детективная фантастика"
 
-#: Utils/Genres.cs:244
+#: Utils/Genres.cs:250
 msgid "Epic SF"
 msgstr "Эпическая фантастика"
 
-#: Utils/Genres.cs:245
+#: Utils/Genres.cs:251
 msgid "Other SF"
 msgstr "Фантастика: прочее"
 
-#: Utils/Genres.cs:246
+#: Utils/Genres.cs:252
 msgid "Fantasy"
 msgstr "Фэнтези"
 
-#: Utils/Genres.cs:247
+#: Utils/Genres.cs:253
 msgid "Fantasy city"
 msgstr "Городское фэнтези"
 
-#: Utils/Genres.cs:248
+#: Utils/Genres.cs:254
 msgid "Ironyc female fantasy"
 msgstr "Ироническое фэнтези"
 
-#: Utils/Genres.cs:249
+#: Utils/Genres.cs:255
 msgid "Heroic SF"
 msgstr "Героическая фантастика"
 
-#: Utils/Genres.cs:250
+#: Utils/Genres.cs:256
 msgid "Alternative history"
 msgstr "Альтернативная история"
 
-#: Utils/Genres.cs:251
+#: Utils/Genres.cs:257
 msgid "Horror"
 msgstr "Ужасы"
 
-#: Utils/Genres.cs:252
+#: Utils/Genres.cs:258
 msgid "Humor SF"
 msgstr "Юмористическая фантастика"
 
-#: Utils/Genres.cs:253
+#: Utils/Genres.cs:259
 msgid "Ironical SF"
 msgstr "Ироническая фантастика"
 
-#: Utils/Genres.cs:254
+#: Utils/Genres.cs:260
 msgid "Mystic"
 msgstr "Мистика"
 
-#: Utils/Genres.cs:255
+#: Utils/Genres.cs:261
 msgid "Postapocalyptic"
 msgstr "Постапокалипсис"
 
-#: Utils/Genres.cs:256
+#: Utils/Genres.cs:262
 msgid "Social SF"
 msgstr "Социальная фантастика"
 
-#: Utils/Genres.cs:257
+#: Utils/Genres.cs:263
 msgid "Space SF"
 msgstr "Космическая фантастика"
 
-#: Utils/Genres.cs:258
+#: Utils/Genres.cs:264
 msgid "Space Opera"
 msgstr "Космоопера"
 
-#: Utils/Genres.cs:259
+#: Utils/Genres.cs:265
 msgid "Stimpank"
 msgstr "Стимпанк"
 
-#: Utils/Genres.cs:260
+#: Utils/Genres.cs:266
 msgid "Technofantasy"
 msgstr "Технофэнтези"
 
-#: Utils/Genres.cs:261
+#: Utils/Genres.cs:267
 msgid "Short story"
 msgstr "Рассказ"
 
-#: Utils/Genres.cs:262
+#: Utils/Genres.cs:268
 msgid "Small Business"
 msgstr "Малый бизнес"
 
-#: Utils/Genres.cs:263
+#: Utils/Genres.cs:269
 msgid "Song Poetry"
 msgstr "Песенная поэзия"
 
-#: Utils/Genres.cs:264
+#: Utils/Genres.cs:270
 msgid "Stock"
 msgstr "Ценные бумаги, инвестиции"
 
-#: Utils/Genres.cs:265
+#: Utils/Genres.cs:271
 msgid "Story"
 msgstr "Новелла"
 
-#: Utils/Genres.cs:266
+#: Utils/Genres.cs:272
 msgid "Theatre"
 msgstr "Театр"
 
-#: Utils/Genres.cs:267
+#: Utils/Genres.cs:273
 msgid "Thrillers"
 msgstr "Триллер"
 
-#: Utils/Genres.cs:268
+#: Utils/Genres.cs:274
 msgid "Legal thriller"
 msgstr "Юридический триллер"
 
-#: Utils/Genres.cs:269
+#: Utils/Genres.cs:275
 msgid "Medical thriller"
 msgstr "Медицинский триллер"
 
-#: Utils/Genres.cs:270
+#: Utils/Genres.cs:276
 msgid "Techno Thriller"
 msgstr "Техно триллер"
 
-#: Utils/Genres.cs:271
+#: Utils/Genres.cs:277
 msgid "Trade"
 msgstr "Торговля"
 
-#: Utils/Genres.cs:272
+#: Utils/Genres.cs:278
 msgid "Tragedy"
 msgstr "Трагедия"
 
-#: Utils/Genres.cs:273
+#: Utils/Genres.cs:279
 msgid "Unfinished"
 msgstr "Недописанное"
 
-#: Utils/Genres.cs:274
+#: Utils/Genres.cs:280
 msgid "Vaudeville"
 msgstr "Водевиль"
 
-#: Utils/Genres.cs:275
+#: Utils/Genres.cs:281
 msgid "Vers libre"
 msgstr "Верлибры"
 
-#: Utils/Genres.cs:276
+#: Utils/Genres.cs:282
 msgid "Visual Arts"
 msgstr "Изобразительное искусство, фотография"
 
-#: Utils/Genres.cs:277
+#: Utils/Genres.cs:283
 msgid "Visual Poetry"
 msgstr "Визуальная поэзия"
 
-#: Utils/Genres.cs:278
+#: Utils/Genres.cs:284
 msgid "Young-adult fiction"
 msgstr "Подростковая литература"
+
+#: Utils/Genres.cs:286
+msgctxt "Genres|Category|"
+msgid "SF, Fantasy"
+msgstr "Фантастика"
+
+#: Utils/Genres.cs:287
+msgctxt "Genres|Category|"
+msgid "Detectives, Thrillers"
+msgstr "Детективы и Триллеры"
+
+#: Utils/Genres.cs:288
+msgctxt "Genres|Category|"
+msgid "Prose"
+msgstr "Проза"
+
+#: Utils/Genres.cs:289
+msgctxt "Genres|Category|"
+msgid "Love"
+msgstr "Любовные романы"
+
+#: Utils/Genres.cs:290
+msgctxt "Genres|Category|"
+msgid "Adventures"
+msgstr "Приключения"
+
+#: Utils/Genres.cs:291
+msgctxt "Genres|Category|"
+msgid "Children's"
+msgstr "Детское"
+
+#: Utils/Genres.cs:292
+msgctxt "Genres|Category|"
+msgid "Poetry, Dramaturgy"
+msgstr "Поэзия"
+
+#: Utils/Genres.cs:293
+msgctxt "Genres|Category|"
+msgid "Antique"
+msgstr "Старинное"
+
+#: Utils/Genres.cs:294
+msgctxt "Genres|Category|"
+msgid "Science, Education"
+msgstr "Наука, Образование"
+
+#: Utils/Genres.cs:295
+msgctxt "Genres|Category|"
+msgid "Computers"
+msgstr "Компьютеры и Интернет"
+
+#: Utils/Genres.cs:296
+msgctxt "Genres|Category|"
+msgid "Reference"
+msgstr "Справочная литература"
+
+#: Utils/Genres.cs:297
+msgctxt "Genres|Category|"
+msgid "Religion"
+msgstr "Религия и духовность"
+
+#: Utils/Genres.cs:298
+msgctxt "Genres|Category|"
+msgid "Humor"
+msgstr "Юмор"
+
+#: Utils/Genres.cs:299
+msgctxt "Genres|Category|"
+msgid "Home, Family"
+msgstr "Домоводство (Дом и семья)"
+
+#: Utils/Genres.cs:300
+msgctxt "Genres|Category|"
+msgid "Technics"
+msgstr "Техника"
+
+#: Utils/Genres.cs:301
+msgctxt "Genres|Category|"
+msgid "Other"
+msgstr "Прочее"
+
+#: Utils/Genres.cs:302
+msgctxt "Genres|Category|"
+msgid "Economy, Business"
+msgstr "Деловая литература"
+
+#: Utils/Genres.cs:303
+msgctxt "Genres|Category|"
+msgid "Nonfiction"
+msgstr "Документальная литература"
+
+#: Utils/Genres.cs:304
+msgctxt "Genres|Category|"
+msgid "Dramaturgy"
+msgstr "Драматургия"
+
+#: Utils/Genres.cs:305
+msgctxt "Genres|Category|"
+msgid "Folklore"
+msgstr "Фольклор"
+
+#: Utils/Genres.cs:306
+msgctxt "Genres|Category|"
+msgid "Military"
+msgstr "Военное дело"

@@ -138,6 +138,52 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
+        [Route("genres")]
+        [HttpGet]
+        public Feed GetByGenres()
+        {
+            var feed = new Feed();
+            feed.Id = "tag:root:genres";
+            feed.Title = T._("Books by genres");
+            AddNavigation(Request.RequestUri, feed);
+
+            foreach (var genre in Genres.Instance.Tree)
+            {
+                var name = genre.Key.Replace("category_", "");
+                var entry = new FeedEntry();
+                entry.Id = "tag:root:genre:" + name;
+                entry.Title = Genres.Instance.Localize(genre.Key);
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genres/" + name });
+                entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre.Key)) };
+                feed.Entries.Add(entry);
+            }
+
+            return feed;
+        }
+
+        [Route("genres/{category}")]
+        [HttpGet]
+        public Feed GetByGenres(string category)
+        {
+            var fullname = "category_" + category;
+            var feed = new Feed();
+            feed.Id = "tag:root:genres:" + category;
+            feed.Title = T._("Books in the genre of {0}", Genres.Instance.Localize(fullname));
+            AddNavigation(Request.RequestUri, feed);
+
+            foreach (var genre in Genres.Instance.Tree[fullname])
+            {
+                var entry = new FeedEntry();
+                entry.Id = "tag:root:genre:" + genre;
+                entry.Title = Genres.Instance.Localize(genre);
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genre/" + genre });
+                entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre)) };
+                feed.Entries.Add(entry);
+            }
+
+            return feed;
+        }
+
         private string ChangePage(string url, int page = 0)
         {
             string result = url;

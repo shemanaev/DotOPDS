@@ -27,6 +27,12 @@ namespace DotOPDS.Utils
         private Dictionary<string, string> localized = new Dictionary<string, string>();
         private Genres()
         {
+            InitLocalization();
+            InitTree();
+        }
+
+        private void InitLocalization()
+        {
             localized.Add("accounting", T._("Accounting"));
             localized.Add("adv_animal", T._("Nature & Animals"));
             localized.Add("adv_geo", T._("Travel & Geography"));
@@ -277,7 +283,365 @@ namespace DotOPDS.Utils
             localized.Add("visual_poetry", T._("Visual Poetry"));
             localized.Add("ya", T._("Young-adult fiction"));
 
+            localized.Add("category_fantasy", T._p("Genres|Category|", "SF, Fantasy"));
+            localized.Add("category_detective", T._p("Genres|Category|", "Detectives, Thrillers"));
+            localized.Add("category_prose", T._p("Genres|Category|", "Prose"));
+            localized.Add("category_love", T._p("Genres|Category|", "Love"));
+            localized.Add("category_adventures", T._p("Genres|Category|", "Adventures"));
+            localized.Add("category_child", T._p("Genres|Category|", "Children's"));
+            localized.Add("category_poetry", T._p("Genres|Category|", "Poetry, Dramaturgy"));
+            localized.Add("category_antique", T._p("Genres|Category|", "Antique"));
+            localized.Add("category_science", T._p("Genres|Category|", "Science, Education"));
+            localized.Add("category_comp", T._p("Genres|Category|", "Computers"));
+            localized.Add("category_ref", T._p("Genres|Category|", "Reference"));
+            localized.Add("category_religion", T._p("Genres|Category|", "Religion"));
+            localized.Add("category_humor", T._p("Genres|Category|", "Humor"));
+            localized.Add("category_home", T._p("Genres|Category|", "Home, Family"));
+            localized.Add("category_technics", T._p("Genres|Category|", "Technics"));
+            localized.Add("category_other", T._p("Genres|Category|", "Other"));
+            localized.Add("category_business", T._p("Genres|Category|", "Economy, Business"));
+            localized.Add("category_nonfiction", T._p("Genres|Category|", "Nonfiction"));
+            localized.Add("category_drama", T._p("Genres|Category|", "Dramaturgy"));
+            localized.Add("category_folk", T._p("Genres|Category|", "Folklore"));
+            localized.Add("category_military", T._p("Genres|Category|", "Military"));
+        }
 
+        //  ([a-z_]+) ([\S ]+)
+        // list.Add("\1");
+        private void InitTree()
+        {
+            List<string> list;
+
+            list = new List<string>();
+            list.Add("sf_history");
+            list.Add("sf_action");
+            list.Add("sf_epic");
+            list.Add("sf_heroic");
+            list.Add("sf_detective");
+            list.Add("sf_cyberpunk");
+            list.Add("sf_space");
+            list.Add("sf_social");
+            list.Add("sf_horror");
+            list.Add("sf_humor");
+            list.Add("sf_fantasy");
+            list.Add("sf");
+            list.Add("child_sf");
+            list.Add("sf_fantasy_city");
+            list.Add("sf_postapocalyptic");
+            list.Add("love_sf");
+            list.Add("gothic_novel");
+            list.Add("nsf");
+            list.Add("fairy_fantasy");
+            list.Add("sf_etc");
+            list.Add("sf_irony");
+            list.Add("sf_fantasy_irony");
+            list.Add("sf_mystic");
+            list.Add("sf_space_opera");
+            list.Add("sf_stimpank");
+            list.Add("sf_technofantasy");
+            list.Add("popadanec");
+            list.Add("historical_fantasy");
+            list.Add("humor_fantasy");
+            Tree.Add("category_fantasy", list);
+
+            list = new List<string>();
+            list.Add("sf_detective");
+            list.Add("det_classic");
+            list.Add("det_police");
+            list.Add("det_action");
+            list.Add("det_irony");
+            list.Add("det_history");
+            list.Add("det_espionage");
+            list.Add("det_crime");
+            list.Add("det_political");
+            list.Add("det_maniac");
+            list.Add("det_hard");
+            list.Add("thriller");
+            list.Add("detective");
+            list.Add("love_detective");
+            list.Add("child_det");
+            list.Add("thriller_legal");
+            list.Add("thriller_medical");
+            list.Add("thriller_techno");
+            list.Add("det_cozy");
+            Tree.Add("category_detective", list);
+
+            list = new List<string>();
+            list.Add("prose");
+            list.Add("prose_classic");
+            list.Add("prose_history");
+            list.Add("prose_contemporary");
+            list.Add("prose_counter");
+            list.Add("prose_rus_classic");
+            list.Add("prose_su_classics");
+            list.Add("prose_military");
+            list.Add("aphorisms");
+            list.Add("essay");
+            list.Add("story");
+            list.Add("great_story");
+            list.Add("short_story");
+            list.Add("roman");
+            list.Add("extravaganza");
+            list.Add("epistolary_fiction");
+            list.Add("prose_epic");
+            list.Add("prose_magic");
+            list.Add("sagas");
+            list.Add("dissident");
+            list.Add("prose_sentimental");
+            Tree.Add("category_prose", list);
+
+            list = new List<string>();
+            list.Add("love_contemporary");
+            list.Add("love_history");
+            list.Add("love_detective");
+            list.Add("love_short");
+            list.Add("love_erotica");
+            list.Add("love");
+            list.Add("love_sf");
+            list.Add("love_hard");
+            list.Add("det_cozy");
+            Tree.Add("category_love", list);
+
+            list = new List<string>();
+            list.Add("adv_western");
+            list.Add("adv_history");
+            list.Add("adv_indian");
+            list.Add("adv_maritime");
+            list.Add("adv_geo");
+            list.Add("adv_animal");
+            list.Add("adventure");
+            list.Add("child_adv");
+            Tree.Add("category_adventures", list);
+
+            list = new List<string>();
+            list.Add("child_tale");
+            list.Add("child_verse");
+            list.Add("child_prose");
+            list.Add("child_sf");
+            list.Add("child_det");
+            list.Add("child_adv");
+            list.Add("child_education");
+            list.Add("children");
+            list.Add("child_folklore");
+            list.Add("prose_game");
+            Tree.Add("category_child", list);
+
+            list = new List<string>();
+            list.Add("child_verse");
+            list.Add("poetry");
+            list.Add("humor_verse");
+            list.Add("fable");
+            list.Add("vers_libre");
+            list.Add("visual_poetry");
+            list.Add("lyrics");
+            list.Add("palindromes");
+            list.Add("song_poetry");
+            list.Add("experimental_poetry");
+            list.Add("epic_poetry");
+            list.Add("in_verse");
+            Tree.Add("category_poetry", list);
+
+            list = new List<string>();
+            list.Add("antique_ant");
+            list.Add("antique_european");
+            list.Add("antique_russian");
+            list.Add("antique_east");
+            list.Add("antique_myths");
+            list.Add("antique");
+            Tree.Add("category_antique", list);
+
+            list = new List<string>();
+            list.Add("sci_history");
+            list.Add("sci_psychology");
+            list.Add("sci_culture");
+            list.Add("sci_religion");
+            list.Add("sci_philosophy");
+            list.Add("sci_politics");
+            list.Add("sci_business");
+            list.Add("sci_juris");
+            list.Add("sci_linguistic");
+            list.Add("sci_medicine");
+            list.Add("sci_phys");
+            list.Add("sci_math");
+            list.Add("sci_chem");
+            list.Add("sci_biology");
+            list.Add("sci_tech");
+            list.Add("science");
+            list.Add("sci_biochem");
+            list.Add("sci_physchem");
+            list.Add("sci_anachem");
+            list.Add("sci_orgchem");
+            list.Add("sci_economy");
+            list.Add("sci_state");
+            list.Add("sci_biophys");
+            list.Add("sci_geo");
+            list.Add("sci_cosmos");
+            list.Add("sci_medicine_alternative");
+            list.Add("sci_philology");
+            list.Add("sci_pedagogy");
+            list.Add("sci_social_studies");
+            list.Add("sci_ecology");
+            list.Add("military_history");
+            list.Add("sci_veterinary");
+            list.Add("sci_zoo");
+            list.Add("sci_botany");
+            list.Add("sci_textbook");
+            list.Add("sci_crib");
+            list.Add("sci_abstract");
+            list.Add("foreign_language");
+            list.Add("psy_childs");
+            list.Add("psy_theraphy");
+            list.Add("psy_sex_and_family");
+            Tree.Add("category_science", list);
+
+            list = new List<string>();
+            list.Add("comp_www");
+            list.Add("comp_programming");
+            list.Add("comp_hard");
+            list.Add("comp_soft");
+            list.Add("comp_db");
+            list.Add("comp_osnet");
+            list.Add("computers");
+            list.Add("comp_dsp");
+            Tree.Add("category_comp", list);
+
+            list = new List<string>();
+            list.Add("ref_encyc");
+            list.Add("ref_dict");
+            list.Add("ref_ref");
+            list.Add("ref_guide");
+            list.Add("reference");
+            list.Add("design");
+            list.Add("geo_guides");
+            Tree.Add("category_ref", list);
+
+            list = new List<string>();
+            list.Add("religion_rel");
+            list.Add("religion_esoterics");
+            list.Add("religion_self");
+            list.Add("religion");
+            list.Add("religion_budda");
+            list.Add("religion_christianity");
+            list.Add("religion_orthodoxy");
+            list.Add("religion_catholicism");
+            list.Add("religion_protestantism");
+            list.Add("religion_hinduism");
+            list.Add("religion_islam");
+            list.Add("religion_judaism");
+            list.Add("astrology");
+            list.Add("palmistry");
+            list.Add("religion_paganism");
+            Tree.Add("category_religion", list);
+
+            list = new List<string>();
+            list.Add("sf_humor");
+            list.Add("humor_anecdote");
+            list.Add("humor_prose");
+            list.Add("humor_verse");
+            list.Add("humor");
+            list.Add("comedy");
+            list.Add("humor_satire");
+            Tree.Add("category_humor", list);
+
+            list = new List<string>();
+            list.Add("home_cooking");
+            list.Add("home_pets");
+            list.Add("home_crafts");
+            list.Add("home_entertain");
+            list.Add("home_health");
+            list.Add("home_garden");
+            list.Add("home_diy");
+            list.Add("home_sport");
+            list.Add("home_sex");
+            list.Add("home");
+            list.Add("home_collecting");
+            Tree.Add("category_home", list);
+
+            list = new List<string>();
+            list.Add("sci_tech");
+            list.Add("sci_transport");
+            list.Add("sci_metal");
+            list.Add("sci_radio");
+            list.Add("sci_build");
+            list.Add("auto_regulations");
+            list.Add("architecture_book");
+            Tree.Add("category_technics", list);
+
+            list = new List<string>();
+            list.Add("other");
+            list.Add("notes");
+            list.Add("periodic");
+            list.Add("music");
+            list.Add("cine");
+            list.Add("theatre");
+            list.Add("fanfiction");
+            list.Add("unfinished");
+            list.Add("visual_arts");
+            Tree.Add("category_other", list);
+
+            list = new List<string>();
+            list.Add("banking");
+            list.Add("accounting");
+            list.Add("global_economy");
+            list.Add("paper_work");
+            list.Add("org_behavior");
+            list.Add("personal_finance");
+            list.Add("small_business");
+            list.Add("marketing");
+            list.Add("real_estate");
+            list.Add("popular_business");
+            list.Add("industries");
+            list.Add("job_hunting");
+            list.Add("ya");
+            list.Add("management");
+            list.Add("stock");
+            list.Add("economics");
+            list.Add("trade");
+            Tree.Add("category_business", list);
+
+            list = new List<string>();
+            list.Add("adv_geo");
+            list.Add("adv_animal");
+            list.Add("nonf_biography");
+            list.Add("nonf_publicism");
+            list.Add("nonf_criticism");
+            list.Add("nonfiction");
+            list.Add("nonf_military");
+            list.Add("sci_popular");
+            Tree.Add("category_nonfiction", list);
+
+            list = new List<string>();
+            list.Add("dramaturgy");
+            list.Add("drama");
+            list.Add("screenplays");
+            list.Add("comedy");
+            list.Add("mystery");
+            list.Add("scenarios");
+            list.Add("tragedy");
+            list.Add("vaudeville");
+            Tree.Add("category_drama", list);
+
+            list = new List<string>();
+            list.Add("humor_anecdote");
+            list.Add("epic");
+            list.Add("child_folklore");
+            list.Add("riddles");
+            list.Add("folk_songs");
+            list.Add("folk_tale");
+            list.Add("proverbs");
+            list.Add("folklore");
+            list.Add("limerick");
+            Tree.Add("category_folk", list);
+
+            list = new List<string>();
+            list.Add("prose_military");
+            list.Add("nonf_military");
+            list.Add("military_history");
+            list.Add("military_weapon");
+            list.Add("military_arts");
+            list.Add("military_special");
+            list.Add("military");
+            Tree.Add("category_military", list);
         }
     }
 }
