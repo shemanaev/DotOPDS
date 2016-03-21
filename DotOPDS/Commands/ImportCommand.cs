@@ -84,12 +84,12 @@ namespace DotOPDS.Commands
             var importStart = watch.Elapsed;
             while (task.EntriesProcessed < task.EntriesTotal)
             {
-                status.Update("Processed {0} of {1}, {2} entry/sec, elapsed {3}", task.EntriesProcessed, task.EntriesTotal,
+                status.Update("Processed {0} of {1}, {2} book/sec, elapsed {3}", task.EntriesProcessed, task.EntriesTotal,
                     Math.Truncate(task.EntriesProcessed / watch.Elapsed.TotalSeconds - importStart.TotalSeconds), watch.Elapsed);
             }
 
             watch.Stop();
-            status.Update("Done in {0}", watch.Elapsed);
+            status.Update("Done in {0} ({1} books)", watch.Elapsed, task.EntriesProcessed);
 
             return 0;
         }
