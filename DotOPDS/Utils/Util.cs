@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace DotOPDS.Utils
 {
@@ -8,7 +9,7 @@ namespace DotOPDS.Utils
         {
             var from = IsLinux ? '\\' : '/';
             var to = IsLinux ? '/' : '\\';
-            return Environment.ExpandEnvironmentVariables(path).Replace(from, to);
+            return Path.GetFullPath(Environment.ExpandEnvironmentVariables(path)).Replace(from, to);
         }
 
         public static bool IsLinux
