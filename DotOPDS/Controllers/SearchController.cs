@@ -2,6 +2,7 @@
 using DotOPDS.Models;
 using DotOPDS.Utils;
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
@@ -157,6 +158,12 @@ namespace DotOPDS.Controllers
 
         private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneSearcher searcher = null)
         {
+            var favicon = Path.Combine(Util.Normalize(Settings.Instance.Web), "favicon.ico");
+            if (File.Exists(favicon))
+            {
+                feed.Icon = "/static/favicon.ico";
+            }
+
             feed.Links.Add(SearchLink);
             feed.Links.Add(StartLink);
             feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Self, Type = FeedLinkType.AtomNavigation, Href = uri.PathAndQuery });

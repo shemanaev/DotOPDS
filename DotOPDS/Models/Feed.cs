@@ -13,6 +13,8 @@ namespace DotOPDS.Models
         public string Id;
         [XmlElement("title")]
         public string Title;
+        [XmlElement("icon")]
+        public string Icon;
         [XmlElement("totalResults", Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
         public int? Total;
         [XmlElement("itemsPerPage", Namespace = "http://a9.com/-/spec/opensearch/1.1/")]
