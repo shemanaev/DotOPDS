@@ -1,6 +1,8 @@
 ﻿using DotOPDS.Middleware;
 using DotOPDS.Utils;
+using DotOPDS.Web.Utils;
 using Microsoft.Owin.Builder;
+using Newtonsoft.Json.Serialization;
 using Nowin;
 using Owin;
 using System;
@@ -41,7 +43,7 @@ namespace DotOPDS.Web
             if (Settings.Instance.Log.Level == "trace")
                 config.MessageHandlers.Add(new MessageLoggingHandler());
 
-            config.Formatters.Remove(config.Formatters.JsonFormatter);
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             var xmlFormatter = new AtomXmlMediaTypeFormatter();
             config.Formatters.Insert(0, xmlFormatter);
