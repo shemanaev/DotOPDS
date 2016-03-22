@@ -1,6 +1,7 @@
 ﻿using DotOPDS.Covers;
 using DotOPDS.Models;
 using DotOPDS.Utils;
+using DotOPDS.Web.Utils;
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -50,6 +51,7 @@ namespace DotOPDS.Controllers
 
         [Route("search")]
         [HttpGet]
+        [RequiredParameters]
         public Feed Search([FromUri] string q, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
@@ -95,6 +97,7 @@ namespace DotOPDS.Controllers
 
         [Route("search")]
         [HttpGet]
+        [RequiredParameters]
         public Feed SearchByAuthor([FromUri] string author, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
@@ -117,6 +120,7 @@ namespace DotOPDS.Controllers
 
         [Route("search")]
         [HttpGet]
+        [RequiredParameters]
         public Feed SearchBySeries([FromUri] string series, [FromUri] int page = 1)
         {
             var searcher = new LuceneSearcher();
