@@ -64,6 +64,7 @@ namespace DotOPDS.Controllers
                 finally
                 {
                     logger.Debug("Cleaned up after {0} file download", id);
+                    logger.Info("Book {0} served to {1}", id, Request.GetOwinContext().Request.RemoteIpAddress);
                     stream.Close();
                     zip.Dispose();
                 }
