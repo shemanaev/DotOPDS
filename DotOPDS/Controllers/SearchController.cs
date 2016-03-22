@@ -256,6 +256,7 @@ namespace DotOPDS.Controllers
 
             entry.Id = string.Format("tag:book:{0}", book.Id);
             entry.Title = book.Title;
+            entry.Issued = book.Date.Year;
 
             foreach (var author in book.Authors)
             {
