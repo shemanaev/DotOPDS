@@ -33,7 +33,7 @@ namespace DotOPDS.Utils
             }
             else
                 responseMessage = response.ReasonPhrase;
-            responseMessage = response.Content.Headers + responseMessage;
+            responseMessage = response.Content?.Headers + responseMessage;
 
             await OutgoingMessageAsync(corrId, requestInfo, responseMessage);
 
