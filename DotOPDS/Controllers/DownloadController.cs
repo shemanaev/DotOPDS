@@ -16,9 +16,9 @@ namespace DotOPDS.Controllers
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        [Route("get/{id:guid}/{name}.{ext}")]
+        [Route("get/{id:guid}/{ext}")]
         [HttpGet]
-        public HttpResponseMessage GetFile(Guid id, string name, string ext)
+        public HttpResponseMessage GetFile(Guid id, string ext)
         {
             var searcher = new LuceneSearcher();
             int total;
@@ -53,7 +53,6 @@ namespace DotOPDS.Controllers
 
             // TODO: handle extensions for converting
             // TODO: zip fb2 book?
-            // TODO: Content-Disposition:attachment; filename="friendy file name.fb2"
             var result = new HttpResponseMessage(HttpStatusCode.OK);
             var pushStreamContent = new PushStreamContent((stream, content, context) =>
             {
@@ -71,6 +70,8 @@ namespace DotOPDS.Controllers
             });
             result.Content = pushStreamContent;
             result.Content.Headers.ContentType = new MediaTypeHeaderValue(FeedLinkType.Fb2);
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            result.Content.Headers.ContentDisposition.FileName = UrlNameEncoder.GetSafeName(book, ext);
 
             logger.Debug("File {0} sent", id);
             return result;

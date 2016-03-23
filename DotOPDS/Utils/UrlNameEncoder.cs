@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Web;
+﻿using DotOPDS.Models;
+using System.Collections.Generic;
 
 namespace DotOPDS.Utils
 {
@@ -58,6 +58,40 @@ namespace DotOPDS.Utils
                 else res += c;
             }
             return res;
+        }
+
+        private static Dictionary<char, string> dangerChars = new Dictionary<char, string>
+        {
+            { '/', "" },
+            { '\\', "" },
+            { ':', "" },
+            { '*', "" },
+            { '?', "" },
+            { '"', "'" },
+            { '<', "«" },
+            { '>', "»" },
+            { '|', "" },
+        };
+
+        private static string FilterDangerChars(string s)
+        {
+            var res = "";
+            foreach (var c in s)
+            {
+                if (dangerChars.ContainsKey(c)) res += dangerChars[c];
+                else res += c;
+            }
+            return res;
+        }
+
+        public static string GetSafeName(Book book, string ext)
+        {
+            var result = book.Title;
+            if (book.Authors.Length > 0)
+            {
+                result = string.Format("{0} - {1}", book.Authors[0].GetScreenName(), result);
+            }
+            return string.Format("{0}.{1}", FilterDangerChars(result), ext);
         }
     }
 }
