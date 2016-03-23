@@ -67,7 +67,7 @@ namespace DotOPDS.Middleware
             }
 
             context.Response.StatusCode = 401;
-            context.Response.Headers.Append("WWW-Authenticate", "Basic realm=" + Settings.Instance.Title);
+            context.Response.Headers.Append("WWW-Authenticate", @"Basic realm=""DotOPDS""");
         }
     }
 
