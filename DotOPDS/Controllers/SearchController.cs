@@ -10,10 +10,12 @@ using System.Web.Http;
 
 namespace DotOPDS.Controllers
 {
+    [RoutePrefix("opds")]
     public class SearchController : ApiController
     {
-        private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = "/search?q={searchTerms}&amp;page={startPage?}" };
-        private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = "/" };
+        private const string Prefix = "/opds";
+        private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = Prefix + "/search?q={searchTerms}&amp;page={startPage?}" };
+        private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = Prefix.StartsWith("/") ? Prefix : "/" };
 
         [Route("")]
         [HttpGet]
@@ -28,21 +30,21 @@ namespace DotOPDS.Controllers
             var entry = new FeedEntry();
             entry.Id = "tag:root:authors";
             entry.Title = T._("Books by authros"); // Книги по авторам
-            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/authors" });
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/authors" });
             entry.Content = new FeedEntryContent { Text = T._("Browse books by authors") }; // Просмотр книг по авторам
             feed.Entries.Add(entry);
 
             entry = new FeedEntry();
             entry.Id = "tag:root:series";
             entry.Title = T.("Books by series"); // Книги по сериям
-            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/series" });
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/series" });
             entry.Content = new FeedEntryContent { Text = T._("Browse books by series") }; // Просмотр книг по сериям
             feed.Entries.Add(entry);
             */
             var entry = new FeedEntry();
             entry.Id = "tag:root:genres";
             entry.Title = T._("Books by genres"); // Книги по жанрам
-            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genres" });
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genres" });
             entry.Content = new FeedEntryContent { Text = T._("Browse books by genres") }; // Просмотр книг по жанрам
             feed.Entries.Add(entry);
 
@@ -157,7 +159,7 @@ namespace DotOPDS.Controllers
                 var entry = new FeedEntry();
                 entry.Id = "tag:root:genre:" + name;
                 entry.Title = Genres.Instance.Localize(genre.Key);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genres/" + name });
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genres/" + name });
                 entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre.Key)) };
                 feed.Entries.Add(entry);
             }
@@ -180,7 +182,7 @@ namespace DotOPDS.Controllers
                 var entry = new FeedEntry();
                 entry.Id = "tag:root:genre:" + genre;
                 entry.Title = Genres.Instance.Localize(genre);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = "/genre/" + genre });
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genre/" + genre });
                 entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre)) };
                 feed.Entries.Add(entry);
             }
@@ -247,12 +249,6 @@ namespace DotOPDS.Controllers
         private FeedEntry GetBook(Book book)
         {
             var entry = new FeedEntry();
-            var filename = book.Title;
-            if (book.Authors.Length > 0)
-            {
-                filename = string.Format("{0} - {1}", book.Authors[0].GetScreenName(), filename);
-            }
-            filename = UrlNameEncoder.Encode(filename);
 
             entry.Id = string.Format("tag:book:{0}", book.Id);
             entry.Title = book.Title;
@@ -264,13 +260,13 @@ namespace DotOPDS.Controllers
                 entry.Authors.Add(new FeedAuthor
                 {
                     Name = name,
-                    Uri = string.Format("/search?author={0}", HttpUtility.UrlEncode(name))
+                    Uri = Prefix + string.Format("/search?author={0}", HttpUtility.UrlEncode(name))
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = string.Format("/search?author={0}", HttpUtility.UrlEncode(name)),
+                    Href = Prefix + string.Format("/search?author={0}", HttpUtility.UrlEncode(name)),
                     Title = T._("All books by {0}", name) // Все книги автора {0}
                 });
             }
@@ -291,7 +287,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
+                    Href = Prefix + string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
                     Title = T._("All books in the series") // Все книги из серии
                 });
             }
@@ -300,7 +296,7 @@ namespace DotOPDS.Controllers
             {
                 Rel = FeedLinkRel.Acquisition,
                 Type = FeedLinkType.Fb2,
-                Href = string.Format("/get/{0}/{1}.fb2", book.Id, filename)
+                Href = string.Format("/get/{0}/fb2", book.Id)
             });
 
             foreach (var converter in Settings.Instance.Converters)
@@ -309,7 +305,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Acquisition,
                     Type = string.Format("application/{0}+zip", converter.Key),
-                    Href = string.Format("/get/{0}/{1}.{2}", book.Id, filename, converter.Key)
+                    Href = string.Format("/get/{0}/{2}", book.Id, converter.Key)
                 });
             }
 

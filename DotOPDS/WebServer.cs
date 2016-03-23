@@ -1,6 +1,5 @@
 ﻿using DotOPDS.Middleware;
 using DotOPDS.Utils;
-using DotOPDS.Web.Utils;
 using Microsoft.Owin.Builder;
 using Newtonsoft.Json.Serialization;
 using Nowin;
@@ -49,6 +48,12 @@ namespace DotOPDS.Web
             config.Formatters.Insert(0, xmlFormatter);
 
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                "Web",
+                "{*filename}",
+                new { controller = "Web", action = "ServeIndex" }
+            );
 
             if (Settings.Instance.Authentication.Enabled)
                 appBuilder.UseBasicAuthentication();

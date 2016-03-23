@@ -1,4 +1,5 @@
 ﻿using DotOPDS.Utils;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -10,11 +11,17 @@ namespace DotOPDS.Controllers
 {
     public class WebController : ApiController
     {
-        [Route("web/{*filename}")]
+        //[Route("{*filename}")]
         [HttpGet]
         public HttpResponseMessage ServeIndex(string filename)
         {
-            return GetFile("index.html") ?? new HttpResponseMessage(HttpStatusCode.NotFound);
+            var file = GetFile("index.html");
+            if (file == null)
+            {
+                file = Request.CreateResponse(HttpStatusCode.Moved);
+                file.Headers.Location = new Uri("/opds", UriKind.Relative);
+            }
+            return file;
         }
 
         [Route("static/{*filename}")]
