@@ -20,7 +20,7 @@ namespace DotOPDS
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
         public int Pagination { get; set; }
-        public Dictionary<string, string> Converters { get; set; }
+        public List<SettingsConverter> Converters { get; set; }
         public Dictionary<Guid, SettingsLibrary> Libraries { get; set; } = new Dictionary<Guid, SettingsLibrary>();
 
         #region Static routines
@@ -100,6 +100,13 @@ namespace DotOPDS
             LogManager.Configuration = config;
         }
         #endregion
+    }
+
+    public class SettingsConverter
+    {
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Command { get; set; }
     }
 
     public class SettingsLog

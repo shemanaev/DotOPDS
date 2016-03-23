@@ -173,6 +173,7 @@
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Feed.cs" />
+    <Compile Include="Utils\MimeHelper.cs" />
     <Compile Include="Utils\RequiredParametersAttribute.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Tasks\ImportTask.cs" />

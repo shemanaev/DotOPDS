@@ -4,6 +4,7 @@ using DotOPDS.Utils;
 using DotOPDS.Web.Utils;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
@@ -295,17 +296,19 @@ namespace DotOPDS.Controllers
             entry.Links.Add(new FeedLink
             {
                 Rel = FeedLinkRel.Acquisition,
-                Type = FeedLinkType.Fb2,
+                Type = MimeHelper.GetMimeType(book.Ext),
                 Href = string.Format("/get/{0}/fb2", book.Id)
             });
 
-            foreach (var converter in Settings.Instance.Converters)
+            var converters = Settings.Instance.Converters
+                .Where(x => x.From.Equals(book.Ext, StringComparison.InvariantCultureIgnoreCase));
+            foreach (var converter in converters)
             {
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Acquisition,
-                    Type = string.Format("application/{0}+zip", converter.Key),
-                    Href = string.Format("/get/{0}/{2}", book.Id, converter.Key)
+                    Type = MimeHelper.GetMimeType(converter.To),
+                    Href = string.Format("/get/{0}/{1}", book.Id, converter.To)
                 });
             }
 
@@ -315,13 +318,13 @@ namespace DotOPDS.Controllers
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Image,
-                    Type = FeedLinkType.Jpeg,
+                    Type = MimeHelper.GetMimeType("jpeg"),
                     Href = cover
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Thumbnail,
-                    Type = FeedLinkType.Jpeg,
+                    Type = MimeHelper.GetMimeType("jpeg"),
                     Href = cover
                 });
             }

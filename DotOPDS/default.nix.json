@@ -15,5 +15,5 @@
         "banned": []
     },
     "pagination": 10,
-    "converters": {}
+    "converters": []
 }

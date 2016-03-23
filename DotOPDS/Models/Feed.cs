@@ -97,9 +97,6 @@ namespace DotOPDS.Models
         public const string AtomSearch = "application/opensearchdescription+xml";
         public const string AtomNavigation = "application/atom+xml;profile=opds-catalog;kind=navigation";
         public const string AtomAcquisition = "application/atom+xml;profile=opds-catalog;kind=acquisition";
-        public const string Fb2 = "application/fb2";
-        public const string Fb2Zip = "application/fb2+zip";
-        public const string Jpeg = "image/jpeg";
     }
 
     public static class FeedLinkRel
