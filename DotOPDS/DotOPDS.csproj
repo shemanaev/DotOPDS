@@ -50,10 +50,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AustinHarris.JsonRpc, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AustinHarris.JsonRpc.1.0.4.46\lib\net40\AustinHarris.JsonRpc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="CommandLine, Version=2.0.275.0, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>..\packages\CommandLineParser.2.0.275-beta\lib\net45\CommandLine.dll</HintPath>
       <Private>True</Private>
@@ -158,7 +154,6 @@
     <Compile Include="Commands\LsCommand.cs" />
     <Compile Include="Commands\MvCommand.cs" />
     <Compile Include="Commands\RmCommand.cs" />
-    <Compile Include="Commands\RpcCommand.cs" />
     <Compile Include="Commands\BaseOptions.cs" />
     <Compile Include="Commands\ServeCommand.cs" />
     <Compile Include="Controllers\DownloadController.cs" />
@@ -178,7 +173,6 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Tasks\ImportTask.cs" />
     <Compile Include="Tasks\ServeTask.cs" />
-    <Compile Include="Utils\ApiService.cs" />
     <Compile Include="Utils\AtomXmlMediaTypeFormatter.cs" />
     <Compile Include="Middleware\BasicAuthMiddleware.cs" />
     <Compile Include="Utils\ConsoleStatus.cs" />

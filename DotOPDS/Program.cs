@@ -23,7 +23,6 @@ namespace DotOPDS
                 LsOptions,
                 MvOptions,
                 RmOptions,
-                RpcOptions,
                 FixtureOptions
                 >(args).MapResult(
                     (ImportOptions opts) => RunCommand(typeof(ImportCommand), opts),
@@ -31,7 +30,6 @@ namespace DotOPDS
                     (LsOptions opts) => RunCommand(typeof(LsCommand), opts),
                     (MvOptions opts) => RunCommand(typeof(MvCommand), opts),
                     (RmOptions opts) => RunCommand(typeof(RmCommand), opts),
-                    (RpcOptions opts) => RunCommand(typeof(RpcCommand), opts),
                     (FixtureOptions opts) => RunCommand(typeof(FixtureCommand), opts),
                     errs => 1);
 
