@@ -56,6 +56,13 @@ namespace DotOPDS.Controllers
             return result;
         }
 
+        [Route("get/{*dummy}")]
+        [HttpGet]
+        public HttpResponseMessage CatchAll(string dummy)
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
         private Stream GetFileInFormat(Book book, SettingsConverter converter)
         {
             // TODO: support books without archives

@@ -18,8 +18,15 @@ namespace DotOPDS.Controllers
             var file = GetFile("index.html");
             if (file == null)
             {
-                file = Request.CreateResponse(HttpStatusCode.Moved);
-                file.Headers.Location = new Uri("/opds", UriKind.Relative);
+                if (filename == null)
+                {
+                    file = Request.CreateResponse(HttpStatusCode.Moved);
+                    file.Headers.Location = new Uri("/opds", UriKind.Relative);
+                }
+                else
+                {
+                    file = Request.CreateResponse(HttpStatusCode.NotFound);
+                }
             }
             return file;
         }
