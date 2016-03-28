@@ -1,8 +1,8 @@
 ﻿using DotOPDS.Models;
-using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +24,9 @@ namespace DotOPDS.Utils
     {
         private static readonly int[] fb2ids = { 0, 65536 };
         private const string defaultStructure = "AUTHOR;GENRE;TITLE;SERIES;SERNO;FILE;SIZE;LIBID;DEL;EXT;DATE;";
+        private static Encoding CP1251 = Encoding.GetEncoding(1251);
 
-        private readonly ZipFile zip;
+        private readonly ZipArchive zip;
         private readonly string[] comment;
 
         public event NewEntryEventHandler OnNewEntry;
@@ -39,15 +40,20 @@ namespace DotOPDS.Utils
 
         public InpxParser(string filename)
         {
-            zip = ZipFile.Read(filename, new ReadOptions { Encoding = Encoding.GetEncoding(1251) });
-            comment = zip.Comment.Split('\n');
-            var result = zip.First(entry => entry.FileName.EndsWith("version.info"));
+            zip = ZipFile.Open(filename, ZipArchiveMode.Read, CP1251);
+            using (var stream = zip.GetEntry("collection.info").Open())
+            using (var reader = new StreamReader(stream, CP1251))
+            {
+                comment = reader.ReadToEnd().Split('\n');
+            }
+            var result = zip.Entries.First(entry => entry.Name.EndsWith("version.info"));
             if (result != null)
             {
-                using (var stream = new MemoryStream())
+                using (var stream = result.Open())
+                using (var reader = new StreamReader(stream, CP1251))
                 {
-                    result.Extract(stream);
-                    Version = int.Parse(Encoding.UTF8.GetString(stream.ToArray()));
+                    var s = reader.ReadToEnd();
+                    Version = int.Parse(s);
                 }
             }
         }
@@ -61,10 +67,10 @@ namespace DotOPDS.Utils
         {
             var structure = GetStructure();
 
-            var inps = zip.Where(entry => entry.FileName.EndsWith(".inp"));
+            var inps = zip.Entries.Where(entry => entry.Name.EndsWith(".inp"));
             foreach (var inp in inps)
             {
-                using (var stream = inp.OpenReader())
+                using (var stream = inp.Open())
                 {
                     var sr = new StreamReader(stream, Encoding.UTF8);
 
@@ -98,7 +104,7 @@ namespace DotOPDS.Utils
                             Date = DateTime.Parse(line[structure.Date]),
                             Language = structure.Language != -1 ? line[structure.Language] : null,
                             Keywords = structure.Keywords != -1 ? GetDelimArray(':', line[structure.Keywords]) : null,
-                            Archive = inp.FileName.Replace(".inp", ".zip"),
+                            Archive = inp.Name.Replace(".inp", ".zip"),
                         };
                         if (OnNewEntry != null) OnNewEntry(this, new NewEntryEventArgs { Book = args });
                     }
@@ -111,13 +117,13 @@ namespace DotOPDS.Utils
         private InpStructure GetStructure()
         {
             var structure = defaultStructure;
-            var info = zip.FirstOrDefault(entry => entry.FileName.EndsWith("structure.info"));
+            var info = zip.Entries.FirstOrDefault(entry => entry.Name.EndsWith("structure.info"));
             if (info != null)
             {
-                using (var stream = new MemoryStream())
+                using (var stream = info.Open())
+                using (var reader = new StreamReader(stream, CP1251))
                 {
-                    info.Extract(stream);
-                    structure = Encoding.UTF8.GetString(stream.ToArray());
+                    structure = reader.ReadToEnd();
                 }
             }
 

@@ -1,11 +1,11 @@
 ﻿using DotOPDS.Models;
 using DotOPDS.Utils;
-using Ionic.Zip;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -74,23 +74,22 @@ namespace DotOPDS.Controllers
             }
             var filename = string.Format("{0}.{1}", book.File, book.Ext);
 
-            var zip = ZipFile.Read(archive);
+            var zip = ZipFile.OpenRead(archive);
             Request.RegisterForDispose(zip);
             logger.Debug("Archive {0} opened", archive);
-            if (!zip.ContainsEntry(filename))
+
+            var entry = zip.GetEntry(filename);
+            if (entry == null)
             {
                 logger.Warn("File {0} in archive {1} not found.", filename, archive);
                 throw new KeyNotFoundException("File not found.");
             }
 
-            zip.FlattenFoldersOnExtract = true;
-            var entry = zip[filename];
-
             // TODO: zip fb2 book?
             if (converter == null)
             {
                 logger.Debug("File {0} served directly from archive.", filename);
-                return entry.OpenReader();
+                return entry.Open();
             }
             else
             {
@@ -100,7 +99,12 @@ namespace DotOPDS.Controllers
                 Directory.CreateDirectory(tempDir);
                 var from = Path.Combine(tempDir, Path.GetRandomFileName() + filename);
                 var to = Path.Combine(tempDir, Path.GetRandomFileName()) + "." + converter.To;
-                entry.Extract(from, ExtractExistingFileAction.DoNotOverwrite);
+
+                using (var output = File.Create(from))
+                using (var input = entry.Open())
+                {
+                    input.CopyTo(output);
+                }
 
                 var cmd = string.Format(converter.Command, from, to);
                 logger.Debug("Starting converter process: {0}", cmd);
