@@ -291,6 +291,12 @@ namespace DotOPDS.Controllers
                     Href = Prefix + string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
                     Title = T._("All books in the series") // Все книги из серии
                 });
+
+                entry.Series = new FeedEntrySeries
+                {
+                    Name = book.Series,
+                    Number = book.SeriesNo
+                };
             }
 
             entry.Links.Add(new FeedLink

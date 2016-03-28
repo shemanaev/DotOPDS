@@ -47,12 +47,22 @@ namespace DotOPDS.Models
         public int Issued;
         [XmlElement("content")]
         public FeedEntryContent Content;
+        [XmlElement("series", Namespace = "urn:dotopds:v1.0")]
+        public FeedEntrySeries Series;
         [XmlElement("link")]
         public List<FeedLink> Links = new List<FeedLink>();
         [XmlElement("author")]
         public List<FeedAuthor> Authors = new List<FeedAuthor>();
         [XmlElement("category")]
         public List<FeedCategory> Categories = new List<FeedCategory>();
+    }
+
+    public class FeedEntrySeries
+    {
+        [XmlAttribute("name")]
+        public string Name;
+        [XmlAttribute("number")]
+        public int Number;
     }
 
     public class FeedEntryContent

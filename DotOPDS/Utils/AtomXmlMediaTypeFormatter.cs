@@ -40,6 +40,7 @@ namespace DotOPDS.Utils
             _serializerNamespaces.Add("dc", "http://purl.org/dc/terms/");
             _serializerNamespaces.Add("os", "http://a9.com/-/spec/opensearch/1.1/");
             _serializerNamespaces.Add("opds", "http://opds-spec.org/2010/catalog");
+            _serializerNamespaces.Add("dotopds", "urn:dotopds:v1.0");
         }
 
         public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
