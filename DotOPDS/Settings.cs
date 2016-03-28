@@ -27,6 +27,7 @@ namespace DotOPDS
         public static string FileName { get; private set; }
         private static Settings instance;
         private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public static Settings Instance
         {
@@ -98,6 +99,8 @@ namespace DotOPDS
             }
 
             LogManager.Configuration = config;
+
+            logger.Info("Loaded configuration from {0}", FileName);
         }
         #endregion
     }
