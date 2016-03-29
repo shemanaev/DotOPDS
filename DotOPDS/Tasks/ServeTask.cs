@@ -5,25 +5,38 @@ using System.Net;
 
 namespace DotOPDS.Tasks
 {
-    class ServeTask : IDisposable
+    class ServeTaskArgs : ITaskArgs
+    {
+        public int Port { get; set; }
+    }
+
+    class ServeTask : ITask
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private WebServer server;
 
-        public int Run()
+        public void Run(ITaskArgs args_)
         {
-            server = new WebServer(new IPEndPoint(IPAddress.Any, Settings.Instance.Port));
+            var args = (ServeTaskArgs)args_;
+            server = new WebServer(new IPEndPoint(IPAddress.Any, args.Port));
 
-            logger.Info("Web server started at http://localhost:{0}/", Settings.Instance.Port);
+            logger.Info("Web server started at http://localhost:{0}/", args.Port);
 
             Program.Exit.WaitOne();
-
-            return 0;
         }
 
         public void Dispose()
         {
-            server.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                server.Dispose();
+            }
         }
     }
 }

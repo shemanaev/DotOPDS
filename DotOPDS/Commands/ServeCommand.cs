@@ -22,7 +22,7 @@ namespace DotOPDS.Commands
             logger.Info("Hit Ctrl+C to stop");
             using (var task = new ServeTask())
             {
-                task.Run();
+                task.Run(new ServeTaskArgs { Port = Settings.Instance.Port });
             }
 
             return 0;

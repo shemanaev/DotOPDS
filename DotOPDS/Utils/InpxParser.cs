@@ -41,16 +41,14 @@ namespace DotOPDS.Utils
         public InpxParser(string filename)
         {
             zip = ZipFile.Open(filename, ZipArchiveMode.Read, CP1251);
-            using (var stream = zip.GetEntry("collection.info").Open())
-            using (var reader = new StreamReader(stream, CP1251))
+            using (var reader = new StreamReader(zip.GetEntry("collection.info").Open(), CP1251))
             {
                 comment = reader.ReadToEnd().Split('\n');
             }
             var result = zip.Entries.First(entry => entry.Name.EndsWith("version.info"));
             if (result != null)
             {
-                using (var stream = result.Open())
-                using (var reader = new StreamReader(stream, CP1251))
+                using (var reader = new StreamReader(result.Open(), CP1251))
                 {
                     var s = reader.ReadToEnd();
                     Version = int.Parse(s);
@@ -120,8 +118,7 @@ namespace DotOPDS.Utils
             var info = zip.Entries.FirstOrDefault(entry => entry.Name.EndsWith("structure.info"));
             if (info != null)
             {
-                using (var stream = info.Open())
-                using (var reader = new StreamReader(stream, CP1251))
+                using (var reader = new StreamReader(info.Open(), CP1251))
                 {
                     structure = reader.ReadToEnd();
                 }
@@ -170,7 +167,16 @@ namespace DotOPDS.Utils
 
         public void Dispose()
         {
-            zip.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                zip.Dispose();
+            }
         }
     }
 

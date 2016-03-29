@@ -68,10 +68,7 @@ namespace DotOPDS.Commands
             var watch = Stopwatch.StartNew();
             var status = new ConsoleStatus();
             var task = new ImportTask();
-            Task.Factory.StartNew(() =>
-            {
-                task.Run(library, Util.Normalize(opts.Input), opts.Covers);
-            });
+            task.Start(new ImportTaskArgs { Library = library, Input = Util.Normalize(opts.Input), Covers = opts.Covers });
 
             while (task.EntriesProcessed == 0)
             {
