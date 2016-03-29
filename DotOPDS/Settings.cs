@@ -79,6 +79,7 @@ namespace DotOPDS
             if (console)
             {
                 var consoleTarget = new ColoredConsoleTarget();
+                consoleTarget.Layout = "${time}|${level:uppercase=true}|${message}";
                 config.AddTarget("console", consoleTarget);
 #if DEBUG
                 var level = LogLevel.Trace;
