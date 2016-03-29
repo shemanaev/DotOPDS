@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace DotOPDS.Commands
 {
@@ -68,7 +67,17 @@ namespace DotOPDS.Commands
             var watch = Stopwatch.StartNew();
             var status = new ConsoleStatus();
             var task = new ImportTask();
-            task.Start(new ImportTaskArgs { Library = library, Input = Util.Normalize(opts.Input), Covers = opts.Covers });
+            task.Start(new ImportTaskArgs
+            {
+                Library = library,
+                Input = Util.Normalize(opts.Input),
+                Covers = opts.Covers
+            }, (e) =>
+            {
+                Console.WriteLine();
+                Console.Error.WriteLine("Bad input file {0}.", opts.Input);
+                Environment.Exit(1);
+            });
 
             while (task.EntriesProcessed == 0)
             {
