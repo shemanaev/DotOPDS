@@ -84,7 +84,7 @@ namespace DotOPDS
                 logger.Error("Something bad happened... Dump written to {0}", dump);
             }
 
-            Environment.Exit(0);
+            Environment.Exit(1);
         }
 
         private static int RunCommand(Type command, BaseOptions options)
