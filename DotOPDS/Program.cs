@@ -1,8 +1,11 @@
 ﻿using CommandLine;
 using DotOPDS.Commands;
+using DotOPDS.Utils;
 using NLog;
 using System;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace DotOPDS
 {
@@ -15,6 +18,8 @@ namespace DotOPDS
         static int Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+
             Console.CancelKeyPress += Console_CancelKeyPress;
 
             var result = Parser.Default.ParseArguments<
@@ -42,10 +47,44 @@ namespace DotOPDS
             exitEvent.Set();
         }
 
+        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            HandleException(e.Exception);
+        }
+
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            logger.Error((Exception)e.ExceptionObject, "Unhandled exception");
-            exitEvent.Set();
+            HandleException((Exception)e.ExceptionObject);
+        }
+
+        public static void HandleException(Exception e)
+        {
+            Console.WriteLine();
+
+            if (Util.IsLinux)
+            {
+                logger.Error(e, "Unhandled exception");
+            }
+            else
+            {
+                var dump = Path.Combine(Path.GetTempPath(), string.Format("DotOPDS_{0}.mdmp", Guid.NewGuid()));
+                using (var fs = new FileStream(dump, FileMode.Create, FileAccess.ReadWrite, FileShare.Write))
+                {
+#if DEBUG
+                    var flags = MiniDump.Option.WithFullMemory
+                              | MiniDump.Option.WithFullMemoryInfo
+                              | MiniDump.Option.WithThreadInfo;
+#else
+                    var flags = MiniDump.Option.WithThreadInfo
+                              | MiniDump.Option.WithProcessThreadData
+                              | MiniDump.Option.WithHandleData;
+#endif
+                    MiniDump.Write(fs.SafeFileHandle, flags);
+                }
+                logger.Error("Something bad happened... Dump written to {0}", dump);
+            }
+
+            Environment.Exit(0);
         }
 
         private static int RunCommand(Type command, BaseOptions options)

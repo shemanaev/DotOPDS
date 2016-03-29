@@ -168,6 +168,7 @@
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Utils\MimeHelper.cs" />
+    <Compile Include="Utils\MiniDump.cs" />
     <Compile Include="Utils\RequiredParametersAttribute.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Tasks\ImportTask.cs" />
