@@ -72,6 +72,7 @@ namespace DotOPDS.Commands
 
             while (task.EntriesProcessed == 0)
             {
+                if (Program.Exit.WaitOne(1)) return 1;
                 status.Update("Parsing file, elapsed {0}", watch.Elapsed);
             }
 
@@ -81,6 +82,7 @@ namespace DotOPDS.Commands
             var importStart = watch.Elapsed;
             while (task.EntriesProcessed < task.EntriesTotal)
             {
+                if (Program.Exit.WaitOne(1)) return 1;
                 status.Update("Processed {0} of {1}, {2} book/sec, elapsed {3}", task.EntriesProcessed, task.EntriesTotal,
                     Math.Truncate(task.EntriesProcessed / watch.Elapsed.TotalSeconds - importStart.TotalSeconds), watch.Elapsed);
             }
