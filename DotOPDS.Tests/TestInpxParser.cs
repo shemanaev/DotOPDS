@@ -36,6 +36,9 @@ namespace DotOPDS.Tests
 
         private void Parser_OnFinished(object sender)
         {
+            // cmd.exe
+            // chcp 65001
+            // .\DotOPDS\bin\Debug\DotOPDS.exe fixture .\DotOPDS.Tests\Data\demo.inpx > .\DotOPDS.Tests\InpxDemoFixture.cs
             records.Count.Should().Be(InpxDemoFixture.Result.Count);
             records.ShouldBeEquivalentTo(InpxDemoFixture.Result);
         }

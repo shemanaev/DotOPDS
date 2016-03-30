@@ -17,7 +17,7 @@ namespace DotOPDS.Commands
     {
         [Value(0, MetaName = "input file",
             Required = true,
-            HelpText = "Import contents into internal index.")]
+            HelpText = "Input .inpx file.")]
         public string Input { get; set; }
 
         [Usage]
