@@ -13,7 +13,6 @@ namespace DotOPDS.Importers
         private IndexWriter writer;
         private RussianAnalyzer analyzer;
         private SimpleFSDirectory directory;
-        private Guid libId;
 
         public void Insert(Book book)
         {
@@ -28,10 +27,8 @@ namespace DotOPDS.Importers
             if (directory != null) directory.Dispose();
         }
 
-        public void Open(string connection, Guid id)
+        public void Open(string connection)
         {
-            libId = id;
-
             analyzer = new RussianAnalyzer(Version.LUCENE_30);
             directory = new SimpleFSDirectory(new System.IO.DirectoryInfo(connection));
             writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
@@ -40,8 +37,8 @@ namespace DotOPDS.Importers
         private Document MapBook(Book book)
         {
             var document = new Document();
-            document.Add(new Field("Guid", Guid.NewGuid().ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-            document.Add(new Field("LibraryId", libId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field("Guid", (book.Id != null ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field("LibraryId", book.LibraryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Title", book.Title, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Series", book.Series ?? "", Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Series.Exact", book.Series ?? "", Field.Store.NO, Field.Index.NOT_ANALYZED));

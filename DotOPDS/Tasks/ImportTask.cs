@@ -19,6 +19,7 @@ namespace DotOPDS.Tasks
     {
         private bool running = true;
         private volatile int entriesProcessed;
+        private Guid libId = Guid.NewGuid();
         private IBookImporter importer = new LuceneImporter();
         private ConcurrentQueue<Book> books = new ConcurrentQueue<Book>();
 
@@ -32,8 +33,7 @@ namespace DotOPDS.Tasks
             parser.OnNewEntry += Parser_OnNewEntry;
             parser.Parse().Wait();
 
-            var libId = Guid.NewGuid();
-            importer.Open(Util.Normalize(Settings.Instance.Database), libId);
+            importer.Open(Util.Normalize(Settings.Instance.Database));
 
             for (var i = 0; i < Environment.ProcessorCount; i++)
             {
@@ -64,6 +64,7 @@ namespace DotOPDS.Tasks
                 Book book;
                 if (!books.IsEmpty && books.TryDequeue(out book))
                 {
+                    book.LibraryId = libId;
                     importer.Insert(book);
                     entriesProcessed++;
                 }
