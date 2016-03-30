@@ -1,4 +1,3 @@
-﻿using DotOPDS.Covers;
 using DotOPDS.Models;
 using DotOPDS.Utils;
 using DotOPDS.Web.Utils;
@@ -318,22 +317,6 @@ namespace DotOPDS.Controllers
                 });
             }
 
-            var cover = CoverResolver.Instance.Get(book);
-            if (!string.IsNullOrEmpty(cover))
-            {
-                entry.Links.Add(new FeedLink
-                {
-                    Rel = FeedLinkRel.Image,
-                    Type = MimeHelper.GetMimeType("jpeg"),
-                    Href = cover
-                });
-                entry.Links.Add(new FeedLink
-                {
-                    Rel = FeedLinkRel.Thumbnail,
-                    Type = MimeHelper.GetMimeType("jpeg"),
-                    Href = cover
-                });
-            }
 
             return entry;
         }
