@@ -7,6 +7,7 @@ using NLog.Targets;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace DotOPDS
 {
@@ -29,6 +30,10 @@ namespace DotOPDS
         private static Settings instance;
         private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static string build = ((AssemblyInformationalVersionAttribute)Assembly
+                                      .GetAssembly(typeof(Settings))
+                                      .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0])
+                                      .InformationalVersion;
 
         public static Settings Instance
         {
@@ -102,6 +107,7 @@ namespace DotOPDS
 
             LogManager.Configuration = config;
 
+            logger.Info("DotOPDS v{0}", build);
             logger.Info("Loaded configuration from {0}", FileName);
         }
         #endregion
