@@ -55,6 +55,41 @@ namespace DotOPDS.Controllers
             return result;
         }
 
+        [Route("cover/{id:guid}")]
+        [HttpGet]
+        public HttpResponseMessage GetCover(Guid id)
+        {
+            var searcher = new LuceneSearcher();
+            int total;
+            var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
+            if (total < 1 || total > 1)
+            {
+                logger.Debug("File {0} not found", id);
+                throw new KeyNotFoundException("Key Not Found: " + id);
+            }
+
+            logger.Debug("File {0} found in {1}ms", id, searcher.Time);
+            var book = books[0];
+
+            if (book.Cover.Has != true)
+            {
+                logger.Warn("No cover found for file {0}", id);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+            result.Content = new ByteArrayContent(book.Cover.Data);
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue(book.Cover.ContentType);
+            return result;
+        }
+
+        [Route("cover/{*dummy}")]
+        [HttpGet]
+        public HttpResponseMessage CatchAllCover(string dummy)
+        {
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+        }
+
         [Route("get/{*dummy}")]
         [HttpGet]
         public HttpResponseMessage CatchAll(string dummy)

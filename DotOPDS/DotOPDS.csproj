@@ -122,6 +122,10 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SgmlReaderDll, Version=1.8.11.0, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SgmlReader.1.8.11\lib\4.0\SgmlReaderDll.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -161,7 +165,11 @@
     <Compile Include="Importers\LuceneImporter.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Feed.cs" />
+    <Compile Include="Parsers\BookParsersPool.cs" />
+    <Compile Include="Parsers\Fb2Parser.cs" />
+    <Compile Include="Parsers\IBookParser.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Utils\FileUtils.cs" />
     <Compile Include="Utils\MimeHelper.cs" />

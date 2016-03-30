@@ -20,5 +20,7 @@ namespace DotOPDS.Models
         public string Language { get; set; }
         public string[] Keywords { get; set; }
         public string Archive { get; set; }
+        public string Annotation { get; set; }
+        public Cover Cover { get; set; }
     }
 }

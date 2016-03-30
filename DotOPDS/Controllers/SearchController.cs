@@ -1,4 +1,5 @@
 using DotOPDS.Models;
+using DotOPDS.Parsers;
 using DotOPDS.Utils;
 using DotOPDS.Web.Utils;
 using System;
@@ -317,6 +318,33 @@ namespace DotOPDS.Controllers
                 });
             }
 
+            if (Settings.Instance.LazyInfoExtract)
+                BookParsersPool.Instance.Update(book);
+
+            if (book.Annotation != null)
+            {
+                entry.Content = new FeedEntryContent
+                {
+                    Type = "text/html",
+                    Text = book.Annotation
+                };
+            }
+
+            if (book.Cover.Has == true)
+            {
+                entry.Links.Add(new FeedLink
+                {
+                    Rel = FeedLinkRel.Image,
+                    Type = book.Cover.ContentType,
+                    Href = string.Format("/cover/{0}", book.Id)
+                });
+                entry.Links.Add(new FeedLink
+                {
+                    Rel = FeedLinkRel.Thumbnail,
+                    Type = book.Cover.ContentType,
+                    Href = string.Format("/cover/{0}", book.Id)
+                });
+            }
 
             return entry;
         }

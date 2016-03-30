@@ -82,6 +82,21 @@ namespace DotOPDS.Utils
                     var genres = doc.GetFields("Genre")
                         .Select(x => x.StringValue)
                         .ToArray();
+
+                    Cover cover = new Cover();
+                    bool hasCover = false;
+                    var hasValue = doc.Get("Cover.Has");
+                    if (hasValue != null)
+                    {
+                        bool.TryParse(hasValue, out hasCover);
+                        cover = new Cover { Has = hasCover };
+                        if (hasCover)
+                        {
+                            cover.Data = doc.GetBinaryValue("Cover.Data");
+                            cover.ContentType = doc.Get("Cover.Type");
+                        }
+                    }
+
                     var book = new Book
                     {
                         Id = Guid.Parse(doc.Get("Guid")),
@@ -98,6 +113,8 @@ namespace DotOPDS.Utils
                         Archive = doc.Get("Archive"),
                         Authors = authors,
                         Genres = genres,
+                        Annotation = doc.Get("Annotation"),
+                        Cover = cover,
                     };
                     books.Add(book);
                 }

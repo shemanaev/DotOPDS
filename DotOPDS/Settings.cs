@@ -17,6 +17,7 @@ namespace DotOPDS
         public string Database { get; set; }
         public string Language { get; set; } = "en";
         public string Web { get; set; } = "";
+        public bool LazyInfoExtract { get; set; } = false;
         public SettingsLog Log { get; set; }
         public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
         public int Pagination { get; set; }

@@ -20,6 +20,22 @@ namespace DotOPDS.Importers
             writer.AddDocument(document);
         }
 
+        public void Replace(Book book)
+        {
+            writer.PrepareCommit();
+            try
+            {
+                var document = MapBook(book);
+                writer.DeleteDocuments(new Term("Guid", book.Id.ToString()));
+                writer.AddDocument(document);
+            }
+            catch (Exception)
+            {
+                writer.Rollback();
+            }
+            writer.Commit();
+        }
+
         public void Dispose()
         {
             if (writer != null) writer.Dispose();
@@ -50,6 +66,20 @@ namespace DotOPDS.Importers
             document.Add(new Field("Ext", book.Ext, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Archive", book.Archive, Field.Store.YES, Field.Index.NO));
+            document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
+            if (book.Cover != null)
+            {
+                if (book.Cover.Has != null)
+                {
+                    document.Add(new Field("Cover.Has", book.Cover.Has.ToString(), Field.Store.YES, Field.Index.NO));
+                    if (book.Cover.Has == true)
+                    {
+                        document.Add(new Field("Cover.Type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
+                        document.Add(new Field("Cover.Data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
+                    }
+                }
+            }
+            
 
             foreach (var author in book.Authors)
             {
