@@ -93,7 +93,7 @@ namespace DotOPDS.Commands
             {
                 if (Program.Exit.WaitOne(1)) return 1;
                 status.Update("Processed {0} of {1}, {2} book/sec, elapsed {3}", task.EntriesProcessed, task.EntriesTotal,
-                    Math.Truncate(task.EntriesProcessed / watch.Elapsed.TotalSeconds - importStart.TotalSeconds), watch.Elapsed);
+                    Math.Truncate(task.EntriesProcessed / (watch.Elapsed.TotalSeconds - importStart.TotalSeconds)), watch.Elapsed);
             }
 
             watch.Stop();
