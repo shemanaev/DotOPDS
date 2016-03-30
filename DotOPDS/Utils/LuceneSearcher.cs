@@ -57,11 +57,13 @@ namespace DotOPDS.Utils
         {
             Query = query.ToString();
             watch = Stopwatch.StartNew();
+            var fields = new SortField[] { SortField.FIELD_SCORE, new SortField("LibId", SortField.INT, false) };
+            var sort = new Sort(fields);
 
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
             using (var searcher = new IndexSearcher(directory))
             {
-                var docs = searcher.Search(query, null, skip + take);
+                var docs = searcher.Search(query, null, skip + take, sort);
                 count = docs.TotalHits;
 
                 var books = new List<Book>();
