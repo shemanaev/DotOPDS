@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -65,45 +64,26 @@ namespace DotOPDS.Controllers
 
         private Stream GetFileInFormat(Book book, SettingsConverter converter)
         {
-            // TODO: support books without archives
-            var archive = Path.Combine(Settings.Instance.Libraries[book.LibraryId].Path, book.Archive);
-            if (!File.Exists(archive))
-            {
-                logger.Warn("Archive {0} not found.", archive);
-                throw new KeyNotFoundException("File not found.");
-            }
-            var filename = string.Format("{0}.{1}", book.File, book.Ext);
-
-            var zip = ZipFile.OpenRead(archive);
-            Request.RegisterForDispose(zip);
-            logger.Debug("Archive {0} opened", archive);
-
-            var entry = zip.GetEntry(filename);
-            if (entry == null)
-            {
-                logger.Warn("File {0} in archive {1} not found.", filename, archive);
-                throw new KeyNotFoundException("File not found.");
-            }
+            var file = FileUtils.GetBookFile(book);
 
             // TODO: zip fb2 book?
             if (converter == null)
             {
-                logger.Debug("File {0} served directly from archive.", filename);
-                return entry.Open();
+                logger.Debug("File {0}.{1} served directly from archive.", book.File, book.Ext);
+                return file;
             }
             else
             {
-                logger.Debug("Trying to convert file {0} from {1} to {2}", filename, book.Ext, converter.To);
+                logger.Debug("Trying to convert file {0} from {1} to {2}", book.File, book.Ext, converter.To);
 
                 var tempDir = Path.Combine(Path.GetTempPath(), "DotOPDS_Temp");
                 Directory.CreateDirectory(tempDir);
-                var from = Path.Combine(tempDir, Path.GetRandomFileName() + filename);
+                var from = Path.Combine(tempDir, Path.GetRandomFileName() + book.File + "." + book.Ext);
                 var to = Path.Combine(tempDir, Path.GetRandomFileName()) + "." + converter.To;
 
                 using (var output = File.Create(from))
-                using (var input = entry.Open())
                 {
-                    input.CopyTo(output);
+                    file.CopyTo(output);
                 }
 
                 var cmd = string.Format(converter.Command, from, to);
