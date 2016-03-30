@@ -178,7 +178,6 @@
     <Compile Include="Utils\MessageLoggingHandler.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\T.cs" />
-    <Compile Include="Utils\UrlNameEncoder.cs" />
     <Compile Include="Utils\Resource.cs" />
     <Compile Include="Utils\LuceneSearcher.cs" />
     <Compile Include="Program.cs" />

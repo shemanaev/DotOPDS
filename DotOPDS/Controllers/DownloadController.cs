@@ -49,7 +49,7 @@ namespace DotOPDS.Controllers
             result.Content = new StreamContent(content);
             result.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-            result.Content.Headers.ContentDisposition.FileName = UrlNameEncoder.GetSafeName(book, ext);
+            result.Content.Headers.ContentDisposition.FileName = Util.GetBookSafeName(book, ext);
 
             logger.Info("Book {0} served to {1}", id, Request.GetOwinContext().Request.RemoteIpAddress);
             return result;
