@@ -140,6 +140,5 @@ namespace DotOPDS
     public class SettingsLibrary
     {
         public string Path { get; set; }
-        public string Covers { get; set; }
     }
 }

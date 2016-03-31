@@ -12,7 +12,6 @@ namespace DotOPDS.Tasks
     {
         public string Library { get; set; }
         public string Input { get; set; }
-        public string Covers { get; set; }
     }
 
     class ImportTask : ITask
@@ -47,7 +46,7 @@ namespace DotOPDS.Tasks
 
             running = false;
 
-            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = args.Library, Covers = args.Covers });
+            Settings.Instance.Libraries.Add(libId, new SettingsLibrary { Path = args.Library });
             Settings.Save();
         }
 
