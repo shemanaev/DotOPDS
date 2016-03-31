@@ -1,25 +1,39 @@
 ﻿using DotOPDS.Utils;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using System.Reflection;
 
 namespace DotOPDS
 {
     public class Settings
     {
         public int Port { get; set; }
+        public string Title { get; set; }
         public string Database { get; set; }
+        public string Language { get; set; } = "en";
+        public string Web { get; set; } = "";
+        public bool LazyInfoExtract { get; set; } = false;
         public SettingsLog Log { get; set; }
-        public SettingsAuthentication Authentication { get; set; }
+        public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
         public int Pagination { get; set; }
         public List<SettingsConverter> Converters { get; set; }
-        public Dictionary<Guid, string> Libraries { get; set; }
+        public Dictionary<Guid, SettingsLibrary> Libraries { get; set; } = new Dictionary<Guid, SettingsLibrary>();
 
         #region Static routines
         public static string FileName { get; private set; }
         private static Settings instance;
+        private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static string build = ((AssemblyInformationalVersionAttribute)Assembly
+                                      .GetAssembly(typeof(Settings))
+                                      .GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false)[0])
+                                      .InformationalVersion;
 
         public static Settings Instance
         {
@@ -35,70 +49,95 @@ namespace DotOPDS
             Load(FileName);
         }
 
-        public static void Load(string filename)
+        public static void Load(string filename, bool console = true)
         {
-            FileName = PathUtil.Normalize(filename);
+            FileName = Util.Normalize(filename);
             if (!File.Exists(FileName))
             {
-                Resource.SaveToFile("default.conf.example", FileName);
+                var resource = string.Format("default.{0}.json", Util.IsLinux ? "nix" : "win");
+                Resource.SaveToFile(resource, FileName);
             }
             using (var reader = File.OpenText(FileName))
             {
-                var deserializer = new Deserializer(namingConvention: new CamelCaseNamingConvention());
-                instance = deserializer.Deserialize<Settings>(reader);
+                instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
             }
-            Normalize();
+            InitLog(console);
+            T.ChangeLanguage(instance.Language);
         }
 
         public static void Save()
         {
-            using (var reader = File.CreateText(FileName))
+            using (var writer = File.CreateText(FileName))
             {
-                var serializer = new Serializer(namingConvention: new CamelCaseNamingConvention());
-                serializer.Serialize(reader, instance);
+                var s = JsonConvert.SerializeObject(instance, Formatting.Indented, jsonSettings);
+                writer.Write(s);
             }
         }
 
-        private static void Normalize()
+        private static void InitLog(bool console)
         {
-            instance.Database = PathUtil.Normalize(instance.Database);
-            if (instance.Log != null)
+            var config = new LoggingConfiguration();
+
+            var debuggerTarget = new DebuggerTarget();
+            config.AddTarget("debugger", debuggerTarget);
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, debuggerTarget));
+
+            if (console)
             {
-                if (instance.Log.Path != null)
-                    instance.Log.Path = PathUtil.Normalize(instance.Log.Path);
+                var consoleTarget = new ColoredConsoleTarget();
+                consoleTarget.Layout = "${time}|${level:uppercase=true}|${message}";
+                config.AddTarget("console", consoleTarget);
+#if DEBUG
+                var level = LogLevel.Trace;
+#else
+                var level = LogLevel.Info;
+#endif
+                config.LoggingRules.Add(new LoggingRule("*", level, consoleTarget));
             }
-            if (instance.Libraries == null)
+
+            if (instance.Log.Enabled)
             {
-                instance.Libraries = new Dictionary<Guid, string>();
+                var fileTarget = new FileTarget();
+                config.AddTarget("file", fileTarget);
+
+                fileTarget.FileName = Path.Combine(Util.Normalize(instance.Log.Path), "${shortdate}.log");
+                // fileTarget.Layout = "${message}";
+                config.LoggingRules.Add(new LoggingRule("*", LogLevel.FromString(instance.Log.Level), fileTarget));
             }
+
+            LogManager.Configuration = config;
+
+            logger.Info("DotOPDS v{0}", build);
+            logger.Info("Loaded configuration from {0}", FileName);
         }
         #endregion
     }
 
+    public class SettingsConverter
+    {
+        public string From { get; set; }
+        public string To { get; set; }
+        public string Command { get; set; }
+    }
+
     public class SettingsLog
     {
-        public bool Enabled { get; set; }
+        public bool Enabled { get; set; } = false;
         public string Path { get; set; }
-        public string Level { get; set; }
+        public string Level { get; set; } = "inforamtion";
     }
 
     public class SettingsAuthentication
     {
-        public bool Enabled { get; set; }
-        public int Attempts { get; set; }
-        public List<SettingsAuthenticationUser> Users { get; set; }
-        public List<string> Banned { get; set; }
+        public bool Enabled { get; set; } = false;
+        public int Attempts { get; set; } = 10;
+        public Dictionary<string, string> Users { get; set; } = new Dictionary<string, string>();
+        public List<string> Banned { get; set; } = new List<string>();
     }
 
-    public class SettingsAuthenticationUser
+    public class SettingsLibrary
     {
-        public string Login { get; set; }
-        public string Pass { get; set; }
-    }
-
-    public class SettingsConverter
-    {
-        public string Ext { get; set; }
-        public string Command { get; set; }
+        public string Path { get; set; }
+        public string Covers { get; set; }
     }
 }

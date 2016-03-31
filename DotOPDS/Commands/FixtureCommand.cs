@@ -1,13 +1,41 @@
-﻿using DotOPDS.Utils;
+﻿using CommandLine;
+using CommandLine.Text;
+using DotOPDS.Models;
+using DotOPDS.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
 namespace DotOPDS.Commands
 {
+#if DEBUG
+    [Verb("fixture",
+        HelpText = "Output c# fixture data for tests.")]
+#endif
+    class FixtureOptions : BaseOptions
+    {
+        [Value(0, MetaName = "input file",
+            Required = true,
+            HelpText = "Input .inpx file.")]
+        public string Input { get; set; }
+
+        [Usage]
+        public static IEnumerable<Example> Examples
+        {
+            get
+            {
+                yield return new Example("Output fixture for inpx file to stdout", new FixtureOptions
+                {
+                    Input = "lib1.inpx",
+                });
+            }
+        }
+    }
+
     class FixtureCommand : ICommand
     {
-        public int Run(SharedOptions options)
+        public int Run(BaseOptions options)
         {
             var opts = (FixtureOptions)options;
             if (!File.Exists(opts.Input))
@@ -20,7 +48,8 @@ namespace DotOPDS.Commands
             parser.OnNewEntry += Parser_OnNewEntry;
 
             Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine(@"using DotOPDS.Utils;
+            Console.WriteLine(@"using DotOPDS.Models;
+using DotOPDS.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -38,11 +67,6 @@ namespace DotOPDS.Tests
 }");
 
             return 0;
-        }
-
-        public void Dispose()
-        {
-            // do nothing
         }
 
         private void Parser_OnNewEntry(object sender, NewEntryEventArgs e)

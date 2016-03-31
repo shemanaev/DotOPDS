@@ -1,0 +1,20 @@
+{
+    "port": 8080,
+    "title": "DotOPDS Library",
+    "language": "en",
+    "lazyInfoExtract": false,
+    "database": "%APPDATA%/DotOPDS/database",
+    "log": {
+        "level": "info",
+        "enabled": true,
+        "path": "%APPDATA%/DotOPDS/logs"
+    },
+    "authentication": {
+        "enabled": false,
+        "attempts": 3,
+        "users": {},
+        "banned": []
+    },
+    "pagination": 10,
+    "converters": []
+}

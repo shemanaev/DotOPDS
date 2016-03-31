@@ -1,38 +1,14 @@
-﻿using Ionic.Zip;
+﻿using DotOPDS.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DotOPDS.Utils
 {
-    public class Author
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-    }
-
-    public class Book
-    {
-        public Author[] Authors { get; set; }
-        public string[] Genres { get; set; }
-        public string Title { get; set; }
-        public string Series { get; set; }
-        public int SeriesNo { get; set; }
-        public string File { get; set; }
-        public int Size { get; set; }
-        public int LibId { get; set; }
-        public bool Del { get; set; }
-        public string Ext { get; set; }
-        public DateTime Date { get; set; }
-        public string Language { get; set; }
-        public string[] Keywords { get; set; }
-        public string Archive { get; set; }
-    }
-
     public class NewEntryEventArgs : EventArgs
     {
         public Book Book;
@@ -48,8 +24,9 @@ namespace DotOPDS.Utils
     {
         private static readonly int[] fb2ids = { 0, 65536 };
         private const string defaultStructure = "AUTHOR;GENRE;TITLE;SERIES;SERNO;FILE;SIZE;LIBID;DEL;EXT;DATE;";
+        private static Encoding CP1251 = Encoding.GetEncoding(1251);
 
-        private readonly ZipFile zip;
+        private readonly ZipArchive zip;
         private readonly string[] comment;
 
         public event NewEntryEventHandler OnNewEntry;
@@ -63,15 +40,18 @@ namespace DotOPDS.Utils
 
         public InpxParser(string filename)
         {
-            zip = ZipFile.Read(filename, new ReadOptions { Encoding = Encoding.GetEncoding(1251) });
-            comment = zip.Comment.Split('\n');
-            var result = zip.First(entry => entry.FileName.EndsWith("version.info"));
+            zip = ZipFile.Open(filename, ZipArchiveMode.Read, CP1251);
+            using (var reader = new StreamReader(zip.GetEntry("collection.info").Open(), CP1251))
+            {
+                comment = reader.ReadToEnd().Split('\n');
+            }
+            var result = zip.Entries.First(entry => entry.Name.EndsWith("version.info"));
             if (result != null)
             {
-                using (var stream = new MemoryStream())
+                using (var reader = new StreamReader(result.Open(), CP1251))
                 {
-                    result.Extract(stream);
-                    Version = int.Parse(Encoding.UTF8.GetString(stream.ToArray()));
+                    var s = reader.ReadToEnd();
+                    Version = int.Parse(s);
                 }
             }
         }
@@ -85,10 +65,10 @@ namespace DotOPDS.Utils
         {
             var structure = GetStructure();
 
-            var inps = zip.Where(entry => entry.FileName.EndsWith(".inp"));
+            var inps = zip.Entries.Where(entry => entry.Name.EndsWith(".inp"));
             foreach (var inp in inps)
             {
-                using (var stream = inp.OpenReader())
+                using (var stream = inp.Open())
                 {
                     var sr = new StreamReader(stream, Encoding.UTF8);
 
@@ -108,6 +88,7 @@ namespace DotOPDS.Utils
                         }
                         var args = new Book
                         {
+                            Id = Guid.Empty,
                             Authors = authors.ToArray(),
                             Genres = GetDelimArray(':', line[structure.Genre]),
                             Title = line[structure.Title],
@@ -121,7 +102,7 @@ namespace DotOPDS.Utils
                             Date = DateTime.Parse(line[structure.Date]),
                             Language = structure.Language != -1 ? line[structure.Language] : null,
                             Keywords = structure.Keywords != -1 ? GetDelimArray(':', line[structure.Keywords]) : null,
-                            Archive = inp.FileName.Replace(".inp", ".zip"),
+                            Archive = inp.Name.Replace(".inp", ".zip"),
                         };
                         if (OnNewEntry != null) OnNewEntry(this, new NewEntryEventArgs { Book = args });
                     }
@@ -134,13 +115,12 @@ namespace DotOPDS.Utils
         private InpStructure GetStructure()
         {
             var structure = defaultStructure;
-            var info = zip.FirstOrDefault(entry => entry.FileName.EndsWith("structure.info"));
+            var info = zip.Entries.FirstOrDefault(entry => entry.Name.EndsWith("structure.info"));
             if (info != null)
             {
-                using (var stream = new MemoryStream())
+                using (var reader = new StreamReader(info.Open(), CP1251))
                 {
-                    info.Extract(stream);
-                    structure = Encoding.UTF8.GetString(stream.ToArray());
+                    structure = reader.ReadToEnd();
                 }
             }
 
@@ -187,7 +167,16 @@ namespace DotOPDS.Utils
 
         public void Dispose()
         {
-            zip.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                zip.Dispose();
+            }
         }
     }
 

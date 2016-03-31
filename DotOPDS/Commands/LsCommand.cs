@@ -1,10 +1,17 @@
-﻿using System;
+﻿using CommandLine;
+using System;
 
 namespace DotOPDS.Commands
 {
+    [Verb("ls",
+        HelpText = "List all libraries.")]
+    class LsOptions : BaseOptions
+    {
+    }
+
     class LsCommand : ICommand
     {
-        public int Run(SharedOptions options)
+        public int Run(BaseOptions options)
         {
             Settings.Load(options.Config);
 
@@ -15,11 +22,6 @@ namespace DotOPDS.Commands
             }
 
             return 0;
-        }
-
-        public void Dispose()
-        {
-            // do nothing
         }
     }
 }

@@ -5,17 +5,23 @@ namespace DotOPDS.Utils
 {
     class Resource
     {
-        public static Assembly Assembly { get { return typeof(Assets.Noop).Assembly; } }
-
         public static Stream AsStream(string name)
         {
-            var resourceName = string.Format("{0}.{1}", Assembly.GetName().Name, name);
-            return Assembly.GetManifestResourceStream(resourceName);
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = string.Format("{0}.{1}", assembly.GetName().Name, name);
+            try
+            {
+                return assembly.GetManifestResourceStream(resourceName);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
 
         public static void SaveToFile(string name, string output)
         {
-            output = PathUtil.Normalize(output);
+            output = Util.Normalize(output);
             var dir = Path.GetDirectoryName(output);
 
             if (!Directory.Exists(dir))
