@@ -25,7 +25,7 @@ with no more 10 users_
 
 ## Getting started
 
-Download [build][4] from CI server, extract somewhere.
+Download [latest build][4] from CI server, extract somewhere.
 Now create default configuration file:
 
     DotOPDS init -c path/to/config
@@ -98,5 +98,5 @@ Use [NSSM][5], Luke!
 [1]: https://en.wikipedia.org/wiki/OPDS
 [2]: http://lib.rus.ec
 [3]: http://flibusta.is
-[4]: ci_builds_link_here
+[4]: https://ci.appveyor.com/api/projects/nis/dotopds/artifacts/DotOPDS/bin/Release/DotOPDS.exe
 [5]: https://nssm.cc
