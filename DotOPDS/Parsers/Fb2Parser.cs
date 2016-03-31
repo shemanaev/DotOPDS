@@ -20,7 +20,7 @@ namespace DotOPDS.Parsers
         {
             var annotation = doc.Descendants()
                                 .Where(x => x.Name.LocalName == "annotation")
-                                .First();
+                                .FirstOrDefault();
             if (annotation != null)
             {
                 var innerXml = string.Join("", annotation.Elements().Select(o => o.ToString())).Trim();
@@ -34,7 +34,7 @@ namespace DotOPDS.Parsers
                                .Where(x => x.Name.LocalName == "coverpage")
                                .Descendants()
                                .Where(x => x.Name.LocalName == "image")
-                               .First();
+                               .FirstOrDefault();
 
             if (coverPage != null)
             {
