@@ -161,6 +161,7 @@
     <Compile Include="Commands\FixtureCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ImportCommand.cs" />
+    <Compile Include="Commands\InitCommand.cs" />
     <Compile Include="Commands\LsCommand.cs" />
     <Compile Include="Commands\MvCommand.cs" />
     <Compile Include="Commands\RmCommand.cs" />

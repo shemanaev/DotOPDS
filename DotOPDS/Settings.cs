@@ -54,8 +54,10 @@ namespace DotOPDS
             FileName = Util.Normalize(filename);
             if (!File.Exists(FileName))
             {
-                var resource = string.Format("default.{0}.json", Util.IsLinux ? "nix" : "win");
-                Resource.SaveToFile(resource, FileName);
+                Console.Error.WriteLine("Config file {0} does not exists.", FileName);
+                Console.Error.WriteLine("Try using 'init' command first:", FileName);
+                Console.Error.WriteLine("\tDotOPDS init -c \"{0}\"", FileName);
+                Environment.Exit(1);
             }
             using (var reader = File.OpenText(FileName))
             {
