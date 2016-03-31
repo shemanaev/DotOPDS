@@ -9,13 +9,6 @@ namespace DotOPDS.Parsers
 {
     class Fb2Parser : IBookParser
     {
-        private static string GetInnerXml(XElement el)
-        {
-            var elems = el.Elements().Select(o => o.ToString());
-            var innerXml = string.Join("", elems).Trim();
-            return innerXml;
-        }
-
         private void UpdateAnnotation(Book book, XDocument doc)
         {
             var annotation = doc.Descendants()
@@ -23,8 +16,7 @@ namespace DotOPDS.Parsers
                                 .FirstOrDefault();
             if (annotation != null)
             {
-                var innerXml = string.Join("", annotation.Elements().Select(o => o.ToString())).Trim();
-                book.Annotation = innerXml;
+                book.Annotation = Util.GetInnerXml(annotation);
             }
         }
 

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace DotOPDS.Utils
 {
@@ -55,6 +57,13 @@ namespace DotOPDS.Utils
 
             stream.Seek(0, SeekOrigin.Begin);
             return result;
+        }
+
+        public static string GetInnerXml(XElement el)
+        {
+            var elems = el.IgnoreNamespace().Elements().Select(o => o.ToString());
+            var innerXml = string.Join("", elems).Trim();
+            return innerXml;
         }
 
         private static Dictionary<char, string> dangerChars = new Dictionary<char, string>
