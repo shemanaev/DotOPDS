@@ -1,5 +1,6 @@
 ﻿using DotOPDS.Importers;
 using DotOPDS.Models;
+using DotOPDS.Utils;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace DotOPDS.Parsers
             if (importer == null)
             {
                 importer = new LuceneImporter();
-                importer.Open(Settings.Instance.Database);
+                importer.Open(Util.Normalize(Settings.Instance.Database));
             }
             importer.Replace(book);
         }
