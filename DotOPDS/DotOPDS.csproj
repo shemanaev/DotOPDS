@@ -1,20 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Major>1</Major>
-    <Minor>0</Minor>
-    <Build>0</Build>
-    <Revision>0</Revision>
-  </PropertyGroup>
-  <PropertyGroup>
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\.build</MSBuildCommunityTasksPath>
-  </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3848799E-C3FF-4811-8831-4BEBF41EAC6A}</ProjectGuid>
     <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DotOPDS</RootNamespace>
     <AssemblyName>DotOPDS</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -198,7 +190,7 @@
     <Compile Include="Utils\Resource.cs" />
     <Compile Include="Utils\LuceneSearcher.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Utils\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\XmlExtensions.cs" />
     <Compile Include="WebServer.cs" />
   </ItemGroup>
@@ -230,26 +222,6 @@
     <Error Condition="!Exists('..\packages\Fody.1.28.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.3\build\Fody.targets'))" />
   </Target>
   <Import Project="..\packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.3\build\Fody.targets') And '$(Configuration)' == 'Release' " />
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
-  <Target Name="Version">
-    <GitVersion LocalPath="$(MSBuildProjectDirectory)">
-      <Output TaskParameter="CommitHash" PropertyName="Revision" />
-    </GitVersion>
-    <AssemblyInfo
-      CodeLanguage="CS"
-      OutputFile="Utils\AssemblyInfo.cs"
-      AssemblyTitle="DotOPDS"
-      AssemblyDescription="Lightweight OPDS server."
-      AssemblyCompany=""
-      AssemblyProduct="DotOPDS"
-      AssemblyCopyright="(c) 2016 Denis Shemanaev"
-      ComVisible="false"
-      CLSCompliant="false"
-      Guid="3848799e-c3ff-4811-8831-4bebf41eac6a"
-      AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)"
-      AssemblyVersion="$(Major).$(Minor).$(Build)"
-      AssemblyFileVersion="$(Major).$(Minor).$(Build)" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
