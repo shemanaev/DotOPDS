@@ -15,7 +15,6 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3848799E-C3FF-4811-8831-4BEBF41EAC6A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DotOPDS</RootNamespace>
     <AssemblyName>DotOPDS</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -198,7 +197,7 @@
     <Compile Include="Utils\Resource.cs" />
     <Compile Include="Utils\LuceneSearcher.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\AssemblyInfo.cs" />
     <Compile Include="Utils\XmlExtensions.cs" />
     <Compile Include="WebServer.cs" />
   </ItemGroup>
@@ -237,7 +236,7 @@
     </GitVersion>
     <AssemblyInfo
       CodeLanguage="CS"
-      OutputFile="Properties\AssemblyInfo.cs"
+      OutputFile="Utils\AssemblyInfo.cs"
       AssemblyTitle="DotOPDS"
       AssemblyDescription="Lightweight OPDS server."
       AssemblyCompany=""
