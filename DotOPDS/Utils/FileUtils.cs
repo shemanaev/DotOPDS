@@ -21,6 +21,7 @@ namespace DotOPDS.Utils
             }
             var filename = string.Format("{0}.{1}", book.File, book.Ext);
 
+            logger.Trace("Trying to open archive, {0}", archive);
             var zip = ZipFile.OpenRead(archive);
             {
                 logger.Debug("Archive {0} opened", archive);

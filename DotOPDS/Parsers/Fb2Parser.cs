@@ -4,11 +4,13 @@ using DotOPDS.Models;
 using System.IO;
 using System.Xml.Linq;
 using DotOPDS.Utils;
+using NLog;
 
 namespace DotOPDS.Parsers
 {
     class Fb2Parser : IBookParser
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         private void UpdateAnnotation(Book book, XDocument doc)
         {
             var annotation = doc.Descendants()
@@ -55,12 +57,15 @@ namespace DotOPDS.Parsers
                 var mem = new MemoryStream();
                 stream.CopyTo(mem);
                 var encoding = Util.DetectXmlEncoding(mem);
+                logger.Trace("Book encoding detected, id:{0}, enc:{1}", book.Id, encoding);
+
                 using (var reader = new StreamReader(mem, encoding))
                 {
                     using (var sgmlReader = new Sgml.SgmlReader())
                     {
                         sgmlReader.InputStream = reader;
                         var doc = XDocument.Load(sgmlReader);
+                        logger.Trace("Book file loaded, id:{0}", book.Id);
 
                         try
                         {

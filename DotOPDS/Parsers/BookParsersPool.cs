@@ -1,5 +1,6 @@
 ﻿using DotOPDS.Importers;
 using DotOPDS.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,7 @@ namespace DotOPDS.Parsers
 
         private Dictionary<string, IBookParser> parsers = new Dictionary<string, IBookParser>();
         private volatile LuceneImporter importer;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private BookParsersPool()
         {
@@ -21,6 +23,8 @@ namespace DotOPDS.Parsers
         public void Update(Book book)
         {
             if (book.Cover.Has != null) return;
+            logger.Debug("Book being updated, id:{0}", book.Id);
+
             IBookParser parser = null;
 
             if (parsers.ContainsKey(book.Ext))
@@ -31,9 +35,11 @@ namespace DotOPDS.Parsers
             try
             {
                 parser.Update(book);
+                logger.Debug("Book updated successfully, id:{0}", book.Id);
             }
             catch (Exception)
             {
+                logger.Debug("Book update failed, id:{0}", book.Id);
             }
 
             if (importer == null)
