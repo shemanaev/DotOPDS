@@ -53,7 +53,7 @@ namespace DotOPDS.Importers
         private Document MapBook(Book book)
         {
             var document = new Document();
-            document.Add(new Field("Guid", (book.Id != null ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field("Guid", (book.Id != Guid.Empty ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("LibraryId", book.LibraryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Title", book.Title, Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Series", book.Series ?? "", Field.Store.YES, Field.Index.ANALYZED));
