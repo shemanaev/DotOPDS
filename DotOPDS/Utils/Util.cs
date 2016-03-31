@@ -25,7 +25,7 @@ namespace DotOPDS.Utils
             }
         }
 
-        private static Regex reEncoding = new Regex("encoding=\"(.+)\"", RegexOptions.IgnoreCase);
+        private static Regex reEncoding = new Regex("encoding=\"(.+?)\"", RegexOptions.IgnoreCase);
         public static Encoding DetectXmlEncoding(Stream stream)
         {
             var result = Encoding.Default;
