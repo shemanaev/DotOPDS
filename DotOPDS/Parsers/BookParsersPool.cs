@@ -9,8 +9,8 @@ namespace DotOPDS.Parsers
 {
     class BookParsersPool
     {
-        private static BookParsersPool instance = new BookParsersPool();
-        public static BookParsersPool Instance { get { return instance; } }
+        private static BookParsersPool instance;
+        public static BookParsersPool Instance => instance ?? (instance = new BookParsersPool());
 
         private Dictionary<string, IBookParser> parsers = new Dictionary<string, IBookParser>();
         private volatile LuceneImporter importer;

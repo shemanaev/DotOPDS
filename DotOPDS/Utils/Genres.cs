@@ -5,15 +5,7 @@ namespace DotOPDS.Utils
     public class Genres
     {
         private static Genres instance;
-
-        public static Genres Instance
-        {
-            get
-            {
-                if (instance == null) instance = new Genres();
-                return instance;
-            }
-        }
+        public static Genres Instance => instance ?? (instance = new Genres());
 
         public string Localize(string genre)
         {

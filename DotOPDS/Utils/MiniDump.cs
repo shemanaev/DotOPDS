@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DotOPDS
+namespace DotOPDS.Utils
 {
     public static class MiniDump
     {

@@ -38,9 +38,9 @@ namespace DotOPDS.Importers
 
         public void Dispose()
         {
-            if (writer != null) writer.Dispose();
-            if (analyzer != null) analyzer.Dispose();
-            if (directory != null) directory.Dispose();
+            writer?.Dispose();
+            analyzer?.Dispose();
+            directory?.Dispose();
         }
 
         public void Open(string connection)
@@ -67,16 +67,13 @@ namespace DotOPDS.Importers
             document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Archive", book.Archive, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
-            if (book.Cover != null)
+            if (book.Cover?.Has != null)
             {
-                if (book.Cover.Has != null)
+                document.Add(new Field("Cover.Has", book.Cover.Has.ToString(), Field.Store.YES, Field.Index.NO));
+                if (book.Cover.Has == true)
                 {
-                    document.Add(new Field("Cover.Has", book.Cover.Has.ToString(), Field.Store.YES, Field.Index.NO));
-                    if (book.Cover.Has == true)
-                    {
-                        document.Add(new Field("Cover.Type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
-                        document.Add(new Field("Cover.Data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
-                    }
+                    document.Add(new Field("Cover.Type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
+                    document.Add(new Field("Cover.Data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
                 }
             }
             

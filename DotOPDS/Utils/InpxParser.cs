@@ -32,11 +32,11 @@ namespace DotOPDS.Utils
         public event NewEntryEventHandler OnNewEntry;
         public event FinishedEventHandler OnFinished;
 
-        public bool IsFb2 { get { return fb2ids.Contains(int.Parse(comment[2])); } }
+        public bool IsFb2 => fb2ids.Contains(int.Parse(comment[2]));
         public int Version { get; private set; }
-        public string Name { get { return comment[0]; } }
-        public string FileName { get { return comment[1]; } }
-        public string Description { get { return string.Join("\n", comment, 3, comment.Length - 3); } }
+        public string Name => comment[0];
+        public string FileName => comment[1];
+        public string Description => string.Join("\n", comment, 3, comment.Length - 3);
 
         public InpxParser(string filename)
         {
@@ -104,12 +104,12 @@ namespace DotOPDS.Utils
                             Keywords = structure.Keywords != -1 ? GetDelimArray(':', line[structure.Keywords]) : null,
                             Archive = inp.Name.Replace(".inp", ".zip"),
                         };
-                        if (OnNewEntry != null) OnNewEntry(this, new NewEntryEventArgs { Book = args });
+                        OnNewEntry?.Invoke(this, new NewEntryEventArgs { Book = args });
                     }
                 }
             }
 
-            if (OnFinished != null) OnFinished(this);
+            OnFinished?.Invoke(this);
         }
 
         private InpStructure GetStructure()
@@ -147,7 +147,7 @@ namespace DotOPDS.Utils
 
         private string[] GetDelimArray(char delimiter, string text, bool removeEmpty = true)
         {
-            return text.Split(delimiter).Where(x => removeEmpty ? (!string.IsNullOrEmpty(x) || x == ",") : true).ToArray();
+            return text.Split(delimiter).Where(x => !removeEmpty || (!string.IsNullOrEmpty(x) || x == ",")).ToArray();
         }
 
         private string SanitizeName(string name)

@@ -24,7 +24,7 @@ namespace DotOPDS.Controllers
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
-            if (total < 1 || total > 1)
+            if (total != 1)
             {
                 logger.Debug("File {0} not found", id);
                 throw new KeyNotFoundException("Key Not Found: " + id);
@@ -34,9 +34,8 @@ namespace DotOPDS.Controllers
 
             var book = books[0];
             var converter = Settings.Instance.Converters
-                .Where(x => x.From.Equals(book.Ext, StringComparison.InvariantCultureIgnoreCase) &&
-                            x.To.Equals(ext, StringComparison.InvariantCultureIgnoreCase))
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.From.Equals(book.Ext, StringComparison.InvariantCultureIgnoreCase) &&
+                                     x.To.Equals(ext, StringComparison.InvariantCultureIgnoreCase));
             if (!ext.Equals(book.Ext, StringComparison.InvariantCultureIgnoreCase) && converter == null)
             {
                 logger.Warn("No converter found for '{0}'->'{1}'", book.Ext, ext);
@@ -62,7 +61,7 @@ namespace DotOPDS.Controllers
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
-            if (total < 1 || total > 1)
+            if (total != 1)
             {
                 logger.Debug("File {0} not found", id);
                 throw new KeyNotFoundException("Key Not Found: " + id);

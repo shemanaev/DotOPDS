@@ -23,7 +23,7 @@ namespace DotOPDS.Tasks
         private ConcurrentQueue<Book> books = new ConcurrentQueue<Book>();
 
         public int EntriesTotal { get; private set; }
-        public int EntriesProcessed { get { return entriesProcessed; } }
+        public int EntriesProcessed => entriesProcessed;
 
         public void Run(ITaskArgs args_)
         {

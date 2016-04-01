@@ -1,7 +1,6 @@
 using DotOPDS.Models;
 using DotOPDS.Parsers;
 using DotOPDS.Utils;
-using DotOPDS.Web.Utils;
 using System;
 using System.IO;
 using System.Linq;
@@ -196,7 +195,7 @@ namespace DotOPDS.Controllers
             string result = url;
             if (url.Contains("page="))
             {
-                var r = @"([\?&]page=)(\d+)";
+                const string r = @"([\?&]page=)(\d+)";
                 var value = page <= 1 ? "" : "${1}" + page;
                 result = Regex.Replace(url, r, value);
             }

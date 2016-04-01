@@ -36,8 +36,7 @@ namespace DotOPDS.Tasks
             }
             catch (Exception e)
             {
-                if (args.Handler != null)
-                    args.Handler(e);
+                args.Handler?.Invoke(e);
             }
         }
     }

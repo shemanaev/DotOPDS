@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace DotOPDS.Web.Utils
+namespace DotOPDS.Utils
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class RequiredParametersAttribute : ActionFilterAttribute

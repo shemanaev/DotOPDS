@@ -17,7 +17,7 @@ namespace DotOPDS.Utils
     {
         private Stopwatch watch;
 
-        public long Time { get { return watch.ElapsedMilliseconds; } }
+        public long Time => watch.ElapsedMilliseconds;
         public string Query { get; private set; }
 
         public string Escape(string s)

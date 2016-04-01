@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace DotOPDS.Commands
 {
@@ -51,13 +52,10 @@ namespace DotOPDS.Commands
                 return 1;
             }
 
-            foreach (var lib in Settings.Instance.Libraries)
+            if (Settings.Instance.Libraries.Any(lib => library.Equals(lib.Value.Path, StringComparison.InvariantCultureIgnoreCase)))
             {
-                if (library.Equals(lib.Value.Path, StringComparison.InvariantCultureIgnoreCase))
-                {
-                    Console.Error.WriteLine("Library with path {0} already imported!", library);
-                    return 1;
-                }
+                Console.Error.WriteLine("Library with path {0} already imported!", library);
+                return 1;
             }
 
             var watch = Stopwatch.StartNew();

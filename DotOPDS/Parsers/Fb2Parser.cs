@@ -11,11 +11,11 @@ namespace DotOPDS.Parsers
     class Fb2Parser : IBookParser
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private void UpdateAnnotation(Book book, XDocument doc)
         {
             var annotation = doc.Descendants()
-                                .Where(x => x.Name.LocalName == "annotation")
-                                .FirstOrDefault();
+                                .FirstOrDefault(x => x.Name.LocalName == "annotation");
             if (annotation != null)
             {
                 book.Annotation = Util.GetInnerXml(annotation);
@@ -27,18 +27,15 @@ namespace DotOPDS.Parsers
             var coverPage = doc.Descendants()
                                .Where(x => x.Name.LocalName == "coverpage")
                                .Descendants()
-                               .Where(x => x.Name.LocalName == "image")
-                               .FirstOrDefault();
+                               .FirstOrDefault(x => x.Name.LocalName == "image");
 
             if (coverPage != null)
             {
                 var coverId = coverPage.Attributes()
-                                       .Where(x => x.Name.LocalName == "href")
-                                       .First()
+                                       .First(x => x.Name.LocalName == "href")
                                        .Value.Substring(1);
                 var cover = doc.Descendants()
-                               .Where(x => x.Name.LocalName == "binary" && x.Attribute("id").Value == coverId)
-                               .First();
+                               .First(x => x.Name.LocalName == "binary" && x.Attribute("id").Value == coverId);
                 var ctype = cover.Attribute("content-type").Value;
                 var bin = Convert.FromBase64String(cover.Value);
                 book.Cover = new Cover
