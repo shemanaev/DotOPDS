@@ -10,7 +10,7 @@ init:
 before_build:
   - ps: nuget restore
 after_build:
-  - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml
+  - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml -x!FSharp.Core.dll
 
 assembly_info:
   patch: true
