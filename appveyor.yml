@@ -9,6 +9,8 @@ init:
   - ps: $env:GIT_HASH = $env:APPVEYOR_REPO_COMMIT.Substring(0, 7)
 before_build:
   - ps: nuget restore
+after_build:
+  - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml
 
 assembly_info:
   patch: true
@@ -24,5 +26,5 @@ cache:
 test: off
 
 artifacts:
-  - path: 'DotOPDS\bin\Release\DotOPDS.exe'
-    name: release_bin
+  - path: 'DotOPDS.zip'
+    name: release_archive

@@ -98,5 +98,5 @@ Use [NSSM][5], Luke!
 [1]: https://en.wikipedia.org/wiki/OPDS
 [2]: http://lib.rus.ec
 [3]: http://flibusta.is
-[4]: https://ci.appveyor.com/api/projects/nis/dotopds/artifacts/DotOPDS/bin/Release/DotOPDS.exe
+[4]: https://ci.appveyor.com/api/projects/nis/dotopds/artifacts/DotOPDS.zip
 [5]: https://nssm.cc
