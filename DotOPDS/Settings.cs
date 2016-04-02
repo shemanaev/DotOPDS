@@ -120,6 +120,7 @@ namespace DotOPDS
         public string From { get; set; }
         public string To { get; set; }
         public string Command { get; set; }
+        public string Arguments { get; set; }
     }
 
     public class SettingsLog

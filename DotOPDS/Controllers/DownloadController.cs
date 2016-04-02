@@ -120,15 +120,15 @@ namespace DotOPDS.Controllers
                     file.CopyTo(output);
                 }
 
-                var cmd = string.Format(converter.Command, from, to);
-                logger.Debug("Starting converter process: {0}", cmd);
+                var args = string.Format(converter.Arguments, from, to);
+                logger.Debug("Starting converter process: {0} {1}", converter.Command, args);
                 var process = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
 
-                        FileName = "cmd.exe",
-                        Arguments = "/c " + cmd,
+                        FileName = converter.Command,
+                        Arguments = args,
                         WindowStyle = ProcessWindowStyle.Hidden
                     }
                 };

@@ -63,7 +63,8 @@ Now edit configuration file if needed:
         {
             "from": "fb2", // file extension
             "to": "epub",
-            "command": "Fb2ePub {0} {1}" // {0} - from, {1} - to
+            "command": "Fb2ePub",
+            "arguments": "{0} {1}" // {0} - from, {1} - to
         }
     ]
 }
