@@ -127,7 +127,7 @@ namespace DotOPDS
     {
         public bool Enabled { get; set; } = false;
         public string Path { get; set; }
-        public string Level { get; set; } = "inforamtion";
+        public string Level { get; set; } = "information";
     }
 
     public class SettingsAuthentication
