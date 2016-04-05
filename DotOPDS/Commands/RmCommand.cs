@@ -15,9 +15,9 @@ namespace DotOPDS.Commands
     HelpText = "Remove library and books from index.")]
     class RmOptions : BaseOptions
     {
-        [Value(0, MetaName = "library location",
+        [Value(0, MetaName = "id",
             Required = true,
-            HelpText = "Library to delete.")]
+            HelpText = "Library ID to delete.")]
         public string Lib { get; set; }
 
         [Usage]
@@ -25,9 +25,9 @@ namespace DotOPDS.Commands
         {
             get
             {
-                yield return new Example("Remove library located at 'lib'.", new RmOptions
+                yield return new Example("Remove library with ID '296cff32-eb42-418a-ba1c-3b5115ec128c'.", new RmOptions
                 {
-                    Lib = "lib"
+                    Lib = "296cff32-eb42-418a-ba1c-3b5115ec128c"
                 });
             }
         }
@@ -40,39 +40,34 @@ namespace DotOPDS.Commands
             Settings.Load(options.Config);
             var opts = (RmOptions)options;
 
-            var library = Util.Normalize(opts.Lib);
-
-            foreach (var lib in Settings.Instance.Libraries)
+            var library = Guid.Parse(opts.Lib);
+            if (!Settings.Instance.Libraries.ContainsKey(library))
             {
-                if (lib.Value.Path == library)
-                {
-                    using (var analyzer = new RussianAnalyzer(Version.LUCENE_30))
-                    using (var directory = new SimpleFSDirectory(new System.IO.DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
-                    using (var writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
-                    {
-                        var query = new TermQuery(new Term("LibraryId", lib.Key.ToString()));
-
-                        int total = 0;
-                        using (var searcher = new IndexSearcher(directory))
-                        {
-                            var docs = searcher.Search(query, 1);
-                            total = docs.TotalHits;
-                        }
-                        
-                        writer.DeleteDocuments(query);
-                        writer.Optimize(true);
-
-                        Settings.Instance.Libraries.Remove(lib.Key);
-                        Settings.Save();
-                        Console.WriteLine("Library {0} removed ({1} books).", library, total);
-                    }
-                    return 0;
-                }
+                Console.Error.WriteLine("Library {0} not found.", library);
+                return 1;
             }
 
-            Console.Error.WriteLine("Library {0} not found.", library);
+            using (var analyzer = new RussianAnalyzer(Version.LUCENE_30))
+            using (var directory = new SimpleFSDirectory(new System.IO.DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
+            using (var writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+            {
+                var query = new TermQuery(new Term("LibraryId", library.ToString()));
 
-            return 1;
+                int total = 0;
+                using (var searcher = new IndexSearcher(directory))
+                {
+                    var docs = searcher.Search(query, 1);
+                    total = docs.TotalHits;
+                }
+
+                writer.DeleteDocuments(query);
+                writer.Optimize(true);
+
+                Settings.Instance.Libraries.Remove(library);
+                Settings.Save();
+                Console.WriteLine("Library {0} removed ({1} books).", library, total);
+            }
+            return 0;
         }
     }
 }

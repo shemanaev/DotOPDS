@@ -10,10 +10,10 @@ namespace DotOPDS.Commands
         HelpText = "Move library to another location.")]
     class MvOptions : BaseOptions
     {
-        [Value(0, MetaName = "from",
+        [Value(0, MetaName = "id",
             Required = true,
-            HelpText = "Current library location.")]
-        public string From { get; set; }
+            HelpText = "Library ID.")]
+        public string Id { get; set; }
 
         [Value(1, MetaName = "to",
             Required = true,
@@ -25,10 +25,10 @@ namespace DotOPDS.Commands
         {
             get
             {
-                yield return new Example("Move library from 'lib' to '../lib_new'.", new MvOptions
+                yield return new Example("Move library with id '296cff32-eb42-418a-ba1c-3b5115ec128c' to 'lib/new/location'.", new MvOptions
                 {
-                    From = "lib",
-                    To = "../lib_new"
+                    Id = "296cff32-eb42-418a-ba1c-3b5115ec128c",
+                    To = "lib/new/location"
                 });
             }
         }
@@ -41,23 +41,21 @@ namespace DotOPDS.Commands
             Settings.Load(options.Config);
             var opts = (MvOptions)options;
 
-            var from = Util.Normalize(opts.From);
+            var id = Guid.Parse(opts.Id);
             var to = Util.Normalize(opts.To);
 
-            foreach (var lib in Settings.Instance.Libraries)
+            if (!Settings.Instance.Libraries.ContainsKey(id))
             {
-                if (lib.Value.Path == from)
-                {
-                    lib.Value.Path = to;
-                    Settings.Save();
-                    Console.WriteLine("Library moved from {0} to {1}.", from, to);
-                    return 0;
-                }
+                Console.Error.WriteLine("Library {0} not found.", id);
+                return 1;
             }
 
-            Console.Error.WriteLine("Library {0} not found.", from);
-
-            return 1;
+            var lib = Settings.Instance.Libraries[id];
+            var from = lib.Path;
+            lib.Path = to;
+            Settings.Save();
+            Console.WriteLine("Library moved from {0} to {1}.", from, to);
+            return 0;
         }
     }
 }
