@@ -22,6 +22,24 @@ namespace DotOPDS.Parsers
             }
         }
 
+        private void ExtractImage(Book book, XDocument doc, XElement el)
+        {
+            var coverId = el.Attributes()
+                                       .First(x => x.Name.LocalName == "href")
+                                       .Value.Substring(1);
+            var cover = doc.Descendants()
+                           .First(x => x.Name.LocalName == "binary"
+                                    && x.Attribute("id").Value == coverId);
+            var ctype = cover.Attribute("content-type").Value;
+            var bin = Convert.FromBase64String(cover.Value);
+            book.Cover = new Cover
+            {
+                Data = bin,
+                ContentType = ctype,
+                Has = true
+            };
+        }
+
         private void UpdateCover(Book book, XDocument doc)
         {
             var coverPage = doc.Descendants()
@@ -31,19 +49,18 @@ namespace DotOPDS.Parsers
 
             if (coverPage != null)
             {
-                var coverId = coverPage.Attributes()
-                                       .First(x => x.Name.LocalName == "href")
-                                       .Value.Substring(1);
-                var cover = doc.Descendants()
-                               .First(x => x.Name.LocalName == "binary" && x.Attribute("id").Value == coverId);
-                var ctype = cover.Attribute("content-type").Value;
-                var bin = Convert.FromBase64String(cover.Value);
-                book.Cover = new Cover
+                ExtractImage(book, doc, coverPage);
+            }
+            else
+            {
+                var firstImage = doc.Descendants()
+                               .Where(x => x.Name.LocalName == "body")
+                               .Descendants()
+                               .FirstOrDefault(x => x.Name.LocalName == "image");
+                if (firstImage != null)
                 {
-                    Data = bin,
-                    ContentType = ctype,
-                    Has = true
-                };
+                    ExtractImage(book, doc, firstImage);
+                }
             }
         }
 
