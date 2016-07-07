@@ -33,7 +33,7 @@ namespace DotOPDS.Utils
         public event FinishedEventHandler OnFinished;
 
         public bool IsFb2 => fb2ids.Contains(int.Parse(comment[2]));
-        public int Version { get; private set; }
+        public string Version { get; private set; }
         public string Name => comment[0];
         public string FileName => comment[1];
         public string Description => string.Join("\n", comment, 3, comment.Length - 3);
@@ -50,8 +50,7 @@ namespace DotOPDS.Utils
             {
                 using (var reader = new StreamReader(result.Open(), CP1251))
                 {
-                    var s = reader.ReadToEnd();
-                    Version = int.Parse(s);
+                    Version = reader.ReadToEnd().Trim();
                 }
             }
         }

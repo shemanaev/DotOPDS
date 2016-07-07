@@ -27,7 +27,7 @@ namespace DotOPDS.Tests
             parser.Name.Should().Be("Lib.rus.ec Local [FB2]");
             parser.FileName.Should().Be("librusec_local_fb2");
             parser.Description.Should().Be("Архивы библиотеки Lib.rus.ec (fb2)\nhttp://lib.rus.ec/");
-            parser.Version.Should().Be(20160301);
+            parser.Version.Should().Be("20160301");
 
             parser.OnNewEntry += Parser_OnNewEntry;
             parser.OnFinished += Parser_OnFinished;
