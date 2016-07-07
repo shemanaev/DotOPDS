@@ -15,6 +15,7 @@ namespace DotOPDS.Utils
         {
             var from = IsLinux ? '\\' : '/';
             var to = IsLinux ? '/' : '\\';
+            if (string.IsNullOrWhiteSpace(path)) return path;
             return Path.GetFullPath(Environment.ExpandEnvironmentVariables(path)).Replace(from, to);
         }
 
