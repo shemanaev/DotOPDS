@@ -81,8 +81,8 @@ namespace DotOPDS.Utils
                         {
                             var author = GetDelimArray(',', name, false);
                             authors.Add(new Author {
-                                FirstName = SanitizeName(author[1]),
-                                MiddleName = SanitizeName(author.Length == 3 ? author[2] : null),
+                                FirstName = SanitizeName(author.Length >= 2 ? author[1] : null),
+                                MiddleName = SanitizeName(author.Length >= 3 ? author[2] : null),
                                 LastName = SanitizeName(author[0]),
                             });
                         }
