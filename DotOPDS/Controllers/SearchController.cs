@@ -14,7 +14,7 @@ namespace DotOPDS.Controllers
     public class SearchController : ApiController
     {
         private const string Prefix = "/opds";
-        private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = Prefix + "/search?q={searchTerms}&amp;page={startPage?}" };
+        private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = Prefix + "/search?q={searchTerms}" };
         private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = Prefix.StartsWith("/") ? Prefix : "/" };
 
         [Route("")]
