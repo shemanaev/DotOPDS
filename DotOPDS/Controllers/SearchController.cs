@@ -195,7 +195,7 @@ namespace DotOPDS.Controllers
             string result = url;
             if (url.Contains("page="))
             {
-                const string r = @"([\?&]page=)(\d+)";
+                const string r = @"([\?&]page=)(\d*)";
                 var value = page <= 1 ? "" : "${1}" + page;
                 result = Regex.Replace(url, r, value);
             }
