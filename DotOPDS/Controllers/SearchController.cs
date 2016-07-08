@@ -56,6 +56,7 @@ namespace DotOPDS.Controllers
         [RequiredParameters]
         public Feed Search([FromUri] string q, [FromUri] int page = 1)
         {
+            if (page < 1) page = 1;
             var searcher = new LuceneSearcher();
             int total;
             var query = string.Format(@"Title:""{0}"" OR Author:""{0}"" OR Series:""{0}""", searcher.Escape(q));
@@ -79,6 +80,7 @@ namespace DotOPDS.Controllers
         [HttpGet]
         public Feed SearchByGenre(string genre, [FromUri] int page = 1)
         {
+            if (page < 1) page = 1;
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Genre", genre, page);
@@ -102,6 +104,7 @@ namespace DotOPDS.Controllers
         [RequiredParameters]
         public Feed SearchByAuthor([FromUri] string author, [FromUri] int page = 1)
         {
+            if (page < 1) page = 1;
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Author.Exact", author, page);
@@ -125,6 +128,7 @@ namespace DotOPDS.Controllers
         [RequiredParameters]
         public Feed SearchBySeries([FromUri] string series, [FromUri] int page = 1)
         {
+            if (page < 1) page = 1;
             var searcher = new LuceneSearcher();
             int total;
             var books = searcher.SearchExact(out total, "Series.Exact", series, page);
