@@ -17,7 +17,7 @@ namespace DotOPDS.Tasks
     class ImportTask : ITask
     {
         private bool running = true;
-        private volatile int entriesProcessed;
+        private int entriesProcessed;
         private Guid libId = Guid.NewGuid();
         private IBookImporter importer = new LuceneImporter();
         private ConcurrentQueue<Book> books = new ConcurrentQueue<Book>();
@@ -65,7 +65,7 @@ namespace DotOPDS.Tasks
                 {
                     book.LibraryId = libId;
                     importer.Insert(book);
-                    entriesProcessed++;
+                    Interlocked.Increment(ref entriesProcessed);
                 }
                 Thread.Sleep(1);
             }
