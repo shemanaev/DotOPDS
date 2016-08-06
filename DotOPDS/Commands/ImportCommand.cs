@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using NLog;
 
 namespace DotOPDS.Commands
 {
@@ -32,7 +33,7 @@ namespace DotOPDS.Commands
                 yield return new Example("Import inpx file", new ImportOptions
                 {
                     Library = "path/to/library/files",
-                    Input = "lib1.inpx",
+                    Input = "path/to/lib1.inpx",
                 });
             }
         }
@@ -40,6 +41,8 @@ namespace DotOPDS.Commands
 
     class ImportCommand : ICommand
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         public int Run(BaseOptions options)
         {
             var opts = (ImportOptions)options;
@@ -58,6 +61,13 @@ namespace DotOPDS.Commands
                 return 1;
             }
 
+            var indexFile = Util.Normalize(opts.Input);
+            if (!File.Exists(indexFile))
+            {
+                Console.Error.WriteLine("Index file {0} not found.", library);
+                return 1;
+            }
+
             var watch = Stopwatch.StartNew();
             var status = new ConsoleStatus();
             using (var task = new ImportTask())
@@ -65,11 +75,12 @@ namespace DotOPDS.Commands
                 task.Start(new ImportTaskArgs
                 {
                     Library = library,
-                    Input = Util.Normalize(opts.Input)
+                    Input = indexFile
                 }, (e) =>
                 {
                     Console.WriteLine();
                     Console.Error.WriteLine("Bad input file {0}.", opts.Input);
+                    _logger.Fatal(e);
                     Environment.Exit(1);
                 });
 

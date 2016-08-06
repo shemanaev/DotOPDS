@@ -72,7 +72,7 @@ Now edit configuration file if needed:
 
 Import library index:
 
-    DotOPDS import D:\library lib.inpx
+    DotOPDS import D:\library D:\lib.inpx
 
 Now just start server:
 
