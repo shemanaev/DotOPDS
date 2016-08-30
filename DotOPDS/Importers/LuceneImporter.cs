@@ -52,10 +52,12 @@ namespace DotOPDS.Importers
 
         private Document MapBook(Book book)
         {
+            var titleSort = book.Title.TrimStart().TrimStart(new char[] { '«' });
             var document = new Document();
             document.Add(new Field("Guid", (book.Id != Guid.Empty ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("LibraryId", book.LibraryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Title", book.Title, Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field("Title.Sort", titleSort, Field.Store.NO, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Series", book.Series ?? "", Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Series.Exact", book.Series ?? "", Field.Store.NO, Field.Index.NOT_ANALYZED));
             document.Add(new Field("SeriesNo", book.SeriesNo.ToString(), Field.Store.YES, Field.Index.NO));
@@ -64,7 +66,7 @@ namespace DotOPDS.Importers
             document.Add(new Field("LibId", book.LibId.ToString(), Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Del", book.Del.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Ext", book.Ext, Field.Store.YES, Field.Index.NO));
-            document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NO));
+            document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Archive", book.Archive, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
             if (book.Cover?.Has != null)

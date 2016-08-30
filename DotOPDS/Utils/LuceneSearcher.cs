@@ -57,7 +57,12 @@ namespace DotOPDS.Utils
         {
             Query = query.ToString();
             watch = Stopwatch.StartNew();
-            var fields = new SortField[] { SortField.FIELD_SCORE, new SortField("LibId", SortField.INT, false) };
+            var fields = new SortField[]
+            {
+                new SortField("Title.Sort", SortField.STRING, false),
+                new SortField("Date", SortField.STRING, true),
+                SortField.FIELD_SCORE
+            };
             var sort = new Sort(fields);
 
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
