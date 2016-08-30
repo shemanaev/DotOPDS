@@ -61,6 +61,10 @@ namespace DotOPDS.Parsers
                 {
                     ExtractImage(book, doc, firstImage);
                 }
+                else
+                {
+                    book.Cover = new Cover { Has = false };
+                }
             }
         }
 
