@@ -64,7 +64,7 @@ namespace DotOPDS.Commands
             var indexFile = Util.Normalize(opts.Input);
             if (!File.Exists(indexFile))
             {
-                Console.Error.WriteLine("Index file {0} not found.", library);
+                Console.Error.WriteLine("Index file {0} not found.", indexFile);
                 return 1;
             }
 
