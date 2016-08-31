@@ -43,7 +43,7 @@ namespace DotOPDS.Utils
                 }
                 while (string.IsNullOrWhiteSpace(line) && !reader.EndOfStream);
 
-                if (line.Contains("encoding"))
+                if (!string.IsNullOrWhiteSpace(line) && line.Contains("encoding"))
                 {
                     var res = reEncoding.Match(line);
                     if (res.Success)

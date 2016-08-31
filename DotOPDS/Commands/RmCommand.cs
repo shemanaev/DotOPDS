@@ -53,7 +53,7 @@ namespace DotOPDS.Commands
             {
                 var query = new TermQuery(new Term("LibraryId", library.ToString()));
 
-                int total = 0;
+                int total;
                 using (var searcher = new IndexSearcher(directory))
                 {
                     var docs = searcher.Search(query, 1);

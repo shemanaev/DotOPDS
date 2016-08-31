@@ -15,7 +15,7 @@ namespace DotOPDS.Middleware
         {
         }
 
-        public async override Task Invoke(IOwinContext context)
+        public override async Task Invoke(IOwinContext context)
         {
             var ip = context.Request.RemoteIpAddress;
             if (Settings.Instance.Authentication.Banned.Contains(ip))
@@ -56,13 +56,13 @@ namespace DotOPDS.Middleware
                 {
                     attempts[ip] += 1;
                 }
-            }
-            if (attempts[ip] >= Settings.Instance.Authentication.Attempts)
-            {
-                lock (Settings.Instance.Authentication.Banned)
+                if (attempts[ip] >= Settings.Instance.Authentication.Attempts)
                 {
-                    Settings.Instance.Authentication.Banned.Add(ip);
-                    Settings.Save();
+                    lock (Settings.Instance.Authentication.Banned)
+                    {
+                        Settings.Instance.Authentication.Banned.Add(ip);
+                        Settings.Save();
+                    }
                 }
             }
 

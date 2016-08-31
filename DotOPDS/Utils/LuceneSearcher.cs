@@ -57,7 +57,7 @@ namespace DotOPDS.Utils
         {
             Query = query.ToString();
             watch = Stopwatch.StartNew();
-            var fields = new SortField[]
+            var fields = new[]
             {
                 new SortField("Title.Sort", SortField.STRING, false),
                 new SortField("Date", SortField.STRING, true),
@@ -89,10 +89,10 @@ namespace DotOPDS.Utils
                         .ToArray();
 
                     Cover cover = new Cover();
-                    bool hasCover = false;
                     var hasValue = doc.Get("Cover.Has");
                     if (hasValue != null)
                     {
+                        bool hasCover;
                         bool.TryParse(hasValue, out hasCover);
                         cover = new Cover { Has = hasCover };
                         if (hasCover)
