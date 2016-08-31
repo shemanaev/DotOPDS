@@ -17,7 +17,7 @@ namespace DotOPDS.Tasks
 
         public void Run(ITaskArgs args_)
         {
-            var args = (ServeTaskArgs)args_;
+            var args = (ServeTaskArgs) args_;
             var ipEndPoint = new IPEndPoint(IPAddress.Any, args.Port);
             server = new WebServer(ipEndPoint);
 
