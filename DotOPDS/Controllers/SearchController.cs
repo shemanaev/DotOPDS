@@ -306,7 +306,7 @@ namespace DotOPDS.Controllers
             {
                 Rel = FeedLinkRel.Acquisition,
                 Type = MimeHelper.GetMimeType(book.Ext),
-                Href = string.Format("/get/{0}/fb2", book.Id)
+                Href = string.Format("/get/{0}/{1}", book.Id, book.Ext)
             });
 
             var converters = Settings.Instance.Converters
