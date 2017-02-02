@@ -17,7 +17,7 @@ namespace DotOPDS.Tasks
 
         public void Run(ITaskArgs args_)
         {
-            var args = (ServeTaskArgs)args_;
+            var args = (ServeTaskArgs) args_;
             server = new WebServer(new IPEndPoint(IPAddress.Any, args.Port));
 
             logger.Info("Web server started at http://localhost:{0}/", args.Port);

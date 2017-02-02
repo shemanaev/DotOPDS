@@ -24,7 +24,7 @@ namespace DotOPDS.Utils
             output = Util.Normalize(output);
             var dir = Path.GetDirectoryName(output);
 
-            if (!Directory.Exists(dir))
+            if (!string.IsNullOrWhiteSpace(dir) && !Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }

@@ -4,6 +4,7 @@ using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Store;
 using System;
+using System.Globalization;
 using Version = Lucene.Net.Util.Version;
 
 namespace DotOPDS.Importers
@@ -52,7 +53,7 @@ namespace DotOPDS.Importers
 
         private Document MapBook(Book book)
         {
-            var titleSort = book.Title.TrimStart().TrimStart(new char[] { '«' });
+            var titleSort = book.Title.TrimStart().TrimStart('«');
             var document = new Document();
             document.Add(new Field("Guid", (book.Id != Guid.Empty ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("LibraryId", book.LibraryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
@@ -66,7 +67,7 @@ namespace DotOPDS.Importers
             document.Add(new Field("LibId", book.LibId.ToString(), Field.Store.YES, Field.Index.ANALYZED));
             document.Add(new Field("Del", book.Del.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Ext", book.Ext, Field.Store.YES, Field.Index.NO));
-            document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+            document.Add(new Field("Date", book.Date.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Archive", book.Archive, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
             if (book.Cover?.Has != null)
@@ -78,7 +79,6 @@ namespace DotOPDS.Importers
                     document.Add(new Field("Cover.Data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
                 }
             }
-            
 
             foreach (var author in book.Authors)
             {

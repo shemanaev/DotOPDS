@@ -1,7 +1,6 @@
-﻿using DotOPDS.Models;
-using DotOPDS.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DotOPDS.Models;
 
 namespace DotOPDS.Tests
 {
@@ -10,13 +9,13 @@ namespace DotOPDS.Tests
         public static List<Book> Result = new List<Book>
         {
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Владимир", MiddleName = "Казимирович", LastName = "Венгловский"},
+                Authors = new[] {
+                    new Author {FirstName = "Владимир", MiddleName = "Казимирович", LastName = "Венгловский"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_heroic",
                     "sf_cyberpunk",
-                    "sf",
+                    "sf"
                 },
                 Title = "Хардкор",
                 Series = null,
@@ -27,15 +26,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Сергей", MiddleName = null, LastName = "Челяев"},
-                    new Author {FirstName = "Александр", MiddleName = null, LastName = "Зорич"},
+                    new Author {FirstName = "Александр", MiddleName = null, LastName = "Зорич"}
                 },
-                Genres = new string[] {
-                    "sf_action",
+                Genres = new[] {
+                    "sf_action"
                 },
                 Title = "Клад Стервятника",
                 Series = "Комбат и Тополь",
@@ -46,14 +45,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Владислав", MiddleName = "Валерьевич", LastName = "Выставной"},
+                Authors = new[] {
+                    new Author {FirstName = "Владислав", MiddleName = "Валерьевич", LastName = "Выставной"}
                 },
-                Genres = new string[] {
-                    "sf_action",
+                Genres = new[] {
+                    "sf_action"
                 },
                 Title = "Убить зону",
                 Series = "Бука",
@@ -64,14 +63,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Леонид", MiddleName = "Викторович", LastName = "Кудрявцев"},
+                Authors = new[] {
+                    new Author {FirstName = "Леонид", MiddleName = "Викторович", LastName = "Кудрявцев"}
                 },
-                Genres = new string[] {
-                    "sf_action",
+                Genres = new[] {
+                    "sf_action"
                 },
                 Title = "Пуля для контролера",
                 Series = null,
@@ -82,14 +81,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Дмитрий", MiddleName = "Александрович", LastName = "Тихонов"},
+                Authors = new[] {
+                    new Author {FirstName = "Дмитрий", MiddleName = "Александрович", LastName = "Тихонов"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Эпоха последних слов",
                 Series = null,
@@ -100,14 +99,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Наталия", MiddleName = "Юрьевна", LastName = "Вико"},
+                Authors = new[] {
+                    new Author {FirstName = "Наталия", MiddleName = "Юрьевна", LastName = "Вико"}
                 },
-                Genres = new string[] {
-                    "prose_contemporary",
+                Genres = new[] {
+                    "prose_contemporary"
                 },
                 Title = "Шизофрения",
                 Series = null,
@@ -118,14 +117,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Михаил", MiddleName = "Аркадьевич", LastName = "Шуваев"},
+                Authors = new[] {
+                    new Author {FirstName = "Михаил", MiddleName = "Аркадьевич", LastName = "Шуваев"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Лунная соната",
                 Series = "Звездный Гольфстрим",
@@ -136,14 +135,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Ксения", MiddleName = null, LastName = "Лазорева"},
+                Authors = new[] {
+                    new Author {FirstName = "Ксения", MiddleName = null, LastName = "Лазорева"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Сирота с Севера. История Кальвина Рейвена[СИ]",
                 Series = "Легенда о Слепых Богах",
@@ -154,15 +153,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Дмитрий", MiddleName = "Сергеевич", LastName = "Бирюков"},
+                Authors = new[] {
+                    new Author {FirstName = "Дмитрий", MiddleName = "Сергеевич", LastName = "Бирюков"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_social",
-                    "prose_contemporary",
+                    "prose_contemporary"
                 },
                 Title = "Снежный Горький и много воды",
                 Series = null,
@@ -173,15 +172,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Михаил", MiddleName = "Анатольевич", LastName = "Голденков"},
+                Authors = new[] {
+                    new Author {FirstName = "Михаил", MiddleName = "Анатольевич", LastName = "Голденков"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "prose_history",
-                    "adv_history",
+                    "adv_history"
                 },
                 Title = "Тропою волка",
                 Series = "Пан Кмитич",
@@ -192,14 +191,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Питер", MiddleName = null, LastName = "Фехервари"},
+                Authors = new[] {
+                    new Author {FirstName = "Питер", MiddleName = null, LastName = "Фехервари"}
                 },
-                Genres = new string[] {
-                    "sf_epic",
+                Genres = new[] {
+                    "sf_epic"
                 },
                 Title = "Змеев заповедник",
                 Series = "Warhammer 40000: Охотники на ксеносов",
@@ -210,14 +209,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Сергей", MiddleName = "Васильевич", LastName = "Лукьяненко"},
+                Authors = new[] {
+                    new Author {FirstName = "Сергей", MiddleName = "Васильевич", LastName = "Лукьяненко"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "За лісом, де підлий ворог",
                 Series = null,
@@ -228,14 +227,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Линдсей", MiddleName = null, LastName = "Дэвис"},
+                Authors = new[] {
+                    new Author {FirstName = "Линдсей", MiddleName = null, LastName = "Дэвис"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "Enemies at Home",
                 Series = "Flavia Albia mystery",
@@ -246,18 +245,18 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Pierre", MiddleName = null, LastName = "Dac"},
+                Authors = new[] {
+                    new Author {FirstName = "Pierre", MiddleName = null, LastName = "Dac"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "poetry",
                     "dramaturgy",
                     "nonf_biography",
                     "nonf_publicism",
-                    "humor_prose",
+                    "humor_prose"
                 },
                 Title = "Dico franco-loufoque",
                 Series = null,
@@ -268,14 +267,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "The Liberties of London",
                 Series = "Red Ned Tudor Mysteries",
@@ -286,14 +285,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "The Fetter Lane Fleece",
                 Series = "Red Ned Tudor Mysteries",
@@ -304,14 +303,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "The Queen's Oranges",
                 Series = "Red Ned Tudor Mysteries",
@@ -322,14 +321,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "The Cardinal's Angels",
                 Series = "Red Ned Tudor Mysteries",
@@ -340,14 +339,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "A Comfit Of Rogues",
                 Series = "Red Ned Tudor Mysteries",
@@ -358,14 +357,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"},
+                Authors = new[] {
+                    new Author {FirstName = "Грегори", MiddleName = null, LastName = "Хаус"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "The Lord Of Misrule",
                 Series = "Red Ned Tudor Mysteries",
@@ -376,14 +375,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Ian", MiddleName = null, LastName = "Miller"},
+                Authors = new[] {
+                    new Author {FirstName = "Ian", MiddleName = null, LastName = "Miller"}
                 },
-                Genres = new string[] {
-                    "adv_history",
+                Genres = new[] {
+                    "adv_history"
                 },
                 Title = "Athene's prophesy",
                 Series = "Gaius Claudius Scaevola",
@@ -394,14 +393,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Ian", MiddleName = null, LastName = "Miller"},
+                Authors = new[] {
+                    new Author {FirstName = "Ian", MiddleName = null, LastName = "Miller"}
                 },
-                Genres = new string[] {
-                    "adv_history",
+                Genres = new[] {
+                    "adv_history"
                 },
                 Title = "Legatus Legionis",
                 Series = "Gaius Claudius Scaevola",
@@ -412,14 +411,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Артур", MiddleName = "Чарльз", LastName = "Кларк"},
+                Authors = new[] {
+                    new Author {FirstName = "Артур", MiddleName = "Чарльз", LastName = "Кларк"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "Фонтаны рая",
                 Series = null,
@@ -430,14 +429,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Antonio", MiddleName = null, LastName = "Hill"},
+                Authors = new[] {
+                    new Author {FirstName = "Antonio", MiddleName = null, LastName = "Hill"}
                 },
-                Genres = new string[] {
-                    "thriller",
+                Genres = new[] {
+                    "thriller"
                 },
                 Title = "The Summer of Dead Toys",
                 Series = "Inspector Hector Salgado",
@@ -448,14 +447,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Antonio", MiddleName = null, LastName = "Hill"},
+                Authors = new[] {
+                    new Author {FirstName = "Antonio", MiddleName = null, LastName = "Hill"}
                 },
-                Genres = new string[] {
-                    "thriller",
+                Genres = new[] {
+                    "thriller"
                 },
                 Title = "The Good Suicides",
                 Series = "Inspector Hector Salgado",
@@ -466,14 +465,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Лаура", MiddleName = null, LastName = "Паркер"},
+                Authors = new[] {
+                    new Author {FirstName = "Лаура", MiddleName = null, LastName = "Паркер"}
                 },
-                Genres = new string[] {
-                    "love_history",
+                Genres = new[] {
+                    "love_history"
                 },
                 Title = "Отвергнутая",
                 Series = "Masqueraders",
@@ -484,15 +483,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Стэйси", MiddleName = null, LastName = "Кейд"},
+                Authors = new[] {
+                    new Author {FirstName = "Стэйси", MiddleName = null, LastName = "Кейд"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "love_sf",
-                    "sf_mystic",
+                    "sf_mystic"
                 },
                 Title = "Призрак и гот",
                 Series = "Призрак и гот",
@@ -503,14 +502,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Victor", MiddleName = null, LastName = "Methos"},
+                Authors = new[] {
+                    new Author {FirstName = "Victor", MiddleName = null, LastName = "Methos"}
                 },
-                Genres = new string[] {
-                    "thriller",
+                Genres = new[] {
+                    "thriller"
                 },
                 Title = "Sin City Homicide",
                 Series = "Jon Stanton",
@@ -521,15 +520,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Роберто", MiddleName = null, LastName = "Калассо"},
+                Authors = new[] {
+                    new Author {FirstName = "Роберто", MiddleName = null, LastName = "Калассо"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "prose_contemporary",
-                    "nonf_publicism",
+                    "nonf_publicism"
                 },
                 Title = "Ka",
                 Series = null,
@@ -540,14 +539,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"},
+                Authors = new[] {
+                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"}
                 },
-                Genres = new string[] {
-                    "love_sf",
+                Genres = new[] {
+                    "love_sf"
                 },
                 Title = "Лада все сладит",
                 Series = null,
@@ -558,14 +557,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"},
+                Authors = new[] {
+                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Линда",
                 Series = null,
@@ -576,14 +575,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"},
+                Authors = new[] {
+                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"}
                 },
-                Genres = new string[] {
-                    "love_sf",
+                Genres = new[] {
+                    "love_sf"
                 },
                 Title = "Про любовь",
                 Series = null,
@@ -594,14 +593,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"},
+                Authors = new[] {
+                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Ученик",
                 Series = null,
@@ -612,14 +611,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"},
+                Authors = new[] {
+                    new Author {FirstName = "Екатерина", MiddleName = "Васильевна", LastName = "Васичкина"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Верность",
                 Series = null,
@@ -630,14 +629,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_social",
+                Genres = new[] {
+                    "sf_social"
                 },
                 Title = "Анатомия абсурда",
                 Series = null,
@@ -648,14 +647,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "Бестиарий",
                 Series = null,
@@ -666,14 +665,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Человек помер",
                 Series = null,
@@ -684,14 +683,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Это не мой труп",
                 Series = null,
@@ -702,14 +701,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Красная нить",
                 Series = null,
@@ -720,14 +719,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "Малеевский феномен",
                 Series = null,
@@ -738,14 +737,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_social",
+                Genres = new[] {
+                    "sf_social"
                 },
                 Title = "О чем молчала бабушка",
                 Series = null,
@@ -756,14 +755,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Охотники за именами",
                 Series = null,
@@ -774,14 +773,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Он все время уходит",
                 Series = null,
@@ -792,14 +791,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Патриоты",
                 Series = null,
@@ -810,14 +809,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Побеждающий разум",
                 Series = null,
@@ -828,14 +827,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "Пожирающий разом",
                 Series = null,
@@ -846,14 +845,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Произнесенное вслух",
                 Series = null,
@@ -864,14 +863,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Щупальце",
                 Series = null,
@@ -882,14 +881,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Смерть Родриго Нуньеса",
                 Series = null,
@@ -900,14 +899,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Солнечные зайчики",
                 Series = null,
@@ -918,14 +917,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_horror",
+                Genres = new[] {
+                    "sf_horror"
                 },
                 Title = "Тень розы",
                 Series = null,
@@ -936,14 +935,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf",
+                Genres = new[] {
+                    "sf"
                 },
                 Title = "Третий дождь",
                 Series = null,
@@ -954,14 +953,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_social",
+                Genres = new[] {
+                    "sf_social"
                 },
                 Title = "В лабиринтах Инфора",
                 Series = null,
@@ -972,14 +971,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"},
+                Authors = new[] {
+                    new Author {FirstName = "Иван", MiddleName = "Кузьмич", LastName = "Андрощук"}
                 },
-                Genres = new string[] {
-                    "sf_space",
+                Genres = new[] {
+                    "sf_space"
                 },
                 Title = "Звездные волки",
                 Series = null,
@@ -990,15 +989,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Хироси", MiddleName = null, LastName = "Сакурадзака"},
+                Authors = new[] {
+                    new Author {FirstName = "Хироси", MiddleName = null, LastName = "Сакурадзака"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_action",
-                    "sf",
+                    "sf"
                 },
                 Title = "Грань будущего",
                 Series = null,
@@ -1009,15 +1008,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Гай Валерий", MiddleName = null, LastName = "Катулл"},
+                Authors = new[] {
+                    new Author {FirstName = "Гай Валерий", MiddleName = null, LastName = "Катулл"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "poetry",
-                    "antique_ant",
+                    "antique_ant"
                 },
                 Title = "33 стихотворения",
                 Series = null,
@@ -1028,15 +1027,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Николай", MiddleName = "Александрович", LastName = "Верещагин"},
+                Authors = new[] {
+                    new Author {FirstName = "Николай", MiddleName = "Александрович", LastName = "Верещагин"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "prose_su_classics",
-                    "love_contemporary",
+                    "love_contemporary"
                 },
                 Title = "Приключение",
                 Series = null,
@@ -1047,14 +1046,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Кара", MiddleName = null, LastName = "Эллиот"},
+                Authors = new[] {
+                    new Author {FirstName = "Кара", MiddleName = null, LastName = "Эллиот"}
                 },
-                Genres = new string[] {
-                    "love_history",
+                Genres = new[] {
+                    "love_history"
                 },
                 Title = "Не в силах устоять",
                 Series = "Лорды полуночи",
@@ -1065,14 +1064,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Джасинда", MiddleName = null, LastName = "Уайлдер"},
+                Authors = new[] {
+                    new Author {FirstName = "Джасинда", MiddleName = null, LastName = "Уайлдер"}
                 },
-                Genres = new string[] {
-                    "love_contemporary",
+                Genres = new[] {
+                    "love_contemporary"
                 },
                 Title = "Я, ты и любовь",
                 Series = "Falling Into",
@@ -1083,14 +1082,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Джеральд", MiddleName = null, LastName = "Даррелл"},
+                Authors = new[] {
+                    new Author {FirstName = "Джеральд", MiddleName = null, LastName = "Даррелл"}
                 },
-                Genres = new string[] {
-                    "adv_animal",
+                Genres = new[] {
+                    "adv_animal"
                 },
                 Title = "A Zoo in My Luggage",
                 Series = null,
@@ -1101,14 +1100,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Яков", MiddleName = null, LastName = "Шехтер"},
+                Authors = new[] {
+                    new Author {FirstName = "Яков", MiddleName = null, LastName = "Шехтер"}
                 },
-                Genres = new string[] {
-                    "prose_contemporary",
+                Genres = new[] {
+                    "prose_contemporary"
                 },
                 Title = "Любовь и СМЕРШ",
                 Series = null,
@@ -1119,14 +1118,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Клаус", MiddleName = null, LastName = "Манн"},
+                Authors = new[] {
+                    new Author {FirstName = "Клаус", MiddleName = null, LastName = "Манн"}
                 },
-                Genres = new string[] {
-                    "nonf_biography",
+                Genres = new[] {
+                    "nonf_biography"
                 },
                 Title = "На повороте. Жизнеописание",
                 Series = null,
@@ -1137,18 +1136,18 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Умберто", MiddleName = null, LastName = "Эко"},
-                    new Author {FirstName = "Жан-Клод", MiddleName = null, LastName = "Карьер"},
+                    new Author {FirstName = "Жан-Клод", MiddleName = null, LastName = "Карьер"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sci_culture",
                     "sci_philosophy",
                     "nonf_publicism",
-                    "nonf_criticism",
+                    "nonf_criticism"
                 },
                 Title = "N'espérez pas vous débarrasser des livres",
                 Series = null,
@@ -1159,15 +1158,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Александр", MiddleName = "Петрович", LastName = "Коцюбинский"},
-                    new Author {FirstName = "Даниил", MiddleName = "А", LastName = "Коцюбинский"},
+                    new Author {FirstName = "Даниил", MiddleName = "А", LastName = "Коцюбинский"}
                 },
-                Genres = new string[] {
-                    "sci_history",
+                Genres = new[] {
+                    "sci_history"
                 },
                 Title = "Распутин. Жизнь. Смерть. Тайна",
                 Series = null,
@@ -1178,16 +1177,16 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Лоранс", MiddleName = null, LastName = "Левассер"},
+                Authors = new[] {
+                    new Author {FirstName = "Лоранс", MiddleName = null, LastName = "Левассер"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sci_psychology",
                     "religion_self",
-                    "home",
+                    "home"
                 },
                 Title = "50 упражнений для развития способности жить настоящим",
                 Series = "Психология. Прорыв",
@@ -1198,15 +1197,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Михаил", MiddleName = "Анатольевич", LastName = "Голденков"},
+                Authors = new[] {
+                    new Author {FirstName = "Михаил", MiddleName = "Анатольевич", LastName = "Голденков"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "prose_history",
-                    "adv_history",
+                    "adv_history"
                 },
                 Title = "Схватка",
                 Series = "Пан Кмитич",
@@ -1217,14 +1216,14 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Игорь", MiddleName = "Витальевич", LastName = "Шелег"},
+                Authors = new[] {
+                    new Author {FirstName = "Игорь", MiddleName = "Витальевич", LastName = "Шелег"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Нужно просто остаться в живых",
                 Series = "Нужно просто остаться в живых",
@@ -1235,15 +1234,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Юлия", MiddleName = "Анатольевна", LastName = "Панченко"},
+                Authors = new[] {
+                    new Author {FirstName = "Юлия", MiddleName = "Анатольевна", LastName = "Панченко"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_fantasy",
-                    "love_sf",
+                    "love_sf"
                 },
                 Title = "Ненавижу, слышишь? И люблю...",
                 Series = null,
@@ -1254,15 +1253,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = null, MiddleName = null, LastName = "Маркоша"},
+                Authors = new[] {
+                    new Author {FirstName = null, MiddleName = null, LastName = "Маркоша"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_space",
-                    "sf_etc",
+                    "sf_etc"
                 },
                 Title = "Пазл",
                 Series = null,
@@ -1273,14 +1272,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Фред", MiddleName = null, LastName = "Стюарт"},
+                Authors = new[] {
+                    new Author {FirstName = "Фред", MiddleName = null, LastName = "Стюарт"}
                 },
-                Genres = new string[] {
-                    "sagas",
+                Genres = new[] {
+                    "sagas"
                 },
                 Title = "Золото и мишура",
                 Series = null,
@@ -1291,14 +1290,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Николай", MiddleName = "Владимирович", LastName = "Белов"},
+                Authors = new[] {
+                    new Author {FirstName = "Николай", MiddleName = "Владимирович", LastName = "Белов"}
                 },
-                Genres = new string[] {
-                    "nonf_biography",
+                Genres = new[] {
+                    "nonf_biography"
                 },
                 Title = "Звезда Монро",
                 Series = null,
@@ -1309,14 +1308,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Эндрю", MiddleName = null, LastName = "О'Хоган"},
+                Authors = new[] {
+                    new Author {FirstName = "Эндрю", MiddleName = null, LastName = "О'Хоган"}
                 },
-                Genres = new string[] {
-                    "prose_contemporary",
+                Genres = new[] {
+                    "prose_contemporary"
                 },
                 Title = "Взгляды на жизнь щенка Мафа и его хозяйки — Мэрилин Монро",
                 Series = null,
@@ -1327,14 +1326,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Арлен", MiddleName = null, LastName = "Аир"},
+                Authors = new[] {
+                    new Author {FirstName = "Арлен", MiddleName = null, LastName = "Аир"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Кружевница",
                 Series = null,
@@ -1345,15 +1344,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Владимир", MiddleName = null, LastName = "Махов"},
+                Authors = new[] {
+                    new Author {FirstName = "Владимир", MiddleName = null, LastName = "Махов"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_action",
-                    "adv_maritime",
+                    "adv_maritime"
                 },
                 Title = "Декомпрессия",
                 Series = "Океан (фантастика)",
@@ -1364,14 +1363,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Хантер", MiddleName = "С", LastName = "Томпсон"},
+                Authors = new[] {
+                    new Author {FirstName = "Хантер", MiddleName = "С", LastName = "Томпсон"}
                 },
-                Genres = new string[] {
-                    "prose_counter",
+                Genres = new[] {
+                    "prose_counter"
                 },
                 Title = "Страх и отвращение в Лас-Вегасе",
                 Series = null,
@@ -1382,14 +1381,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Майя", MiddleName = "Юрьевна", LastName = "Горина"},
+                Authors = new[] {
+                    new Author {FirstName = "Майя", MiddleName = "Юрьевна", LastName = "Горина"}
                 },
-                Genres = new string[] {
-                    "religion_esoterics",
+                Genres = new[] {
+                    "religion_esoterics"
                 },
                 Title = "Статьи Майи Гориной, ч. 3",
                 Series = null,
@@ -1400,14 +1399,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Майя", MiddleName = "Юрьевна", LastName = "Горина"},
+                Authors = new[] {
+                    new Author {FirstName = "Майя", MiddleName = "Юрьевна", LastName = "Горина"}
                 },
-                Genres = new string[] {
-                    "religion_esoterics",
+                Genres = new[] {
+                    "religion_esoterics"
                 },
                 Title = "Копилка Мудрости от Творца",
                 Series = null,
@@ -1418,14 +1417,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"},
+                Authors = new[] {
+                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Конан. Рожденный в битве",
                 Series = "Конан. Сборники",
@@ -1436,14 +1435,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"},
+                Authors = new[] {
+                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Конан. Кровавый венец",
                 Series = "Конан. Сборники",
@@ -1454,14 +1453,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"},
+                Authors = new[] {
+                    new Author {FirstName = "Роберт", MiddleName = "Ирвин", LastName = "Говард"}
                 },
-                Genres = new string[] {
-                    "sf_fantasy",
+                Genres = new[] {
+                    "sf_fantasy"
                 },
                 Title = "Конан. Карающий меч",
                 Series = "Конан. Сборники",
@@ -1472,10 +1471,10 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Дэвид", MiddleName = null, LastName = "Брин"},
                     new Author {FirstName = "Брюс", MiddleName = null, LastName = "Стерлинг"},
                     new Author {FirstName = "Алексис", MiddleName = "де", LastName = "Токвиль"},
@@ -1483,11 +1482,11 @@ namespace DotOPDS.Tests
                     new Author {FirstName = "Дин", MiddleName = null, LastName = "Уитлок"},
                     new Author {FirstName = "Майк", MiddleName = null, LastName = "Коннер"},
                     new Author {FirstName = "Уэйн", MiddleName = null, LastName = "Уайтмэн"},
-                    new Author {FirstName = "Элизабет", MiddleName = null, LastName = "Краус"},
+                    new Author {FirstName = "Элизабет", MiddleName = null, LastName = "Краус"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf",
-                    "periodic",
+                    "periodic"
                 },
                 Title = "Сверхновая американская фантастика, 1995 № 05-06",
                 Series = null,
@@ -1498,14 +1497,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"},
+                Authors = new[] {
+                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"}
                 },
-                Genres = new string[] {
-                    "child_sf",
+                Genres = new[] {
+                    "child_sf"
                 },
                 Title = "Как пережить штурм дракона",
                 Series = "Как приручить дракона",
@@ -1516,14 +1515,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"},
+                Authors = new[] {
+                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"}
                 },
-                Genres = new string[] {
-                    "child_sf",
+                Genres = new[] {
+                    "child_sf"
                 },
                 Title = "Как приручить викинга",
                 Series = "Как приручить дракона",
@@ -1534,15 +1533,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"},
+                Authors = new[] {
+                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "child_sf",
-                    "child_adv",
+                    "child_adv"
                 },
                 Title = "Как перехитрить дракона",
                 Series = "Как приручить дракона",
@@ -1553,14 +1552,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"},
+                Authors = new[] {
+                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"}
                 },
-                Genres = new string[] {
-                    "child_sf",
+                Genres = new[] {
+                    "child_sf"
                 },
                 Title = "Как приручить викинга",
                 Series = "Как приручить дракона",
@@ -1571,14 +1570,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"},
+                Authors = new[] {
+                    new Author {FirstName = "Крессида", MiddleName = null, LastName = "Коуэлл"}
                 },
-                Genres = new string[] {
-                    "child_sf",
+                Genres = new[] {
+                    "child_sf"
                 },
                 Title = "Как переиграть историю дракона",
                 Series = "Как приручить дракона",
@@ -1589,10 +1588,10 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Евгений", MiddleName = "Алексеевич", LastName = "Обухов"},
                     new Author {FirstName = "Леонид", MiddleName = "Викторович", LastName = "Кудрявцев"},
                     new Author {FirstName = null, MiddleName = null, LastName = "Журнал «Космопорт»"},
@@ -1600,11 +1599,11 @@ namespace DotOPDS.Tests
                     new Author {FirstName = "Майк", MiddleName = null, LastName = "Гелприн"},
                     new Author {FirstName = "Сергей", MiddleName = "Алексеевич", LastName = "Булыга"},
                     new Author {FirstName = "Сергей", MiddleName = "Валериевич", LastName = "Легеза"},
-                    new Author {FirstName = "Илья", MiddleName = null, LastName = "Суханов"},
+                    new Author {FirstName = "Илья", MiddleName = null, LastName = "Суханов"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf",
-                    "periodic",
+                    "periodic"
                 },
                 Title = "Космопорт, 2013 № 01",
                 Series = "Космопорт (журнал)",
@@ -1615,10 +1614,10 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Евгений", MiddleName = "Ануфриевич", LastName = "Дрозд"},
                     new Author {FirstName = "Дмитрий", MiddleName = "Станиславович", LastName = "Федотов"},
                     new Author {FirstName = "Яцек", MiddleName = null, LastName = "Савашкевич"},
@@ -1628,11 +1627,11 @@ namespace DotOPDS.Tests
                     new Author {FirstName = "Александр", MiddleName = "Александрович", LastName = "Змушко"},
                     new Author {FirstName = "Клиффорд", MiddleName = null, LastName = "Болл"},
                     new Author {FirstName = "Анна", MiddleName = null, LastName = "Бжезинская"},
-                    new Author {FirstName = "Владимир", MiddleName = "Казимирович", LastName = "Венгловский"},
+                    new Author {FirstName = "Владимир", MiddleName = "Казимирович", LastName = "Венгловский"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf",
-                    "periodic",
+                    "periodic"
                 },
                 Title = "Космопорт, 2014 № 01 (2)",
                 Series = "Космопорт (журнал)",
@@ -1643,10 +1642,10 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Евгений", MiddleName = "Ануфриевич", LastName = "Дрозд"},
                     new Author {FirstName = "Леонид", MiddleName = "Викторович", LastName = "Кудрявцев"},
                     new Author {FirstName = null, MiddleName = null, LastName = "Журнал «Космопорт»"},
@@ -1658,11 +1657,11 @@ namespace DotOPDS.Tests
                     new Author {FirstName = "Александр", MiddleName = null, LastName = "Рыжков"},
                     new Author {FirstName = "Анатолий", MiddleName = null, LastName = "Белиловский"},
                     new Author {FirstName = "Михаил", MiddleName = null, LastName = "Ифф"},
-                    new Author {FirstName = "Константин", MiddleName = null, LastName = "Чихунов"},
+                    new Author {FirstName = "Константин", MiddleName = null, LastName = "Чихунов"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf",
-                    "periodic",
+                    "periodic"
                 },
                 Title = "Космопорт, 2014 № 04 (5)",
                 Series = "Космопорт (журнал)",
@@ -1673,15 +1672,15 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Виктория", MiddleName = "Владимировна", LastName = "Карпухина"},
+                Authors = new[] {
+                    new Author {FirstName = "Виктория", MiddleName = "Владимировна", LastName = "Карпухина"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "home_cooking",
-                    "home_health",
+                    "home_health"
                 },
                 Title = "Энциклопедия целительных специй. Имбирь, куркума, кориандр, корица, шафран и еще 100 исцеляющих специй",
                 Series = null,
@@ -1692,14 +1691,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Ариадна", MiddleName = "Валентиновна", LastName = "Борисова"},
+                Authors = new[] {
+                    new Author {FirstName = "Ариадна", MiddleName = "Валентиновна", LastName = "Борисова"}
                 },
-                Genres = new string[] {
-                    "love_contemporary",
+                Genres = new[] {
+                    "love_contemporary"
                 },
                 Title = "Когда вырастают дети",
                 Series = null,
@@ -1710,14 +1709,14 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Татьяна", MiddleName = "Михайловна", LastName = "Тронина"},
+                Authors = new[] {
+                    new Author {FirstName = "Татьяна", MiddleName = "Михайловна", LastName = "Тронина"}
                 },
-                Genres = new string[] {
-                    "love_detective",
+                Genres = new[] {
+                    "love_detective"
                 },
                 Title = "Та, кто приходит незваной",
                 Series = null,
@@ -1728,15 +1727,15 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
+                Authors = new[] {
                     new Author {FirstName = "Александр", MiddleName = "Петрович", LastName = "Коцюбинский"},
-                    new Author {FirstName = "Даниил", MiddleName = "А", LastName = "Коцюбинский"},
+                    new Author {FirstName = "Даниил", MiddleName = "А", LastName = "Коцюбинский"}
                 },
-                Genres = new string[] {
-                    "nonf_biography",
+                Genres = new[] {
+                    "nonf_biography"
                 },
                 Title = "Распутин. Жизнь. Смерть. Тайна",
                 Series = null,
@@ -1747,14 +1746,14 @@ namespace DotOPDS.Tests
                 Del = true,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Фиона", MiddleName = null, LastName = "Харпер"},
+                Authors = new[] {
+                    new Author {FirstName = "Фиона", MiddleName = null, LastName = "Харпер"}
                 },
-                Genres = new string[] {
-                    "love_short",
+                Genres = new[] {
+                    "love_short"
                 },
                 Title = "Хитрости любви",
                 Series = null,
@@ -1765,16 +1764,16 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Александр", MiddleName = null, LastName = "Костенко"},
+                Authors = new[] {
+                    new Author {FirstName = "Александр", MiddleName = null, LastName = "Костенко"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "sf_horror",
                     "det_history",
-                    "thriller",
+                    "thriller"
                 },
                 Title = "Интересно девки пляшут, или Введение в профессию",
                 Series = null,
@@ -1785,14 +1784,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Ефим", MiddleName = "Яковлевич", LastName = "Курганов"},
+                Authors = new[] {
+                    new Author {FirstName = "Ефим", MiddleName = "Яковлевич", LastName = "Курганов"}
                 },
-                Genres = new string[] {
-                    "det_history",
+                Genres = new[] {
+                    "det_history"
                 },
                 Title = "Воры над законом, или Дело Политковского",
                 Series = "Старая уголовная хроника",
@@ -1803,15 +1802,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Елена", MiddleName = null, LastName = "Вос"},
+                Authors = new[] {
+                    new Author {FirstName = "Елена", MiddleName = null, LastName = "Вос"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "ref_ref",
-                    "religion_self",
+                    "religion_self"
                 },
                 Title = "Этикет в ресторане",
                 Series = null,
@@ -1822,14 +1821,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Капка", MiddleName = null, LastName = "Кассабова"},
+                Authors = new[] {
+                    new Author {FirstName = "Капка", MiddleName = null, LastName = "Кассабова"}
                 },
-                Genres = new string[] {
-                    "nonf_biography",
+                Genres = new[] {
+                    "nonf_biography"
                 },
                 Title = "Двенадцать минут любви",
                 Series = null,
@@ -1840,15 +1839,15 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "А", MiddleName = "Дж", LastName = "Моллой"},
+                Authors = new[] {
+                    new Author {FirstName = "А", MiddleName = "Дж", LastName = "Моллой"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "love_detective",
-                    "love_erotica",
+                    "love_erotica"
                 },
                 Title = "История Икс",
                 Series = null,
@@ -1859,14 +1858,14 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("18.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Валерий", MiddleName = "Сергеевич", LastName = "Флёров"},
+                Authors = new[] {
+                    new Author {FirstName = "Валерий", MiddleName = "Сергеевич", LastName = "Флёров"}
                 },
-                Genres = new string[] {
-                    "sci_history",
+                Genres = new[] {
+                    "sci_history"
                 },
                 Title = "«Города» и «замки» Хазарского каганата. Археологическая реальность",
                 Series = null,
@@ -1877,16 +1876,16 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("19.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
+                Archive = "fb2-492166-492374_lost.zip"
             },
             new Book {
-                Authors = new Author[] {
-                    new Author {FirstName = "Роберто", MiddleName = null, LastName = "Калассо"},
+                Authors = new[] {
+                    new Author {FirstName = "Роберто", MiddleName = null, LastName = "Калассо"}
                 },
-                Genres = new string[] {
+                Genres = new[] {
                     "prose_contemporary",
                     "nonf_publicism",
-                    "nonf_criticism",
+                    "nonf_criticism"
                 },
                 Title = "Literature and the Gods",
                 Series = null,
@@ -1897,8 +1896,8 @@ namespace DotOPDS.Tests
                 Del = false,
                 Ext = "fb2",
                 Date = DateTime.Parse("19.06.2014 0:00:00"),
-                Archive = "fb2-492166-492374_lost.zip",
-            },
+                Archive = "fb2-492166-492374_lost.zip"
+            }
         };
     }
 }

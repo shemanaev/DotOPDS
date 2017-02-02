@@ -87,9 +87,9 @@ namespace DotOPDS.Utils
             exp.ExceptionPointers = IntPtr.Zero;
             if (exceptionInfo == ExceptionInfo.Present)
             {
-                exp.ExceptionPointers = System.Runtime.InteropServices.Marshal.GetExceptionPointers();
+                exp.ExceptionPointers = Marshal.GetExceptionPointers();
             }
-            bool bRet = false;
+            bool bRet;
             if (exp.ExceptionPointers == IntPtr.Zero)
             {
                 bRet = MiniDumpWriteDump(currentProcessHandle, currentProcessId, fileHandle, (uint)options, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);

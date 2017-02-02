@@ -73,7 +73,12 @@ namespace DotOPDS.Utils
 
                     while (!sr.EndOfStream)
                     {
-                        var line = sr.ReadLine().Split('\x04');
+                        var readLine = sr.ReadLine();
+                        if (string.IsNullOrWhiteSpace(readLine))
+                        {
+                            break;
+                        }
+                        var line = readLine.Split('\x04');
                         var names = GetDelimArray(':', line[structure.Author]);
                         var authors = new List<Author>();
                         foreach (var name in names)

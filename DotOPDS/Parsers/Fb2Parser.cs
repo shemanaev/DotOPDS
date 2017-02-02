@@ -29,8 +29,8 @@ namespace DotOPDS.Parsers
                                        .Value.Substring(1);
             var cover = doc.Descendants()
                            .First(x => x.Name.LocalName == "binary"
-                                    && x.Attribute("id").Value == coverId);
-            var ctype = cover.Attribute("content-type").Value;
+                                    && x.Attribute("id")?.Value == coverId);
+            var ctype = cover.Attribute("content-type")?.Value;
             var bin = Convert.FromBase64String(cover.Value);
             book.Cover = new Cover
             {
