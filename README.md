@@ -18,10 +18,12 @@ with no more 10 users_
 * Works on Windows (.NET 4.5.2) and Linux (mono 4.2.3) *(not tested on OS X)*
 * Cover and annotation extraction *(experimental)*
 * Web interface support (not included)
+* New- Scan pdf files in directory
 
 ## Limitations
 
 * Works only with archived `fb2` libraries for now
+* Requires Debenu PDF Library Lite for pdf scanning
 
 ## Getting started
 
@@ -72,7 +74,8 @@ Now edit configuration file if needed:
 
 Import library index:
 
-    DotOPDS import D:\library D:\lib.inpx
+    DotOPDS import inpx D:\library D:\lib.inpx
+	DotOPDS import pdf D:\library ""
 
 Now just start server:
 
@@ -91,6 +94,7 @@ Use [NSSM][5], Luke!
 * producing `.inpx` diff for index updates
 * support for more file formats (epub)
 * support for not archived libraries
+* support for Author, Title listinf via Opds
 
 ## License
 
