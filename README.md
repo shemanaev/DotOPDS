@@ -90,7 +90,6 @@ Use [NSSM][5], Luke!
 
 * producing `.inpx` diff for index updates
 * support for more file formats (epub)
-* support for not archived libraries
 
 ## License
 

@@ -12,15 +12,24 @@ namespace DotOPDS.Utils
 
         public static Stream GetBookFile(Book book)
         {
-            // TODO: support books without archives
             var archive = Path.Combine(Settings.Instance.Libraries[book.LibraryId].Path, book.Archive);
-            if (!File.Exists(archive))
-            {
-                logger.Warn("Archive {0} not found.", archive);
-                throw new KeyNotFoundException("File not found.");
-            }
             var filename = string.Format("{0}.{1}", book.File, book.Ext);
+            if (File.Exists(archive))
+            {
+                return GetBookFileFromArchive(archive, filename);
+            }
+            
+            var fullpath = Path.Combine(Settings.Instance.Libraries[book.LibraryId].Path, filename);
+            if (File.Exists(fullpath))
+            {
+                return File.OpenRead(fullpath);
+            }
 
+            throw new KeyNotFoundException("File not found.");
+        }
+
+        private static Stream GetBookFileFromArchive(string archive, string filename)
+        {
             logger.Trace("Trying to open archive, {0}", archive);
             var zip = ZipFile.OpenRead(archive);
             {
