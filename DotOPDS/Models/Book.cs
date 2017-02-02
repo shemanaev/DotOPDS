@@ -22,5 +22,10 @@ namespace DotOPDS.Models
         public string Archive { get; set; }
         public string Annotation { get; set; }
         public Cover Cover { get; set; }
+        // for Pdf's
+        public string Creator { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
+        public int Pages { get; set; }
     }
 }

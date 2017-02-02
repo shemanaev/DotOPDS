@@ -12,17 +12,22 @@ using NLog;
 namespace DotOPDS.Commands
 {
     [Verb("import",
-    HelpText = "Displays first lines of a file.")]
+    HelpText = "Imports a library.")]
     class ImportOptions : BaseOptions
     {
-        [Value(0, MetaName = "library path",
+        [Value(0, MetaName = "Import Type",
+            Required = true,
+            HelpText = "Type of media, inpx or pdf.")]
+        public string ImportType { get; set; }
+
+        [Value(1, MetaName = "library path",
             Required = true,
             HelpText = "Base path where books located.")]
         public string Library { get; set; }
 
-        [Value(1, MetaName = "input file",
+        [Value(2, MetaName = "input file",
             Required = true,
-            HelpText = "Import contents into internal index.")]
+            HelpText = "For inpx:Import contents into internal index from .inpx file.")]
         public string Input { get; set; }
 
         [Usage]
@@ -32,22 +37,32 @@ namespace DotOPDS.Commands
             {
                 yield return new Example("Import inpx file", new ImportOptions
                 {
+                    ImportType = "inpx",
                     Library = "path/to/library/files",
                     Input = "path/to/lib1.inpx",
                 });
             }
         }
     }
-
+    /// <summary>
+    /// Imports books from an .indx file, using a base Library dir for the actual books
+    /// </summary>
     class ImportCommand : ICommand
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public int Run(BaseOptions options)
         {
+            string indexFile = "";
             var opts = (ImportOptions)options;
             Settings.Load(opts.Config);
 
+            var type = opts.ImportType;
+            if (type != "inpx" && type != "pdf")
+            {
+                Console.Error.WriteLine("Type {0} not valid, should be inpx or pdf.", type);
+                return 1;
+            }
             var library = Util.Normalize(opts.Library);
             if (!Directory.Exists(library))
             {
@@ -61,11 +76,14 @@ namespace DotOPDS.Commands
                 return 1;
             }
 
-            var indexFile = Util.Normalize(opts.Input);
-            if (!File.Exists(indexFile))
-            {
-                Console.Error.WriteLine("Index file {0} not found.", indexFile);
-                return 1;
+            if (type == "inpx")
+            { // not needed for pdf scanner
+                 indexFile = Util.Normalize(opts.Input);
+                if (!File.Exists(indexFile))
+                {
+                    Console.Error.WriteLine("Index file {0} not found.", indexFile);
+                    return 1;
+                }
             }
 
             var watch = Stopwatch.StartNew();
@@ -74,6 +92,7 @@ namespace DotOPDS.Commands
             {
                 task.Start(new ImportTaskArgs
                 {
+                    ImportType = type,
                     Library = library,
                     Input = indexFile
                 }, (e) =>

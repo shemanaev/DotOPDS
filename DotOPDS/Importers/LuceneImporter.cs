@@ -5,7 +5,10 @@ using Lucene.Net.Index;
 using Lucene.Net.Store;
 using System;
 using Version = Lucene.Net.Util.Version;
-
+/// <summary>
+/// Import a book and Update the book index
+/// </summary>
+// TODO Add ref to Analysis, add ref to Standard, add property to permit setting the analyzer
 namespace DotOPDS.Importers
 {
     class LuceneImporter : IBookImporter
@@ -13,7 +16,7 @@ namespace DotOPDS.Importers
         private IndexWriter writer;
         private RussianAnalyzer analyzer;
         private SimpleFSDirectory directory;
-
+        
         public void Insert(Book book)
         {
             var document = MapBook(book);

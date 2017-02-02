@@ -173,8 +173,11 @@
     <Compile Include="Parsers\IBookParser.cs" />
     <Compile Include="Tasks\ITask.cs" />
     <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\GetPdfFiles.cs" />
     <Compile Include="Utils\MimeHelper.cs" />
     <Compile Include="Utils\MiniDump.cs" />
+    <Compile Include="Utils\PdfDoc.cs" />
+    <Compile Include="Utils\PdfParser.cs" />
     <Compile Include="Utils\RequiredParametersAttribute.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Tasks\ImportTask.cs" />
@@ -216,6 +219,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="DebenuPDFLibraryLite1114">
+      <Guid>{85CF953E-9E81-40CC-9126-2BE27E246E0D}</Guid>
+      <VersionMajor>11</VersionMajor>
+      <VersionMinor>14</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
