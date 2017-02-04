@@ -27,6 +27,7 @@ namespace DotOPDS
 
         #region Static routines
         public static string FileName { get; private set; }
+        private static string bannedFileName;
         private static Settings instance;
         private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -39,7 +40,7 @@ namespace DotOPDS
         {
             get
             {
-                if (instance == null) throw new Exception("Create f*ckin Settings first!"); // shouldn't be ever really
+                if (instance == null) throw new Exception("Settings instance does not exists. Probably you forget Settings.Load() call."); // shouldn't be ever really
                 return instance;
             }
         }
@@ -63,6 +64,15 @@ namespace DotOPDS
             {
                 instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
             }
+
+            bannedFileName = Path.Combine(Path.GetDirectoryName(FileName), "banned.json");
+            if (File.Exists(bannedFileName)) {
+                using (var reader = File.OpenText(bannedFileName))
+                {
+                    instance.Authentication.Banned = JsonConvert.DeserializeObject<List<string>>(reader.ReadToEnd(), jsonSettings);
+                }
+            }
+
             InitLog(console);
             T.ChangeLanguage(instance.Language);
         }
@@ -73,6 +83,15 @@ namespace DotOPDS
             {
                 var s = JsonConvert.SerializeObject(instance, Formatting.Indented, jsonSettings);
                 writer.Write(s);
+            }
+
+            if (instance.Authentication.Banned.Count > 0)
+            {
+                using (var writer = File.CreateText(bannedFileName))
+                {
+                    var s = JsonConvert.SerializeObject(instance.Authentication.Banned, Formatting.Indented, jsonSettings);
+                    writer.Write(s);
+                }
             }
         }
 
@@ -135,6 +154,7 @@ namespace DotOPDS
         public bool Enabled { get; set; } = false;
         public int Attempts { get; set; } = 10;
         public Dictionary<string, string> Users { get; set; } = new Dictionary<string, string>();
+        [JsonIgnore]
         public List<string> Banned { get; set; } = new List<string>();
     }
 

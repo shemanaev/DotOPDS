@@ -12,8 +12,7 @@
     "authentication": {
         "enabled": false,
         "attempts": 10,
-        "users": {},
-        "banned": []
+        "users": {}
     },
     "pagination": 10,
     "converters": []

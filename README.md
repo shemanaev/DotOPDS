@@ -52,11 +52,10 @@ Now edit configuration file if needed:
     },
     "authentication": {
         "enabled": false, // enable basic authentication
-        "attempts": 3, // how many wrong auth attempts before ban
+        "attempts": 3, // how many wrong auth attempts before ban. Banned ips stored in banned.json near config file
         "users": {
             "user": "pass"
-        },
-        "banned": [] // banned ips will be here
+        }
     },
     "pagination": 10, // how many books per page
     "converters": [
