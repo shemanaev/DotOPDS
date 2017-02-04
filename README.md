@@ -87,7 +87,6 @@ Use [NSSM][5], Luke!
 
 ## TODO
 
-* producing `.inpx` diff for index updates
 * support for more file formats (epub)
 
 ## License

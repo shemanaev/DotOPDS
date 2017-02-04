@@ -136,6 +136,10 @@ namespace DotOPDS.Utils
 
         public void Insert(Book book)
         {
+            // delete previous version
+            var q = new Term("UniqueId", GetBookUniqueId(book));
+            writer.DeleteDocuments(q);
+
             var document = MapBook(book);
             writer.AddDocument(document);
         }
@@ -170,10 +174,17 @@ namespace DotOPDS.Utils
             writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
         }
 
+        private string GetBookUniqueId(Book book)
+        {
+            return book.LibraryId + book.File + book.Ext + book.Archive;
+        }
+
         private Document MapBook(Book book)
         {
             var titleSort = book.Title.TrimStart().TrimStart(new char[] { '«' });
             var document = new Document();
+            document.Add(new Field("UpdatedAt", DateTools.DateToString(DateTime.UtcNow, DateTools.Resolution.SECOND), Field.Store.NO, Field.Index.NOT_ANALYZED_NO_NORMS));
+            document.Add(new Field("UniqueId", GetBookUniqueId(book), Field.Store.NO, Field.Index.NOT_ANALYZED_NO_NORMS));
             document.Add(new Field("Guid", (book.Id != Guid.Empty ? book.Id : Guid.NewGuid()).ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("LibraryId", book.LibraryId.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("Title", book.Title, Field.Store.YES, Field.Index.ANALYZED));
@@ -187,7 +198,7 @@ namespace DotOPDS.Utils
             document.Add(new Field("Del", book.Del.ToString(), Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Ext", book.Ext, Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Date", book.Date.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-            document.Add(new Field("Archive", book.Archive, Field.Store.YES, Field.Index.NO));
+            document.Add(new Field("Archive", book.Archive ?? "", Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
             if (book.Cover?.Has != null)
             {
@@ -239,6 +250,28 @@ namespace DotOPDS.Utils
 
                 return total;
             }
+        }
+
+        public int CleanupLibrary(string libraryId)
+        {
+            var deleteBefore = DateTime.UtcNow.AddHours(-6); // delete older than 6 hour entries. import shouldn't take so much
+            var query = new BooleanQuery {
+                { new TermRangeQuery("UpdatedAt", "*", DateTools.DateToString(deleteBefore, DateTools.Resolution.SECOND), true, true), Occur.MUST },
+                { new TermQuery(new Term("LibraryId", libraryId)), Occur.MUST },
+            };
+
+            writer.Commit();
+            int total = 0;
+            using (var searcher = new IndexSearcher(directory))
+            {
+                var docs = searcher.Search(query, 1);
+                total = docs.TotalHits;
+            }
+
+            writer.DeleteDocuments(query);
+            writer.Optimize(true);
+
+            return total;
         }
     }
 }

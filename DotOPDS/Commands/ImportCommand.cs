@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using NLog;
 
 namespace DotOPDS.Commands
@@ -55,12 +54,6 @@ namespace DotOPDS.Commands
                 return 1;
             }
 
-            if (Settings.Instance.Libraries.Any(lib => library.Equals(lib.Value.Path, StringComparison.InvariantCultureIgnoreCase)))
-            {
-                Console.Error.WriteLine("Library with path {0} already imported!", library);
-                return 1;
-            }
-
             var indexFile = Util.Normalize(opts.Input);
             if (!File.Exists(indexFile))
             {
@@ -94,7 +87,7 @@ namespace DotOPDS.Commands
                 Console.WriteLine("Using {0} workers", Environment.ProcessorCount);
 
                 var importStart = watch.Elapsed;
-                while (task.EntriesProcessed < task.EntriesTotal)
+                while (!task.Finished)
                 {
                     if (Program.Exit.WaitOne(1)) return 1;
                     status.Update("Processed {0} of {1}, {2} book/sec, elapsed {3}", task.EntriesProcessed, task.EntriesTotal,
@@ -102,7 +95,7 @@ namespace DotOPDS.Commands
                 }
 
                 watch.Stop();
-                status.Update("Done in {0} ({1} books)", watch.Elapsed, task.EntriesProcessed);
+                status.Update("Done in {0} ({1} added/updated, {2} deleted)", watch.Elapsed, task.EntriesProcessed, task.EntriesDeleted);
             }
 
             return 0;
