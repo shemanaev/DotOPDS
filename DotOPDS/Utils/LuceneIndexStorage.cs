@@ -225,7 +225,7 @@ namespace DotOPDS.Utils
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(database)))
             using (var writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
             {
-                var query = new TermQuery(new Term("LibraryId", id.ToString()));
+                var query = new TermQuery(new Term("LibraryId", id));
 
                 int total = 0;
                 using (var searcher = new IndexSearcher(directory))
