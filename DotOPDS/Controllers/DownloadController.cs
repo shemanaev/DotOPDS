@@ -21,7 +21,7 @@ namespace DotOPDS.Controllers
         [HttpGet]
         public HttpResponseMessage GetFile(Guid id, string ext)
         {
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
             if (total != 1)
@@ -58,7 +58,7 @@ namespace DotOPDS.Controllers
         [HttpGet]
         public HttpResponseMessage GetCover(Guid id)
         {
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
             if (total != 1)

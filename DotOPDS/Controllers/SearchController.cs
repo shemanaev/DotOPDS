@@ -57,7 +57,7 @@ namespace DotOPDS.Controllers
         public Feed Search([FromUri] string q, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var query = string.Format(@"Title:""{0}"" OR Author:""{0}"" OR Series:""{0}""", searcher.Escape(q));
             var books = searcher.Search(out total, query, "Title", page);
@@ -81,7 +81,7 @@ namespace DotOPDS.Controllers
         public Feed SearchByGenre(string genre, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "Genre", genre, page);
 
@@ -105,7 +105,7 @@ namespace DotOPDS.Controllers
         public Feed SearchByAuthor([FromUri] string author, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "Author.Exact", author, page);
 
@@ -129,7 +129,7 @@ namespace DotOPDS.Controllers
         public Feed SearchBySeries([FromUri] string series, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            var searcher = new LuceneSearcher();
+            var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "Series.Exact", series, page);
 
@@ -212,7 +212,7 @@ namespace DotOPDS.Controllers
             return result;
         }
 
-        private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneSearcher searcher = null)
+        private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneIndexStorage searcher = null)
         {
             var favicon = Path.Combine(Util.Normalize(Settings.Instance.Web), "favicon.ico");
             if (File.Exists(favicon))

@@ -1,5 +1,4 @@
-﻿using DotOPDS.Importers;
-using DotOPDS.Models;
+﻿using DotOPDS.Models;
 using DotOPDS.Utils;
 using NLog;
 using System;
@@ -13,7 +12,7 @@ namespace DotOPDS.Parsers
         public static BookParsersPool Instance => instance ?? (instance = new BookParsersPool());
 
         private Dictionary<string, IBookParser> parsers = new Dictionary<string, IBookParser>();
-        private volatile LuceneImporter importer;
+        private volatile LuceneIndexStorage importer;
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private BookParsersPool()
@@ -45,7 +44,7 @@ namespace DotOPDS.Parsers
 
             if (importer == null)
             {
-                importer = new LuceneImporter();
+                importer = new LuceneIndexStorage();
                 importer.Open(Util.Normalize(Settings.Instance.Database));
             }
             importer.Replace(book);

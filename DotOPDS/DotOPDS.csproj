@@ -162,8 +162,6 @@
     <Compile Include="Controllers\DownloadController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WebController.cs" />
-    <Compile Include="Importers\IBookImporter.cs" />
-    <Compile Include="Importers\LuceneImporter.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Cover.cs" />
@@ -188,7 +186,7 @@
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\T.cs" />
     <Compile Include="Utils\Resource.cs" />
-    <Compile Include="Utils\LuceneSearcher.cs" />
+    <Compile Include="Utils\LuceneIndexStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\XmlExtensions.cs" />

@@ -1,5 +1,4 @@
-﻿using DotOPDS.Importers;
-using DotOPDS.Models;
+﻿using DotOPDS.Models;
 using DotOPDS.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -19,7 +18,7 @@ namespace DotOPDS.Tasks
         private bool running = true;
         private int entriesProcessed;
         private Guid libId = Guid.NewGuid();
-        private IBookImporter importer = new LuceneImporter();
+        private LuceneIndexStorage importer = new LuceneIndexStorage();
         private ConcurrentQueue<Book> books = new ConcurrentQueue<Book>();
 
         public int EntriesTotal { get; private set; }
