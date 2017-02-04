@@ -45,7 +45,7 @@ namespace DotOPDS.Parsers
             if (importer == null)
             {
                 importer = new LuceneIndexStorage();
-                importer.Open(Util.Normalize(Settings.Instance.Database));
+                importer.Open(Settings.Instance.DatabaseIndex);
             }
             importer.Replace(book);
         }

@@ -69,7 +69,7 @@ namespace DotOPDS.Utils
             };
             var sort = new Sort(fields);
 
-            using (var directory = new SimpleFSDirectory(new DirectoryInfo(Util.Normalize(Settings.Instance.Database))))
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(Settings.Instance.DatabaseIndex)))
             using (var searcher = new IndexSearcher(directory))
             {
                 var docs = searcher.Search(query, null, skip + take, sort);

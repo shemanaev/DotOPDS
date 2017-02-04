@@ -16,6 +16,8 @@ namespace DotOPDS
         public int Port { get; set; }
         public string Title { get; set; }
         public string Database { get; set; }
+        [JsonIgnore]
+        public string DatabaseIndex { get; set; }
         public string Language { get; set; } = "en";
         public string Web { get; set; } = "";
         public bool LazyInfoExtract { get; set; } = false;
@@ -23,11 +25,13 @@ namespace DotOPDS
         public SettingsAuthentication Authentication { get; set; } = new SettingsAuthentication();
         public int Pagination { get; set; }
         public List<SettingsConverter> Converters { get; set; }
+        [JsonIgnore]
         public Dictionary<Guid, SettingsLibrary> Libraries { get; set; } = new Dictionary<Guid, SettingsLibrary>();
 
         #region Static routines
         public static string FileName { get; private set; }
         private static string bannedFileName;
+        private static string librariesFileName;
         private static Settings instance;
         private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -63,6 +67,17 @@ namespace DotOPDS
             using (var reader = File.OpenText(FileName))
             {
                 instance = JsonConvert.DeserializeObject<Settings>(reader.ReadToEnd(), jsonSettings);
+                var db = Util.Normalize(instance.Database);
+                instance.DatabaseIndex = Path.Combine(db, "index/");
+                librariesFileName = Path.Combine(db, "index.json");
+            }
+
+            if (File.Exists(librariesFileName))
+            {
+                using (var reader = File.OpenText(librariesFileName))
+                {
+                    instance.Libraries = JsonConvert.DeserializeObject<Dictionary<Guid, SettingsLibrary>>(reader.ReadToEnd(), jsonSettings);
+                }
             }
 
             bannedFileName = Path.Combine(Path.GetDirectoryName(FileName), "banned.json");
@@ -79,9 +94,16 @@ namespace DotOPDS
 
         public static void Save()
         {
-            using (var writer = File.CreateText(FileName))
+            // Don't need to modify config file itself anymore.
+            //using (var writer = File.CreateText(FileName))
+            //{
+            //    var s = JsonConvert.SerializeObject(instance, Formatting.Indented, jsonSettings);
+            //    writer.Write(s);
+            //}
+
+            using (var writer = File.CreateText(librariesFileName))
             {
-                var s = JsonConvert.SerializeObject(instance, Formatting.Indented, jsonSettings);
+                var s = JsonConvert.SerializeObject(instance.Libraries, Formatting.Indented, jsonSettings);
                 writer.Write(s);
             }
 

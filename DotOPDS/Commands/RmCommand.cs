@@ -43,7 +43,7 @@ namespace DotOPDS.Commands
             }
 
             var storage = new LuceneIndexStorage();
-            var total = storage.RemoveLibrary(Util.Normalize(Settings.Instance.Database), library.ToString());
+            var total = storage.RemoveLibrary(Settings.Instance.DatabaseIndex, library.ToString());
 
             Settings.Instance.Libraries.Remove(library);
             Settings.Save();

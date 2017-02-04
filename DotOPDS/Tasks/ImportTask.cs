@@ -31,7 +31,7 @@ namespace DotOPDS.Tasks
             parser.OnNewEntry += Parser_OnNewEntry;
             parser.Parse().Wait();
 
-            importer.Open(Util.Normalize(Settings.Instance.Database));
+            importer.Open(Settings.Instance.DatabaseIndex);
 
             for (var i = 0; i < Environment.ProcessorCount; i++)
             {
