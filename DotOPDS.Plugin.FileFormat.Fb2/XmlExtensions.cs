@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace DotOPDS.Utils
+namespace DotOPDS.Plugin.FileFormat.Fb2
 {
     static class XmlExtensions
     {

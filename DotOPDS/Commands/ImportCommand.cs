@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using NLog;
+using DotOPDS.Plugins;
 
 namespace DotOPDS.Commands
 {
@@ -46,6 +47,7 @@ namespace DotOPDS.Commands
         {
             var opts = (ImportOptions)options;
             Settings.Load(opts.Config);
+            PluginProvider.Instance.Initialize();
 
             var library = Util.Normalize(opts.Library);
             if (!Directory.Exists(library))
