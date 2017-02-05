@@ -68,13 +68,15 @@ namespace DotOPDS.Plugins
 
         public IImporter GetImporter(string command)
         {
-            importers.TryGetValue(command, out IImporter ret);
+            IImporter ret;
+            importers.TryGetValue(command, out ret);
             return ret;
         }
 
         public IFileFormat GetFileFormatReader(string ext)
         {
-            fileFormatReaders.TryGetValue(ext, out IFileFormat ret);
+            IFileFormat ret;
+            fileFormatReaders.TryGetValue(ext, out ret);
             return ret;
         }
 
