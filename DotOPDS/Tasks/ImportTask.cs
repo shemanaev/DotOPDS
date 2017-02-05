@@ -1,4 +1,5 @@
 ﻿using DotOPDS.Models;
+using DotOPDS.Plugins;
 using DotOPDS.Utils;
 using System;
 using System.Collections.Concurrent;
@@ -10,13 +11,15 @@ namespace DotOPDS.Tasks
 {
     class ImportTaskArgs : ITaskArgs
     {
+        public IBookProvider Plugin { get; set; }
         public string Library { get; set; }
-        public string Input { get; set; }
+        public string[] Args { get; set; }
     }
 
     class ImportTask : ITask
     {
         private bool running = true;
+        private bool finished = false;
         private int entriesProcessed;
         private Guid libId;
         private LuceneIndexStorage importer = new LuceneIndexStorage();
@@ -45,9 +48,7 @@ namespace DotOPDS.Tasks
 
             var startedAt = DateTime.UtcNow;
 
-            var parser = new InpxParser(args.Input);
-            parser.OnNewEntry += Parser_OnNewEntry;
-            parser.Parse().Wait();
+            args.Plugin.Run(args.Library, args.Args, OnImportBook, OnImportFinished);
 
             importer.Open(Settings.Instance.DatabaseIndex);
 
@@ -56,7 +57,7 @@ namespace DotOPDS.Tasks
                 Task.Factory.StartNew(ImportWorker);
             }
 
-            while (EntriesProcessed < EntriesTotal)
+            while (EntriesProcessed < EntriesTotal || !finished)
             {
                 Thread.Sleep(100);
             }
@@ -71,10 +72,15 @@ namespace DotOPDS.Tasks
             Finished = true;
         }
 
-        private void Parser_OnNewEntry(object sender, NewEntryEventArgs e)
+        private void OnImportBook(Book book)
         {
             EntriesTotal++;
-            books.Enqueue(e.Book);
+            books.Enqueue(book);
+        }
+
+        private void OnImportFinished()
+        {
+            finished = true;
         }
 
         private void ImportWorker()

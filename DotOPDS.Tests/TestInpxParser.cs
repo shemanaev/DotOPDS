@@ -1,5 +1,5 @@
 ﻿using DotOPDS.Models;
-using DotOPDS.Utils;
+using DotOPDS.Plugin.BookProvider.Inpx;
 using FluentAssertions;
 using NUnit.Framework;
 using System.Collections.Generic;

@@ -164,7 +164,7 @@
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Parsers\BookParsersPool.cs" />
     <Compile Include="Plugins\IFileFormat.cs" />
-    <Compile Include="Plugins\IImporter.cs" />
+    <Compile Include="Plugins\IBookProvider.cs" />
     <Compile Include="Plugins\ILogger.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\IPluginHost.cs" />
@@ -182,7 +182,6 @@
     <Compile Include="Middleware\BasicAuthMiddleware.cs" />
     <Compile Include="Utils\ConsoleStatus.cs" />
     <Compile Include="Utils\Genres.cs" />
-    <Compile Include="Utils\InpxParser.cs" />
     <Compile Include="Utils\MessageLoggingHandler.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\T.cs" />

@@ -69,9 +69,14 @@ Now edit configuration file if needed:
 }
 ```
 
-Import library index:
+Import library index from `.inpx` file:
 
-    DotOPDS import D:\library D:\lib.inpx
+    DotOPDS import inpx D:\library D:\lib.inpx
+
+To see available import plugins type:
+
+    DotOPDS import help
+    DotOPDS import help inpx # plugin help
 
 Now just start server:
 

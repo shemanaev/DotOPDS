@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using DotOPDS.Utils;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,9 +15,9 @@ namespace DotOPDS.Plugins
         public static PluginProvider Instance { get { return lazy.Value; } }
 
         private Dictionary<string, IFileFormat> fileFormatReaders = new Dictionary<string, IFileFormat>(StringComparer.InvariantCultureIgnoreCase);
-        private Dictionary<string, IImporter> importers = new Dictionary<string, IImporter>(StringComparer.InvariantCultureIgnoreCase);
+        private Dictionary<string, IBookProvider> bookProviders = new Dictionary<string, IBookProvider>(StringComparer.InvariantCultureIgnoreCase);
 
-        public List<IImporter> Importers { get { return importers.Values.ToList(); } }
+        public List<IBookProvider> Importers { get { return bookProviders.Values.ToList(); } }
 
         private PluginProvider()
         {
@@ -24,7 +25,7 @@ namespace DotOPDS.Plugins
 
         ~PluginProvider()
         {
-            foreach (var p in importers.Values)
+            foreach (var p in bookProviders.Values)
             {
                 p.Terminate();
             }
@@ -42,14 +43,14 @@ namespace DotOPDS.Plugins
                           select type;
 
             (from i in plugins
-             where i.GetInterfaces().Contains(typeof(IImporter))
-             select (IImporter)Activator.CreateInstance(i)).ToList()
+             where i.GetInterfaces().Contains(typeof(IBookProvider))
+             select (IBookProvider)Activator.CreateInstance(i)).ToList()
             .ForEach(i =>
             {
                 if (i.Initialize(this))
                 {
                     logger.Info("Loaded import plugin: {0} {1}.", i.Name, i.Version);
-                    importers.Add(i.Command, i);
+                    bookProviders.Add(i.Command, i);
                 }
             });
 
@@ -66,10 +67,10 @@ namespace DotOPDS.Plugins
             });
         }
 
-        public IImporter GetImporter(string command)
+        public IBookProvider GetBookProvider(string command)
         {
-            IImporter ret;
-            importers.TryGetValue(command, out ret);
+            IBookProvider ret;
+            bookProviders.TryGetValue(command, out ret);
             return ret;
         }
 
@@ -83,6 +84,11 @@ namespace DotOPDS.Plugins
         public ILogger GetLogger(string name)
         {
             return new PluginLogger(name);
+        }
+
+        public string NormalizePath(string path)
+        {
+            return Util.Normalize(path);
         }
     }
 }
