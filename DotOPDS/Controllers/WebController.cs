@@ -15,7 +15,7 @@ namespace DotOPDS.Controllers
         [HttpGet]
         public HttpResponseMessage ServeIndex(string filename)
         {
-            var file = GetFile("index.html");
+            var file = GetFile(filename + ".html") ?? GetFile(filename) ?? GetFile("index.html");
             if (file == null)
             {
                 if (filename == null)
@@ -31,15 +31,10 @@ namespace DotOPDS.Controllers
             return file;
         }
 
-        [Route("static/{*filename}")]
-        [HttpGet]
-        public HttpResponseMessage ServeStatic(string filename)
-        {
-            return GetFile(filename) ?? new HttpResponseMessage(HttpStatusCode.NotFound);
-        }
-
         private HttpResponseMessage GetFile(string filename)
         {
+            if (filename == null) return null;
+
             var file = Path.Combine(Util.Normalize(Settings.Instance.Web), filename);
             if (File.Exists(file))
             {
