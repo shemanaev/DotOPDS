@@ -252,11 +252,10 @@ namespace DotOPDS.Utils
             }
         }
 
-        public int CleanupLibrary(string libraryId)
+        public int CleanupLibrary(string libraryId, DateTime startedAt)
         {
-            var deleteBefore = DateTime.UtcNow.AddHours(-6); // delete older than 6 hour entries. import shouldn't take so much
             var query = new BooleanQuery {
-                { new TermRangeQuery("UpdatedAt", "*", DateTools.DateToString(deleteBefore, DateTools.Resolution.SECOND), true, true), Occur.MUST },
+                { new TermRangeQuery("UpdatedAt", "*", DateTools.DateToString(startedAt, DateTools.Resolution.SECOND), true, false), Occur.MUST },
                 { new TermQuery(new Term("LibraryId", libraryId)), Occur.MUST },
             };
 

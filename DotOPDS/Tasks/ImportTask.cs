@@ -43,6 +43,8 @@ namespace DotOPDS.Tasks
                 libId = id;
             }
 
+            var startedAt = DateTime.UtcNow;
+
             var parser = new InpxParser(args.Input);
             parser.OnNewEntry += Parser_OnNewEntry;
             parser.Parse().Wait();
@@ -61,7 +63,7 @@ namespace DotOPDS.Tasks
 
             running = false;
 
-            EntriesDeleted = importer.CleanupLibrary(libId.ToString());
+            EntriesDeleted = importer.CleanupLibrary(libId.ToString(), startedAt);
 
             Settings.Instance.Libraries[libId] = new SettingsLibrary { Path = args.Library };
             Settings.Save();
