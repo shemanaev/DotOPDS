@@ -16,6 +16,7 @@ namespace DotOPDS.Utils
 {
     class LuceneIndexStorage : IDisposable
     {
+        public const int VERSION = 1;
         private IndexWriter writer;
         private RussianAnalyzer analyzer;
         private SimpleFSDirectory directory;
