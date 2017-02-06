@@ -93,10 +93,16 @@ namespace DotOPDS.Utils
                         .Select(x => x.StringValue)
                         .ToArray();
 
-                    Cover cover = new Cover();
-                    bool hasCover = false;
-                    var hasValue = doc.Get("Cover.Has");
-                    if (hasValue != null)
+                    Cover cover = null;
+                    var coverContentType = doc.Get("_cover_type");
+                    if (coverContentType != null)
+                    {
+                        cover = new Cover
+                        {
+                            Data = doc.GetBinaryValue("_cover_data"),
+                            ContentType = coverContentType
+                        };
+                    }
                     {
                         bool.TryParse(hasValue, out hasCover);
                         cover = new Cover { Has = hasCover };
@@ -202,13 +208,11 @@ namespace DotOPDS.Utils
             document.Add(new Field("Archive", book.Archive ?? "", Field.Store.YES, Field.Index.NO));
             document.Add(new Field("Annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.NO));
             if (book.Cover?.Has != null)
+            document.Add(new Field("_updated_from_file", book.UpdatedFromFile.ToString(), Field.Store.YES, Field.Index.NO));
+            if (book.Cover != null)
             {
-                document.Add(new Field("Cover.Has", book.Cover.Has.ToString(), Field.Store.YES, Field.Index.NO));
-                if (book.Cover.Has == true)
-                {
-                    document.Add(new Field("Cover.Type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
-                    document.Add(new Field("Cover.Data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
-                }
+                document.Add(new Field("_cover_type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
+                document.Add(new Field("_cover_data", book.Cover.Data, 0, book.Cover.Data.Length, Field.Store.YES));
             }
 
 

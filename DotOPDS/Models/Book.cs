@@ -22,5 +22,6 @@ namespace DotOPDS.Models
         public string Archive { get; set; }
         public string Annotation { get; set; }
         public Cover Cover { get; set; }
+        internal bool UpdatedFromFile { get; set; }
     }
 }

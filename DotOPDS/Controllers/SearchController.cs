@@ -335,7 +335,7 @@ namespace DotOPDS.Controllers
                 };
             }
 
-            if (book.Cover.Has == true)
+            if (book.Cover != null)
             {
                 entry.Links.Add(new FeedLink
                 {

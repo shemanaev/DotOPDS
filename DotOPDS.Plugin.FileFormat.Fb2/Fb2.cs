@@ -56,7 +56,6 @@ namespace DotOPDS.Plugin.FileFormat.Fb2
                     }
                     catch (Exception)
                     {
-                        book.Cover = new Cover { Has = false };
                     }
                 }
             }
@@ -87,8 +86,7 @@ namespace DotOPDS.Plugin.FileFormat.Fb2
             book.Cover = new Cover
             {
                 Data = bin,
-                ContentType = ctype,
-                Has = true
+                ContentType = ctype
             };
         }
 
@@ -112,10 +110,6 @@ namespace DotOPDS.Plugin.FileFormat.Fb2
                 if (firstImage != null)
                 {
                     ExtractImage(book, doc, firstImage);
-                }
-                else
-                {
-                    book.Cover = new Cover { Has = false };
                 }
             }
         }

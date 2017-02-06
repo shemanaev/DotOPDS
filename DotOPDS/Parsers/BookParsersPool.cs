@@ -20,7 +20,7 @@ namespace DotOPDS.Parsers
 
         public void Update(Book book)
         {
-            if (book.Cover.Has != null) return;
+            if (book.UpdatedFromFile) return;
             logger.Debug("Book being updated, id:{0}", book.Id);
 
             var parser = PluginProvider.Instance.GetFileFormatReader(book.Ext);
@@ -36,9 +36,9 @@ namespace DotOPDS.Parsers
                 }
                 logger.Debug("Book updated successfully, id:{0}", book.Id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                logger.Debug("Book update failed, id:{0}", book.Id);
+                logger.Debug("Book update failed, id:{0}. {1}", book.Id, e.Message);
             }
 
             if (importer == null)
@@ -48,6 +48,7 @@ namespace DotOPDS.Parsers
             }
             if (replace)
             {
+                book.UpdatedFromFile = true;
                 importer.Replace(book);
             }
         }

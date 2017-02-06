@@ -70,7 +70,7 @@ namespace DotOPDS.Controllers
             logger.Debug("File {0} found in {1}ms", id, searcher.Time);
             var book = books[0];
 
-            if (book.Cover.Has != true)
+            if (book.Cover == null)
             {
                 logger.Warn("No cover found for file {0}", id);
                 return Request.CreateResponse(HttpStatusCode.NotFound);
