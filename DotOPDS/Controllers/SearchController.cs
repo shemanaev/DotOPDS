@@ -51,9 +51,14 @@ namespace DotOPDS.Controllers
             */
             var entry = new FeedEntry();
             entry.Id = "tag:root:genres";
-            entry.Title = T._("Books by genres"); // Книги по жанрам
+            entry.Title = T._("Books by genres");
             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genres" });
-            entry.Content = new FeedEntryContent { Text = T._("Browse books by genres") }; // Просмотр книг по жанрам
+            entry.Content = new FeedEntryContent { Text = T._("Browse books by genres") };
+            feed.Entries.Add(entry);
+
+            return feed;
+        }
+
         [Route("search")]
         [HttpGet]
         [RequiredParameters]
