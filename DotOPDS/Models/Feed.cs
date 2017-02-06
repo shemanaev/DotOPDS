@@ -45,6 +45,8 @@ namespace DotOPDS.Models
         public string Title;
         [XmlElement("issued", Namespace = "http://purl.org/dc/terms/")]
         public int Issued;
+        [XmlElement("language", Namespace = "http://purl.org/dc/terms/")]
+        public string Language;
         [XmlElement("content")]
         public FeedEntryContent Content;
         [XmlElement("series", Namespace = "urn:dotopds:v1.0")]
