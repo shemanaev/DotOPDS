@@ -20,7 +20,7 @@ namespace DotOPDS.Utils
         private IndexWriter writer;
         private RussianAnalyzer analyzer;
         private SimpleFSDirectory directory;
-        private Stopwatch watch;
+        private Stopwatch watch = Stopwatch.StartNew();
 
         public long Time => watch.ElapsedMilliseconds;
         public string Query { get; private set; }
