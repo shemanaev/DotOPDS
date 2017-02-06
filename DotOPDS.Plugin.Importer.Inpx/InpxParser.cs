@@ -85,23 +85,34 @@ namespace DotOPDS.Plugin.BookProvider.Inpx
                                 LastName = SanitizeName(author[0]),
                             });
                         }
+                        var meta = new List<MetaField>
+                        {
+                            new MetaField{ Name = "size", Value = line[structure.Size] },
+                            new MetaField{ Name = "libid", Value = line[structure.LibId] },
+                            new MetaField{ Name = "del", Value = (line[structure.Del] == "1").ToString() },
+                        };
+                        if (structure.Keywords != -1)
+                        {
+                            var keywords = GetDelimArray(':', line[structure.Keywords]);
+                            foreach (var word in keywords)
+                            {
+                                meta.Add(new MetaField { Name = "keyword", Value = word });
+                            }
+                        }
+                        
                         var args = new Book
                         {
-                            Id = Guid.Empty,
-                            Authors = authors.ToArray(),
+                            Authors = authors,
                             Genres = GetDelimArray(':', line[structure.Genre]),
                             Title = line[structure.Title],
                             Series = SanitizeName(line[structure.Series]),
                             SeriesNo = ParseInt(line[structure.SeriesNo]),
                             File = line[structure.File],
-                            Size = int.Parse(line[structure.Size]),
-                            LibId = int.Parse(line[structure.LibId]),
-                            Del = line[structure.Del] == "1",
                             Ext = line[structure.Ext],
                             Date = DateTime.Parse(line[structure.Date]),
                             Language = structure.Language != -1 ? line[structure.Language] : null,
-                            Keywords = structure.Keywords != -1 ? GetDelimArray(':', line[structure.Keywords]) : null,
                             Archive = inp.Name.Replace(".inp", ".zip"),
+                            Meta = meta
                         };
                         OnNewEntry?.Invoke(this, new NewEntryEventArgs { Book = args });
                     }

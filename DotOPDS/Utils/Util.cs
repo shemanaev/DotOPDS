@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace DotOPDS.Utils
 {
@@ -51,9 +52,10 @@ namespace DotOPDS.Utils
         public static string GetBookSafeName(Book book, string ext)
         {
             var result = book.Title;
-            if (book.Authors.Length > 0)
+            var firstAuthor = book.Authors.FirstOrDefault();
+            if (firstAuthor != null)
             {
-                result = string.Format("{0} - {1}", book.Authors[0].GetScreenName(), result);
+                result = string.Format("{0} - {1}", firstAuthor.GetScreenName(), result);
             }
             return string.Format("{0}.{1}", FilterDangerChars(result), ext);
         }

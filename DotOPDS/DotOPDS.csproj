@@ -163,6 +163,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Feed.cs" />
+    <Compile Include="Models\MetaField.cs" />
     <Compile Include="Parsers\BookParsersPool.cs" />
     <Compile Include="Plugins\IFileFormat.cs" />
     <Compile Include="Plugins\IBookProvider.cs" />

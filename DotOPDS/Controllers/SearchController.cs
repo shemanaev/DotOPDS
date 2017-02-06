@@ -46,6 +46,28 @@ namespace DotOPDS.Controllers
             entry.Title = T._("Books by genres"); // Книги по жанрам
             entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genres" });
             entry.Content = new FeedEntryContent { Text = T._("Browse books by genres") }; // Просмотр книг по жанрам
+        [Route("search")]
+        [HttpGet]
+        [RequiredParameters]
+        public Feed SearchIndex([FromUri] string q)
+        {
+            var feed = new Feed();
+            feed.Id = $"tag:root:search:{q}";
+            feed.Title = Settings.Instance.Title;
+            AddNavigation(Request.RequestUri, feed);
+
+            var entry = new FeedEntry();
+            entry.Id = $"tag:root:search:everywhere:{q}";
+            entry.Title = T._("Search everywhere");
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?everywhere={HttpUtility.UrlEncode(q)}" });
+            entry.Content = new FeedEntryContent { Text = T._("Search in titles, authors and series") };
+            feed.Entries.Add(entry);
+
+            entry = new FeedEntry();
+            entry.Id = $"tag:root:search:advanced:{q}";
+            entry.Title = T._("Advanced search");
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?advanced={HttpUtility.UrlEncode(q)}" });
+            entry.Content = new FeedEntryContent { Text = T._("Advanced search") };
             feed.Entries.Add(entry);
 
             return feed;
@@ -54,17 +76,45 @@ namespace DotOPDS.Controllers
         [Route("search")]
         [HttpGet]
         [RequiredParameters]
-        public Feed Search([FromUri] string q, [FromUri] int page = 1)
+        public Feed Search([FromUri] string everywhere, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
             var searcher = new LuceneIndexStorage();
             int total;
-            var query = string.Format(@"Title:""{0}"" OR Author:""{0}"" OR Series:""{0}""", searcher.Escape(q));
-            var books = searcher.Search(out total, query, "Title", page);
+            var query = string.Format(@"title:""{0}"" OR author:""{0}"" OR series:""{0}""", searcher.Escape(everywhere));
+            var books = searcher.Search(out total, query, "title", page);
 
             var feed = new Feed();
-            feed.Id = "tag:root:search:" + q;
+            feed.Id = $"tag:root:search:everywhere:{everywhere}";
+            feed.Title = T._("Search results: {0}", everywhere);
+            feed.Total = total;
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+
+            foreach (var book in books)
+            {
+                feed.Entries.Add(GetBook(book));
+            }
+
+            return feed;
+        }
             feed.Title = T._("Search results: {0}", q);
+            feed.Total = total;
+            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+
+
+        [Route("search")]
+        [HttpGet]
+        [RequiredParameters]
+        public Feed SearchAdvanced([FromUri] string advanced, [FromUri] int page = 1)
+        {
+            if (page < 1) page = 1;
+            var searcher = new LuceneIndexStorage();
+            int total;
+            var books = searcher.Search(out total, advanced, "title", page);
+
+            var feed = new Feed();
+            feed.Id = $"tag:root:search:advanced:{advanced}";
+            feed.Title = T._("Search results: {0}", advanced);
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
@@ -83,7 +133,7 @@ namespace DotOPDS.Controllers
             if (page < 1) page = 1;
             var searcher = new LuceneIndexStorage();
             int total;
-            var books = searcher.SearchExact(out total, "Genre", genre, page);
+            var books = searcher.SearchExact(out total, "genre", genre, page);
 
             var feed = new Feed();
             feed.Id = "tag:root:genre:" + genre;
@@ -99,18 +149,19 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
-        [Route("search")]
+        [Route("author/{author}")]
         [HttpGet]
         [RequiredParameters]
-        public Feed SearchByAuthor([FromUri] string author, [FromUri] int page = 1)
+        public Feed SearchByAuthor(string author, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
+            author = HttpUtility.UrlDecode(author);
             var searcher = new LuceneIndexStorage();
             int total;
-            var books = searcher.SearchExact(out total, "Author.Exact", author, page);
+            var books = searcher.SearchExact(out total, "author_exact", author, page);
 
             var feed = new Feed();
-            feed.Id = "tag:root:author:" + author;
+            feed.Id = $"tag:root:author:{author}";
             feed.Title = T._("Books by {0}", author);
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
@@ -123,18 +174,19 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
-        [Route("search")]
+        [Route("series/{series}")]
         [HttpGet]
         [RequiredParameters]
-        public Feed SearchBySeries([FromUri] string series, [FromUri] int page = 1)
+        public Feed SearchBySeries(string series, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
+            series = HttpUtility.UrlDecode(series);
             var searcher = new LuceneIndexStorage();
             int total;
-            var books = searcher.SearchExact(out total, "Series.Exact", series, page);
+            var books = searcher.SearchExact(out total, "series_exact", series, page);
 
             var feed = new Feed();
-            feed.Id = "tag:root:series:" + series;
+            feed.Id = $"tag:root:series:{series}";
             feed.Title = T._("Books in the series {0}", series);
             feed.Total = total;
 
@@ -266,13 +318,13 @@ namespace DotOPDS.Controllers
                 entry.Authors.Add(new FeedAuthor
                 {
                     Name = name,
-                    Uri = Prefix + string.Format("/search?author={0}", HttpUtility.UrlEncode(name))
+                    Uri = Prefix + string.Format("/author/{0}", HttpUtility.UrlEncode(name))
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = Prefix + string.Format("/search?author={0}", HttpUtility.UrlEncode(name)),
+                    Href = Prefix + string.Format("/author/{0}", HttpUtility.UrlEncode(name)),
                     Title = T._("All books by {0}", name) // Все книги автора {0}
                 });
             }
@@ -293,7 +345,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = Prefix + string.Format("/search?series={0}", HttpUtility.UrlEncode(book.Series)),
+                    Href = Prefix + string.Format("/series/{0}", HttpUtility.UrlEncode(book.Series)),
                     Title = T._("All books in the series") // Все книги из серии
                 });
 
