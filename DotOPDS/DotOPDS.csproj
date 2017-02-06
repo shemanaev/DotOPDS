@@ -159,6 +159,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\AuthorExtensions.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Feed.cs" />
