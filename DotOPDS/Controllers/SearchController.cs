@@ -258,6 +258,7 @@ namespace DotOPDS.Controllers
             entry.Title = book.Title;
             entry.Issued = book.Date.Year;
             entry.Language = book.Language;
+            entry.Updated = book.UpdatedAt.ToString("s");
 
             foreach (var author in book.Authors)
             {
