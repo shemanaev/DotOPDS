@@ -1,5 +1,7 @@
 ﻿using DotOPDS.Models;
+using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Ru;
+using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
@@ -44,7 +46,7 @@ namespace DotOPDS.Utils
         };
 
         private IndexWriter writer;
-        private RussianAnalyzer analyzer;
+        private Analyzer analyzer;
         private SimpleFSDirectory directory;
         private Stopwatch watch = Stopwatch.StartNew();
 
@@ -60,7 +62,7 @@ namespace DotOPDS.Utils
         {
             var take = Settings.Instance.Pagination;
             var skip = (page - 1) * Settings.Instance.Pagination;
-            using (var analyzer = new RussianAnalyzer(Version.LUCENE_30))
+            using (var analyzer = GetAnalyzer())
             {
                 var parser = new QueryParser(Version.LUCENE_30, field, analyzer);
                 var q = parser.Parse(query);
@@ -201,7 +203,7 @@ namespace DotOPDS.Utils
 
         public void Open(string connection)
         {
-            analyzer = new RussianAnalyzer(Version.LUCENE_30);
+            analyzer = GetAnalyzer();
             directory = new SimpleFSDirectory(new System.IO.DirectoryInfo(connection));
             writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED);
         }
@@ -262,7 +264,7 @@ namespace DotOPDS.Utils
 
         public int RemoveLibrary(string database, string id)
         {
-            using (var analyzer = new RussianAnalyzer(Version.LUCENE_30))
+            using (var analyzer = GetAnalyzer())
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(database)))
             using (var writer = new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
             {
@@ -301,6 +303,18 @@ namespace DotOPDS.Utils
             writer.Optimize(true);
 
             return total;
+        }
+
+        private Analyzer GetAnalyzer()
+        {
+            switch (Settings.Instance.Language)
+            {
+                case "ru":
+                    return new RussianAnalyzer(Version.LUCENE_30);
+
+                default:
+                    return new StandardAnalyzer(Version.LUCENE_30);
+            }
         }
     }
 }
