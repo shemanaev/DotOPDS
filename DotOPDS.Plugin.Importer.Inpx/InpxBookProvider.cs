@@ -1,6 +1,7 @@
 ﻿using DotOPDS.Plugins;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace DotOPDS.Plugin.BookProvider.Inpx
 {
@@ -12,6 +13,12 @@ namespace DotOPDS.Plugin.BookProvider.Inpx
         public string Help => @"Arguments:
   inpx file                     inpx file to import.
 ";
+
+        public IEnumerable<IndexField> IndexFields => new List<IndexField>
+        {
+            //new IndexField { Field = "libid", DisplayName = "online library id" },
+            //new IndexField { Field = "keyword", DisplayName = "keywords" }
+        };
 
         private IPluginHost _host;
         private InpxParser parser;

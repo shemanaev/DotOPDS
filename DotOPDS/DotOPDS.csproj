@@ -168,6 +168,7 @@
     <Compile Include="Plugins\IFileFormat.cs" />
     <Compile Include="Plugins\IBookProvider.cs" />
     <Compile Include="Plugins\ILogger.cs" />
+    <Compile Include="Plugins\IndexField.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\IPluginHost.cs" />
     <Compile Include="Plugins\PluginLogger.cs" />

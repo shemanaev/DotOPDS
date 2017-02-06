@@ -18,6 +18,13 @@ namespace DotOPDS.Plugins
         private Dictionary<string, IBookProvider> bookProviders = new Dictionary<string, IBookProvider>(StringComparer.InvariantCultureIgnoreCase);
 
         public List<IBookProvider> Importers { get { return bookProviders.Values.ToList(); } }
+        public IEnumerable<IndexField> IndexFields
+        {
+            get
+            {
+                return bookProviders.Values.Where(p => p.IndexFields != null).SelectMany(p => p.IndexFields);
+            }
+        }
 
         private PluginProvider()
         {

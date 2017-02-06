@@ -1,7 +1,9 @@
 using DotOPDS.Models;
 using DotOPDS.Parsers;
+using DotOPDS.Plugins;
 using DotOPDS.Utils;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,6 +18,12 @@ namespace DotOPDS.Controllers
         private const string Prefix = "/opds";
         private static FeedLink SearchLink = new FeedLink { Rel = FeedLinkRel.Search, Type = FeedLinkType.Atom, Href = Prefix + "/search?q={searchTerms}" };
         private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = Prefix.StartsWith("/") ? Prefix : "/" };
+        private static readonly IndexField[] predefinedSearchFields =
+        {
+            new IndexField {Field = "title", DisplayName = "title"},
+            new IndexField {Field = "author", DisplayName = "author"},
+            new IndexField {Field = "series", DisplayName = "series"},
+        };
 
         [Route("")]
         [HttpGet]
@@ -63,6 +71,26 @@ namespace DotOPDS.Controllers
             entry.Content = new FeedEntryContent { Text = T._("Search in titles, authors and series") };
             feed.Entries.Add(entry);
 
+            foreach (var f in predefinedSearchFields)
+            {
+                entry = new FeedEntry();
+                entry.Id = $"tag:root:search:{f.Field}:{q}";
+                entry.Title = T._("Search in {0}", f.DisplayName);
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?field={f.Field}&q={HttpUtility.UrlEncode(q)}" });
+                entry.Content = new FeedEntryContent { Text = T._("Search in {0}", f.DisplayName) };
+                feed.Entries.Add(entry);
+            }
+
+            foreach (var f in PluginProvider.Instance.IndexFields)
+            {
+                entry = new FeedEntry();
+                entry.Id = $"tag:root:search:{f.Field}:{q}";
+                entry.Title = T._("Search in {0}", f.DisplayName);
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?field={f.Field}&q={HttpUtility.UrlEncode(q)}" });
+                entry.Content = new FeedEntryContent { Text = T._("Search in {0}", f.DisplayName) };
+                feed.Entries.Add(entry);
+            }
+
             entry = new FeedEntry();
             entry.Id = $"tag:root:search:advanced:{q}";
             entry.Title = T._("Advanced search");
@@ -97,10 +125,36 @@ namespace DotOPDS.Controllers
 
             return feed;
         }
+
+        [Route("search")]
+        [HttpGet]
+        [RequiredParameters]
+        public Feed SearchInField([FromUri] string q, [FromUri] string field, [FromUri] int page = 1)
+        {
+            if (page < 1) page = 1;
+            var searcher = new LuceneIndexStorage();
+            int total = 0;
+            List<Book> books = null;
+
+            if (predefinedSearchFields.Any(f => f.Field == field) || PluginProvider.Instance.IndexFields.Any(f => f.Field == field))
+            {
+                books = searcher.Search(out total, q, field, page);
+            }
+
+            var feed = new Feed();
+            feed.Id = $"tag:root:search:{field}:{q}";
             feed.Title = T._("Search results: {0}", q);
             feed.Total = total;
             AddNavigation(Request.RequestUri, feed, page, total, searcher);
 
+            if (books != null)
+                foreach (var book in books)
+                {
+                    feed.Entries.Add(GetBook(book));
+                }
+
+            return feed;
+        }
 
         [Route("search")]
         [HttpGet]
