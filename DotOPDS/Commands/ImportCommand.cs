@@ -101,7 +101,11 @@ namespace DotOPDS.Commands
 
                 while (task.EntriesProcessed == 0)
                 {
-                    if (Program.Exit.WaitOne(1)) return 1;
+                    if (Program.Exit.WaitOne(1))
+                    {
+                        Environment.Exit(1);
+                        return 1;
+                    }
                     status.Update("Preparing to import, elapsed {0:hh\\:mm\\:ss}", watch.Elapsed);
                 }
 
@@ -111,7 +115,11 @@ namespace DotOPDS.Commands
                 var importStart = watch.Elapsed;
                 while (!task.Finished)
                 {
-                    if (Program.Exit.WaitOne(1)) return 1;
+                    if (Program.Exit.WaitOne(1))
+                    {
+                        Environment.Exit(1);
+                        return 1;
+                    }
                     status.Update("Processed {0} of {1}, {2} book/sec, elapsed {3:hh\\:mm\\:ss}", task.EntriesProcessed, task.EntriesTotal,
                         Math.Truncate(task.EntriesProcessed / (watch.Elapsed.TotalSeconds - importStart.TotalSeconds)), watch.Elapsed);
                 }
