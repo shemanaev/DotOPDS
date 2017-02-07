@@ -44,7 +44,8 @@ namespace DotOPDS.Plugins
 
         public void Initialize()
         {
-            var plugins = from file in Directory.GetFiles(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"plugins\"), "*.dll")
+            var pluginsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plugins/");
+            var plugins = from file in Directory.GetFiles(pluginsPath, "*.dll")
                           from type in Assembly.LoadFrom(file).GetTypes()
                           where type.GetInterfaces().Contains(typeof(IPlugin))
                           select type;
