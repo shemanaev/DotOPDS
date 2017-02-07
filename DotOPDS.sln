@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Tests", "DotOPDS.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Plugin.FileFormat.Fb2", "DotOPDS.Plugin.FileFormat.Fb2\DotOPDS.Plugin.FileFormat.Fb2.csproj", "{BF1AAC79-02DD-4075-B675-1EA19439B810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Plugin.BookProvider.Inpx", "DotOPDS.Plugin.Importer.Inpx\DotOPDS.Plugin.BookProvider.Inpx.csproj", "{CE8035AC-186F-4090-96E7-4D186F5F3D0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Plugin.BookProvider.Inpx", "DotOPDS.Plugin.BookProvider.Inpx\DotOPDS.Plugin.BookProvider.Inpx.csproj", "{CE8035AC-186F-4090-96E7-4D186F5F3D0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
