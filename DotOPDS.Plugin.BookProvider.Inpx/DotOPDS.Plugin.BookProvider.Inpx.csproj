@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Genres.cs" />
     <Compile Include="InpxBookProvider.cs" />
     <Compile Include="InpxParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,11 @@
       <Name>DotOPDS</Name>
       <Private>False</Private>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="locale\ru\LC_MESSAGES\DotOPDS.Plugin.BookProvider.Inpx.mo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

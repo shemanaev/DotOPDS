@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Http;
 
 namespace DotOPDS.Controllers
@@ -20,9 +19,9 @@ namespace DotOPDS.Controllers
         private static FeedLink StartLink = new FeedLink { Rel = FeedLinkRel.Start, Type = FeedLinkType.AtomNavigation, Href = Prefix.StartsWith("/") ? Prefix : "/" };
         private static readonly IndexField[] predefinedSearchFields =
         {
-            new IndexField {Field = "title", DisplayName = "title"},
-            new IndexField {Field = "author", DisplayName = "author"},
-            new IndexField {Field = "series", DisplayName = "series"},
+            new IndexField {Field = "title", DisplayName = T._("title")},
+            new IndexField {Field = "author", DisplayName = T._("author")},
+            new IndexField {Field = "series", DisplayName = T._("series")},
         };
 
         [Route("")]
@@ -32,7 +31,7 @@ namespace DotOPDS.Controllers
             var feed = new Feed();
             feed.Id = "tag:root:root";
             feed.Title = Settings.Instance.Title;
-            AddNavigation(Request.RequestUri, feed);
+            AddNavigation(Prefix, feed);
 
             /* TODO: add alphabet indexes by authors and series
             var entry = new FeedEntry();
@@ -67,12 +66,12 @@ namespace DotOPDS.Controllers
             var feed = new Feed();
             feed.Id = $"tag:root:search:{q}";
             feed.Title = Settings.Instance.Title;
-            AddNavigation(Request.RequestUri, feed);
+            AddNavigation($"{Prefix}/search?q={q}", feed);
 
             var entry = new FeedEntry();
             entry.Id = $"tag:root:search:everywhere:{q}";
             entry.Title = T._("Search everywhere");
-            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?everywhere={HttpUtility.UrlEncode(q)}" });
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?everywhere={Uri.EscapeDataString(q)}" });
             entry.Content = new FeedEntryContent { Text = T._("Search in titles, authors and series") };
             feed.Entries.Add(entry);
 
@@ -81,7 +80,7 @@ namespace DotOPDS.Controllers
                 entry = new FeedEntry();
                 entry.Id = $"tag:root:search:{f.Field}:{q}";
                 entry.Title = T._("Search in {0}", f.DisplayName);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?field={f.Field}&q={HttpUtility.UrlEncode(q)}" });
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?field={f.Field}&q={Uri.EscapeDataString(q)}" });
                 entry.Content = new FeedEntryContent { Text = T._("Search in {0}", f.DisplayName) };
                 feed.Entries.Add(entry);
             }
@@ -89,7 +88,7 @@ namespace DotOPDS.Controllers
             entry = new FeedEntry();
             entry.Id = $"tag:root:search:advanced:{q}";
             entry.Title = T._("Advanced search");
-            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?advanced={HttpUtility.UrlEncode(q)}" });
+            entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?advanced={Uri.EscapeDataString(q)}" });
             entry.Content = new FeedEntryContent { Text = T._("Advanced search") };
             feed.Entries.Add(entry);
 
@@ -111,7 +110,7 @@ namespace DotOPDS.Controllers
             feed.Id = $"tag:root:search:everywhere:{everywhere}";
             feed.Title = T._("Search results: {0}", everywhere);
             feed.Total = total;
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/search?everywhere={everywhere}", feed, page, total, searcher);
 
             foreach (var book in books)
             {
@@ -140,7 +139,7 @@ namespace DotOPDS.Controllers
             feed.Id = $"tag:root:search:{field}:{q}";
             feed.Title = T._("Search results: {0}", q);
             feed.Total = total;
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/search?field={field}&q={q}", feed, page, total, searcher);
 
             if (books != null)
                 foreach (var book in books)
@@ -165,7 +164,7 @@ namespace DotOPDS.Controllers
             feed.Id = $"tag:root:search:advanced:{advanced}";
             feed.Title = T._("Search results: {0}", advanced);
             feed.Total = total;
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/search?advanced={advanced}", feed, page, total, searcher);
 
             foreach (var book in books)
             {
@@ -180,15 +179,16 @@ namespace DotOPDS.Controllers
         public Feed SearchByGenre(string genre, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
+            genre = Uri.UnescapeDataString(genre);
             var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "genre", genre, page);
 
             var feed = new Feed();
             feed.Id = "tag:root:genre:" + genre;
-            feed.Title = T._("Books in the genre of {0}", Genres.Instance.Localize(genre));
+            feed.Title = T._("Books in the genre of {0}", GenreExtensions.GetDisplayName(genre));
             feed.Total = total;
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/genre/{Uri.EscapeDataString(genre)}", feed, page, total, searcher);
 
             foreach (var book in books)
             {
@@ -204,7 +204,7 @@ namespace DotOPDS.Controllers
         public Feed SearchByAuthor(string author, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            author = HttpUtility.UrlDecode(author);
+            author = Uri.UnescapeDataString(author);
             var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "author_exact", author, page);
@@ -213,7 +213,7 @@ namespace DotOPDS.Controllers
             feed.Id = $"tag:root:author:{author}";
             feed.Title = T._("Books by {0}", author);
             feed.Total = total;
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/author/{Uri.EscapeDataString(author)}", feed, page, total, searcher);
 
             foreach (var book in books)
             {
@@ -229,7 +229,7 @@ namespace DotOPDS.Controllers
         public Feed SearchBySeries(string series, [FromUri] int page = 1)
         {
             if (page < 1) page = 1;
-            series = HttpUtility.UrlDecode(series);
+            series = Uri.UnescapeDataString(series);
             var searcher = new LuceneIndexStorage();
             int total;
             var books = searcher.SearchExact(out total, "series_exact", series, page);
@@ -239,7 +239,7 @@ namespace DotOPDS.Controllers
             feed.Title = T._("Books in the series {0}", series);
             feed.Total = total;
 
-            AddNavigation(Request.RequestUri, feed, page, total, searcher);
+            AddNavigation($"{Prefix}/series/{Uri.EscapeDataString(series)}", feed, page, total, searcher);
 
             foreach (var book in books)
             {
@@ -249,46 +249,29 @@ namespace DotOPDS.Controllers
             return feed;
         }
 
-        [Route("genres")]
+        [Route("genres/{*genre}")]
         [HttpGet]
-        public Feed GetByGenres()
+        public Feed GetByGenres(string genre)
         {
+            genre = Uri.UnescapeDataString(genre ?? "");
+
             var feed = new Feed();
-            feed.Id = "tag:root:genres";
-            feed.Title = T._("Books by genres");
-            AddNavigation(Request.RequestUri, feed);
+            feed.Id = "tag:root:genres" + (genre == "" ? "" : $":{genre}");
+            feed.Title = genre == "" ? T._("Books by genres") : T._("Books in the genre of {0}", GenreExtensions.GetDisplayName(genre));
+            AddNavigation($"{Prefix}/genres/{Uri.EscapeDataString(genre)}", feed);
 
-            foreach (var genre in Genres.Instance.Tree)
+            var searcher = new LuceneIndexStorage();
+            var genres = searcher.GetAllGenres(genre);
+
+            foreach (var k in genres)
             {
-                var name = genre.Key.Replace("category_", "");
+                var tag = k.Value.Item2 ? "genre" : "genres";
+                var url = k.Value.Item1;
                 var entry = new FeedEntry();
-                entry.Id = "tag:root:genre:" + name;
-                entry.Title = Genres.Instance.Localize(genre.Key);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genres/" + name });
-                entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre.Key)) };
-                feed.Entries.Add(entry);
-            }
-
-            return feed;
-        }
-
-        [Route("genres/{category}")]
-        [HttpGet]
-        public Feed GetByGenres(string category)
-        {
-            var fullname = "category_" + category;
-            var feed = new Feed();
-            feed.Id = "tag:root:genres:" + category;
-            feed.Title = T._("Books in the genre of {0}", Genres.Instance.Localize(fullname));
-            AddNavigation(Request.RequestUri, feed);
-
-            foreach (var genre in Genres.Instance.Tree[fullname])
-            {
-                var entry = new FeedEntry();
-                entry.Id = "tag:root:genre:" + genre;
-                entry.Title = Genres.Instance.Localize(genre);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = Prefix + "/genre/" + genre });
-                entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", Genres.Instance.Localize(genre)) };
+                entry.Id = $"tag:root:{tag}:{url}";
+                entry.Title = k.Key;
+                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/{tag}/{Uri.EscapeDataString(url)}" });
+                entry.Content = new FeedEntryContent { Text = T._("Books in the genre of {0}", k.Key) };
                 feed.Entries.Add(entry);
             }
 
@@ -313,7 +296,7 @@ namespace DotOPDS.Controllers
             return result;
         }
 
-        private void AddNavigation(Uri uri, Feed feed, int page = 0, int total = 0, LuceneIndexStorage searcher = null)
+        private void AddNavigation(string uri, Feed feed, int page = 0, int total = 0, LuceneIndexStorage searcher = null)
         {
             var favicon = Path.Combine(Util.Normalize(Settings.Instance.Web), "favicon.ico");
             if (File.Exists(favicon))
@@ -323,14 +306,14 @@ namespace DotOPDS.Controllers
 
             feed.Links.Add(SearchLink);
             feed.Links.Add(StartLink);
-            feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Self, Type = FeedLinkType.AtomNavigation, Href = uri.PathAndQuery });
+            feed.Links.Add(new FeedLink { Rel = FeedLinkRel.Self, Type = FeedLinkType.AtomNavigation, Href = ChangePage(uri, page) });
             if (page > 1)
             {
                 feed.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Prev,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = ChangePage(uri.PathAndQuery, page - 1)
+                    Href = ChangePage(uri, page - 1)
                 });
             }
             if (page * Settings.Instance.Pagination < total)
@@ -339,7 +322,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Next,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = ChangePage(uri.PathAndQuery, page + 1)
+                    Href = ChangePage(uri, page + 1)
                 });
             }
 #if DEBUG
@@ -367,24 +350,23 @@ namespace DotOPDS.Controllers
                 entry.Authors.Add(new FeedAuthor
                 {
                     Name = name,
-                    Uri = Prefix + string.Format("/author/{0}", HttpUtility.UrlEncode(name))
+                    Uri = Prefix + string.Format("/author/{0}", Uri.EscapeDataString(name))
                 });
                 entry.Links.Add(new FeedLink
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = Prefix + string.Format("/author/{0}", HttpUtility.UrlEncode(name)),
+                    Href = Prefix + string.Format("/author/{0}", Uri.EscapeDataString(name)),
                     Title = T._("All books by {0}", name) // Все книги автора {0}
                 });
             }
 
             foreach (var genre in book.Genres)
             {
-                var local = Genres.Instance.Localize(genre);
                 entry.Categories.Add(new FeedCategory
                 {
-                    Label = local,
-                    Term = local
+                    Label = genre.GetDisplayName(),
+                    Term = genre.GetFullName()
                 });
             }
 
@@ -394,7 +376,7 @@ namespace DotOPDS.Controllers
                 {
                     Rel = FeedLinkRel.Related,
                     Type = FeedLinkType.AtomNavigation,
-                    Href = Prefix + string.Format("/series/{0}", HttpUtility.UrlEncode(book.Series)),
+                    Href = Prefix + string.Format("/series/{0}", Uri.EscapeDataString(book.Series)),
                     Title = T._("All books in the series") // Все книги из серии
                 });
 

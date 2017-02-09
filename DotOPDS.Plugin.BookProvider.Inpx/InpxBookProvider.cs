@@ -39,6 +39,7 @@ namespace DotOPDS.Plugin.BookProvider.Inpx
             }
             
             parser = new InpxParser(input);
+            parser.Genres = new Genres(_host.GetTranslator());
             parser.OnNewEntry += (s, e) =>
             {
                 import(e.Book);

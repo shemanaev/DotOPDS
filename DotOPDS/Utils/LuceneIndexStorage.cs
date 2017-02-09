@@ -118,7 +118,8 @@ namespace DotOPDS.Utils
                         .Select(x => x.StringValue.Split(','))
                         .Select(x => new Author { FirstName = x[0], MiddleName = x[1], LastName = x[2] });
                     var genres = doc.GetFields("genre")
-                        .Select(x => x.StringValue);
+                        .Select(x => x.StringValue)
+                        .Select(x => GenreExtensions.Construct(x));
 
                     Cover cover = null;
                     var coverContentType = doc.Get("_cover_type");
@@ -253,7 +254,7 @@ namespace DotOPDS.Utils
             if (book.Genres != null)
             foreach (var genre in book.Genres)
             {
-                document.Add(new Field("genre", genre, Field.Store.YES, Field.Index.NOT_ANALYZED));
+                document.Add(new Field("genre", genre.GetFullName(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             }
 
             if (book.Meta != null)
@@ -306,6 +307,32 @@ namespace DotOPDS.Utils
             writer.Optimize(true);
 
             return total;
+        }
+
+        public IDictionary<string, Tuple<string, bool>> GetAllGenres(string startsWith)
+        {
+            const string field = "genre";
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(Settings.Instance.DatabaseIndex)))
+            using (var reader = IndexReader.Open(directory, true)) {
+                var result = new SortedDictionary<string, Tuple<string, bool>>();
+                var terms = reader.Terms(new Term(field));
+               
+                while (terms.Next())
+                {
+                    var term = terms.Term;
+                    if (term.Field == field && term.Text.StartsWith(startsWith))
+                    {
+                        var name = GenreExtensions.Cut(term.Text, startsWith);
+                        var displayName = GenreExtensions.GetNthName(name, 0);
+                        var fullName = GenreExtensions.Combine(startsWith, displayName);
+                        var isLast = GenreExtensions.IsLast(name);
+
+                        result[displayName] = new Tuple<string, bool>(fullName, isLast);
+                    }
+                }
+
+                return result;
+            }
         }
 
         private Analyzer GetAnalyzer()

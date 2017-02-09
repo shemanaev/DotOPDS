@@ -163,6 +163,8 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Feed.cs" />
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\GenreExtensions.cs" />
     <Compile Include="Models\MetaField.cs" />
     <Compile Include="Parsers\BookParsersPool.cs" />
     <Compile Include="Plugins\IFileFormat.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Plugins\IndexField.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\IPluginHost.cs" />
+    <Compile Include="Plugins\ITranslator.cs" />
     <Compile Include="Plugins\PluginHost.cs" />
     <Compile Include="Plugins\PluginLogger.cs" />
     <Compile Include="Plugins\PluginProvider.cs" />
@@ -185,8 +188,8 @@
     <Compile Include="Utils\AtomXmlMediaTypeFormatter.cs" />
     <Compile Include="Middleware\BasicAuthMiddleware.cs" />
     <Compile Include="Utils\ConsoleStatus.cs" />
-    <Compile Include="Utils\Genres.cs" />
     <Compile Include="Utils\MessageLoggingHandler.cs" />
+    <Compile Include="Utils\Translator.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\T.cs" />
     <Compile Include="Utils\Resource.cs" />
@@ -201,10 +204,12 @@
     </None>
     <EmbeddedResource Include="default.win.json" />
     <EmbeddedResource Include="default.nix.json" />
+    <None Include="locale\ru\LC_MESSAGES\DotOPDS.mo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <EmbeddedResource Include="Translations\ru.mo" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

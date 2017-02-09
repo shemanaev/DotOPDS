@@ -21,7 +21,7 @@ namespace DotOPDS.Models
         public Cover Cover { get; set; }                 // cover image. optional
         public string Language { get; set; }             // language code (two letters). optional
         public IEnumerable<Author> Authors { get; set; } // list of authors. required
-        public IEnumerable<string> Genres { get; set; }  // list of genres. optional
+        public IEnumerable<Genre> Genres { get; set; }   // list of genres. optional
         public IEnumerable<MetaField> Meta { get; set; } // set of extra fields needs to be indexed. optional
     }
 }

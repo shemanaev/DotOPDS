@@ -17,6 +17,13 @@ namespace DotOPDS.Plugins
             return new PluginLogger($"{_name}.{name}");
         }
 
+        public ITranslator GetTranslator()
+        {
+            if (translator == null)
+                translator = new Translator(_name, Settings.Instance.Language);
+            return translator;
+        }
+
         public string NormalizePath(string path)
         {
             return Util.Normalize(path);

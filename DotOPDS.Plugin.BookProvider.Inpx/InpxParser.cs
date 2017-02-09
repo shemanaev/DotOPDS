@@ -31,6 +31,7 @@ namespace DotOPDS.Plugin.BookProvider.Inpx
 
         public event NewEntryEventHandler OnNewEntry;
         public event FinishedEventHandler OnFinished;
+        public Genres Genres { get; set; }
 
         public bool IsFb2 => fb2ids.Contains(int.Parse(comment[2]));
         public string Version { get; private set; }
@@ -99,11 +100,21 @@ namespace DotOPDS.Plugin.BookProvider.Inpx
                                 meta.Add(new MetaField { Name = "keyword", Value = word });
                             }
                         }
-                        
+                        var genresText = GetDelimArray(':', line[structure.Genre]);
+                        var genres = new List<Genre>();
+                        foreach (var s in genresText)
+                        {
+                            var genreTuples = Genres.Localize(s);
+                            foreach (var tuple in genreTuples)
+                            {
+                                genres.Add(new Genre { Name = tuple.Item1, Child = new Genre { Name = tuple.Item2 } });
+                            }
+                        }
+
                         var args = new Book
                         {
                             Authors = authors,
-                            Genres = GetDelimArray(':', line[structure.Genre]),
+                            Genres = genres,
                             Title = line[structure.Title],
                             Series = SanitizeName(line[structure.Series]),
                             SeriesNo = ParseInt(line[structure.SeriesNo]),

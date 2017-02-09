@@ -1,27 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using DotOPDS.Plugins;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace DotOPDS.Utils
+namespace DotOPDS.Plugin.BookProvider.Inpx
 {
     public class Genres
     {
-        private static Genres instance;
-        public static Genres Instance => instance ?? (instance = new Genres());
-
-        public string Localize(string genre)
+        public Genres(ITranslator translator)
         {
-            return localized.ContainsKey(genre) ? localized[genre] : genre;
+            T = translator;
+            InitLocalization();
+            InitTree();
         }
 
-        public Dictionary<string, List<string>> Tree { get; private set; } = new Dictionary<string, List<string>>();
+        public List<Tuple<string, string>> Localize(string genre)
+        {
+            var categories = Tree.AsParallel().Where(k => k.Value.Contains(genre)).Select(x => x.Key);
+            var gen = localized.ContainsKey(genre) ? localized[genre] : genre;
+            var ret = new List<Tuple<string, string>>();
+            foreach (var cat in categories)
+            {
+                var category = localized.ContainsKey(cat) ? localized[cat] : cat;
+                ret.Add(new Tuple<string, string>(category, gen));
+            }
+            return ret;
+        }
 
         //  ([a-z_]+) ([\S ]+)
         // localized.Add("\1", T._("\2"));
         private Dictionary<string, string> localized = new Dictionary<string, string>();
-        private Genres()
-        {
-            InitLocalization();
-            InitTree();
-        }
+        private Dictionary<string, List<string>> Tree = new Dictionary<string, List<string>>();
+        private ITranslator T;
 
         private void InitLocalization()
         {
