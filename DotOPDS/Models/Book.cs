@@ -15,7 +15,7 @@ namespace DotOPDS.Models
         public string Archive { get; set; }              // archive with file. optional
         public string Title { get; set; }                // book title. required
         public string Annotation { get; set; }           // book annotation. optional
-        public DateTime Date { get; set; }               // publication date. optional
+        public DateTime Date { get; set; }               // publication date. required
         public string Series { get; set; }               // book series. optional
         public int SeriesNo { get; set; }                // number of book in series. optional
         public Cover Cover { get; set; }                 // cover image. optional
