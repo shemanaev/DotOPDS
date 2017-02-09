@@ -171,6 +171,7 @@
     <Compile Include="Plugins\IndexField.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\IPluginHost.cs" />
+    <Compile Include="Plugins\PluginHost.cs" />
     <Compile Include="Plugins\PluginLogger.cs" />
     <Compile Include="Plugins\PluginProvider.cs" />
     <Compile Include="Tasks\ITask.cs" />

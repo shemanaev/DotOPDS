@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace DotOPDS.Plugins
 {
-    internal class PluginProvider : IPluginHost
+    internal class PluginProvider
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static readonly Lazy<PluginProvider> lazy = new Lazy<PluginProvider>(() => new PluginProvider());
@@ -55,7 +55,8 @@ namespace DotOPDS.Plugins
              select (IBookProvider)Activator.CreateInstance(i)).ToList()
             .ForEach(i =>
             {
-                if (i.Initialize(this))
+                var host = new PluginHost(i.GetType().Assembly.GetName().Name);
+                if (i.Initialize(host))
                 {
                     logger.Info("Loaded import plugin: {0} {1}.", i.Name, i.Version);
                     bookProviders.Add(i.Command, i);
@@ -67,7 +68,8 @@ namespace DotOPDS.Plugins
              select (IFileFormat)Activator.CreateInstance(i)).ToList()
             .ForEach(i =>
             {
-                if (i.Initialize(this))
+                var host = new PluginHost(i.GetType().Assembly.GetName().Name);
+                if (i.Initialize(host))
                 {
                     logger.Info("Loaded file format plugin: {0} {1}.", i.Name, i.Version);
                     fileFormatReaders.Add(i.Extension, i);
@@ -87,16 +89,6 @@ namespace DotOPDS.Plugins
             IFileFormat ret;
             fileFormatReaders.TryGetValue(ext, out ret);
             return ret;
-        }
-
-        public ILogger GetLogger(string name)
-        {
-            return new PluginLogger(name);
-        }
-
-        public string NormalizePath(string path)
-        {
-            return Util.Normalize(path);
         }
     }
 }
