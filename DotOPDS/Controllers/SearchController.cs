@@ -328,7 +328,7 @@ namespace DotOPDS.Controllers
             var favicon = Path.Combine(Util.Normalize(Settings.Instance.Web), "favicon.ico");
             if (File.Exists(favicon))
             {
-                feed.Icon = "/static/favicon.ico";
+                feed.Icon = "/favicon.ico";
             }
 
             feed.Links.Add(SearchLink);
