@@ -43,6 +43,7 @@ namespace DotOPDS.Utils
             "author_exact",
             "author_fullname",
             "genre",
+            "language",
         };
 
         private IndexWriter writer;
@@ -156,6 +157,7 @@ namespace DotOPDS.Utils
                         Authors = authors,
                         Genres = genres,
                         Annotation = doc.Get("annotation"),
+                        Language = doc.Get("language"),
                         Cover = cover,
                         Meta = meta
                     };
@@ -232,6 +234,7 @@ namespace DotOPDS.Utils
             document.Add(new Field("pubdate", book.Date.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
             document.Add(new Field("archive", book.Archive ?? "", Field.Store.YES, Field.Index.NO));
             document.Add(new Field("annotation", book.Annotation ?? "", Field.Store.YES, Field.Index.ANALYZED));
+            document.Add(new Field("language", book.Language ?? "", Field.Store.YES, Field.Index.NOT_ANALYZED));
             if (book.Cover != null)
             {
                 document.Add(new Field("_cover_type", book.Cover.ContentType, Field.Store.YES, Field.Index.NO));
