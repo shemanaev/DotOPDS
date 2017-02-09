@@ -19,7 +19,7 @@ namespace DotOPDS.Plugin.FileFormat.Fb2
         public bool Initialize(IPluginHost host)
         {
             _host = host;
-            logger = _host.GetLogger(GetType().FullName);
+            logger = _host.GetLogger("Fb2");
             return true;
         }
 
