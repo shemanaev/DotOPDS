@@ -76,17 +76,7 @@ namespace DotOPDS.Controllers
             entry.Content = new FeedEntryContent { Text = T._("Search in titles, authors and series") };
             feed.Entries.Add(entry);
 
-            foreach (var f in predefinedSearchFields)
-            {
-                entry = new FeedEntry();
-                entry.Id = $"tag:root:search:{f.Field}:{q}";
-                entry.Title = T._("Search in {0}", f.DisplayName);
-                entry.Links.Add(new FeedLink { Type = FeedLinkType.AtomAcquisition, Href = $"{Prefix}/search?field={f.Field}&q={HttpUtility.UrlEncode(q)}" });
-                entry.Content = new FeedEntryContent { Text = T._("Search in {0}", f.DisplayName) };
-                feed.Entries.Add(entry);
-            }
-
-            foreach (var f in PluginProvider.Instance.IndexFields)
+            foreach (var f in predefinedSearchFields.Union(PluginProvider.Instance.IndexFields))
             {
                 entry = new FeedEntry();
                 entry.Id = $"tag:root:search:{f.Field}:{q}";
