@@ -61,7 +61,7 @@ namespace DotOPDS
             if (!File.Exists(FileName))
             {
                 Console.Error.WriteLine("Config file {0} does not exists.", FileName);
-                Console.Error.WriteLine("Try using 'init' command first:", FileName);
+                Console.Error.WriteLine("Try using 'init' command first:");
                 Console.Error.WriteLine("\tDotOPDS init -c \"{0}\"", FileName);
                 Environment.Exit(1);
             }
