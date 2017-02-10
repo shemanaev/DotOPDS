@@ -8,7 +8,7 @@ namespace DotOPDS.Models
         private const string SEPARATOR = "~~~";
         public static string GetFullName(this Genre genre)
         {
-            return genre.Child != null ? $"{genre.Name}{SEPARATOR}{genre.Child.GetFullName()}" : genre.Name;
+            return genre.Child != null ? $"{genre.Name.Replace(SEPARATOR, "")}{SEPARATOR}{genre.Child.GetFullName()}" : genre.Name.Replace(SEPARATOR, "");
         }
 
         public static string GetDisplayName(this Genre genre)
