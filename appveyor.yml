@@ -31,3 +31,13 @@ artifacts:
     name: release_archive
   - path: 'DotOPDS-pdb.zip'
     name: debug_symbols
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: TxP8eEzFcS3XuTx/zRKV4Pev1x6D4egsnIoonP6ArBpqFy5V50DwgrRnIMETEN56
+  artifact: release_archive,debug_symbols
+  draft: true
+  force_update: true
+  on:
+    appveyor_repo_tag: true
