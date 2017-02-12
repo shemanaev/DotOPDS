@@ -94,6 +94,12 @@ Use [NSSM][5], Luke!
 
 [MIT](LICENSE)
 
+## Preparing release
+ * Bump version in `appveyor.yml`
+ * Make tag with version number
+ * Wait for ci build completed and edit draft description
+ * Publish
+
 [1]: https://en.wikipedia.org/wiki/OPDS
 [2]: http://lib.rus.ec
 [3]: http://flibusta.is
