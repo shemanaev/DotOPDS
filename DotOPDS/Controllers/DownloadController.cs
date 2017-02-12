@@ -23,7 +23,7 @@ namespace DotOPDS.Controllers
         {
             var searcher = new LuceneIndexStorage();
             int total;
-            var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
+            var books = searcher.SearchExact(out total, "guid", id.ToString(), take: 1);
             if (total != 1)
             {
                 logger.Debug("File {0} not found", id);
@@ -60,7 +60,7 @@ namespace DotOPDS.Controllers
         {
             var searcher = new LuceneIndexStorage();
             int total;
-            var books = searcher.SearchExact(out total, "Guid", id.ToString(), take: 1);
+            var books = searcher.SearchExact(out total, "guid", id.ToString(), take: 1);
             if (total != 1)
             {
                 logger.Debug("File {0} not found", id);
@@ -70,7 +70,7 @@ namespace DotOPDS.Controllers
             logger.Debug("File {0} found in {1}ms", id, searcher.Time);
             var book = books[0];
 
-            if (book.Cover.Has != true)
+            if (book.Cover == null)
             {
                 logger.Warn("No cover found for file {0}", id);
                 return Request.CreateResponse(HttpStatusCode.NotFound);

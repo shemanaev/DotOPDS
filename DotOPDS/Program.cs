@@ -28,8 +28,10 @@ namespace DotOPDS
                 LsOptions,
                 MvOptions,
                 RmOptions,
-                InitOptions,
-                FixtureOptions
+                InitOptions
+                #if DEBUG_FIXTURE
+                ,FixtureOptions
+                #endif
                 >(args).MapResult(
                     (ImportOptions opts) => RunCommand(typeof(ImportCommand), opts),
                     (ServeOptions opts) => RunCommand(typeof(ServeCommand), opts),
@@ -37,7 +39,9 @@ namespace DotOPDS
                     (MvOptions opts) => RunCommand(typeof(MvCommand), opts),
                     (RmOptions opts) => RunCommand(typeof(RmCommand), opts),
                     (InitOptions opts) => RunCommand(typeof(InitCommand), opts),
+                    #if DEBUG_FIXTURE
                     (FixtureOptions opts) => RunCommand(typeof(FixtureCommand), opts),
+                    #endif
                     errs => 1);
 
             return result;

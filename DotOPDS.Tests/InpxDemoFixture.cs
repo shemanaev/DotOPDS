@@ -1,4 +1,5 @@
-﻿using DotOPDS.Models;
+﻿#if DEBUG_FIXTURE
+using DotOPDS.Models;
 using DotOPDS.Utils;
 using System;
 using System.Collections.Generic;
@@ -1902,3 +1903,4 @@ namespace DotOPDS.Tests
         };
     }
 }
+#endif

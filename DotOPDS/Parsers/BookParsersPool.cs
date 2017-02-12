@@ -1,8 +1,8 @@
 ﻿using DotOPDS.Models;
+using DotOPDS.Plugins;
 using DotOPDS.Utils;
 using NLog;
 using System;
-using System.Collections.Generic;
 
 namespace DotOPDS.Parsers
 {
@@ -11,35 +11,34 @@ namespace DotOPDS.Parsers
         private static BookParsersPool instance;
         public static BookParsersPool Instance => instance ?? (instance = new BookParsersPool());
 
-        private Dictionary<string, IBookParser> parsers = new Dictionary<string, IBookParser>();
         private volatile LuceneIndexStorage importer;
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         private BookParsersPool()
         {
-            parsers.Add("fb2", new Fb2Parser());
         }
 
         public void Update(Book book)
         {
-            if (book.Cover.Has != null) return;
+            if (book.UpdatedFromFile) return;
             logger.Debug("Book being updated, id:{0}", book.Id);
 
-            IBookParser parser = null;
-
-            if (parsers.ContainsKey(book.Ext))
-                parser = parsers[book.Ext];
+            var parser = PluginProvider.Instance.GetFileFormatReader(book.Ext);
 
             if (parser == null) return;
 
+            bool replace = false;
             try
             {
-                parser.Update(book);
+                using (var stream = FileUtils.GetBookFile(book))
+                {
+                    replace = parser.Read(book, stream);
+                }
                 logger.Debug("Book updated successfully, id:{0}", book.Id);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                logger.Debug("Book update failed, id:{0}", book.Id);
+                logger.Debug("Book update failed, id:{0}. {1}", book.Id, e.Message);
             }
 
             if (importer == null)
@@ -47,7 +46,11 @@ namespace DotOPDS.Parsers
                 importer = new LuceneIndexStorage();
                 importer.Open(Settings.Instance.DatabaseIndex);
             }
-            importer.Replace(book);
+            if (replace)
+            {
+                book.UpdatedFromFile = true;
+                importer.Replace(book);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿#if DEBUG_FIXTURE
+using CommandLine;
 using CommandLine.Text;
 using DotOPDS.Models;
 using DotOPDS.Utils;
@@ -9,10 +10,9 @@ using System.Text;
 
 namespace DotOPDS.Commands
 {
-#if DEBUG
+
     [Verb("fixture",
         HelpText = "Output c# fixture data for tests.")]
-#endif
     class FixtureOptions : BaseOptions
     {
         [Value(0, MetaName = "input file",
@@ -105,3 +105,4 @@ namespace DotOPDS.Tests
         }
     }
 }
+#endif

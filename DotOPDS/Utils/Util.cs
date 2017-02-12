@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace DotOPDS.Utils
 {
@@ -26,45 +23,6 @@ namespace DotOPDS.Utils
                 int p = (int)Environment.OSVersion.Platform;
                 return (p == 4) || (p == 6) || (p == 128);
             }
-        }
-
-        private static Regex reEncoding = new Regex("encoding=\"(.+?)\"", RegexOptions.IgnoreCase);
-        public static Encoding DetectXmlEncoding(Stream stream)
-        {
-            var result = Encoding.Default;
-            try
-            {
-                stream.Seek(0, SeekOrigin.Begin);
-                var reader = new StreamReader(stream);
-                string line;
-                do
-                {
-                    line = reader.ReadLine();
-                }
-                while (string.IsNullOrWhiteSpace(line) && !reader.EndOfStream);
-
-                if (line.Contains("encoding"))
-                {
-                    var res = reEncoding.Match(line);
-                    if (res.Success)
-                    {
-                        result = Encoding.GetEncoding(res.Groups[1].Value);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-            }
-
-            stream.Seek(0, SeekOrigin.Begin);
-            return result;
-        }
-
-        public static string GetInnerXml(XElement el)
-        {
-            var elems = el.IgnoreNamespace().Elements().Select(o => o.ToString());
-            var innerXml = string.Join("", elems).Trim();
-            return innerXml;
         }
 
         private static Dictionary<char, string> dangerChars = new Dictionary<char, string>
@@ -94,9 +52,10 @@ namespace DotOPDS.Utils
         public static string GetBookSafeName(Book book, string ext)
         {
             var result = book.Title;
-            if (book.Authors.Length > 0)
+            var firstAuthor = book.Authors.FirstOrDefault();
+            if (firstAuthor != null)
             {
-                result = string.Format("{0} - {1}", book.Authors[0].GetScreenName(), result);
+                result = string.Format("{0} - {1}", firstAuthor.GetScreenName(), result);
             }
             return string.Format("{0}.{1}", FilterDangerChars(result), ext);
         }

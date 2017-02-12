@@ -61,13 +61,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotOPDS.Plugin.BookProvider.Inpx\DotOPDS.Plugin.BookProvider.Inpx.csproj">
+      <Project>{ce8035ac-186f-4090-96e7-4d186f5f3d0b}</Project>
+      <Name>DotOPDS.Plugin.BookProvider.Inpx</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotOPDS\DotOPDS.csproj">
       <Project>{3848799e-c3ff-4811-8831-4bebf41eac6a}</Project>
       <Name>DotOPDS</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,16 +1,67 @@
-﻿using System;
-using System.Linq;
+﻿using DotOPDS.Plugins;
+using System;
 using DotOPDS.Models;
-using System.IO;
 using System.Xml.Linq;
-using DotOPDS.Utils;
-using NLog;
+using System.Linq;
+using System.IO;
 
-namespace DotOPDS.Parsers
+namespace DotOPDS.Plugin.FileFormat.Fb2
 {
-    class Fb2Parser : IBookParser
+    public class Fb2 : IFileFormat
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        public Version Version => new Version(1, 0);
+        public string Name => "FB2 file format";
+        public string Extension => "fb2";
+
+        private IPluginHost _host;
+        private ILogger logger;
+
+        public bool Initialize(IPluginHost host)
+        {
+            _host = host;
+            logger = _host.GetLogger("Fb2");
+            return true;
+        }
+
+        public void Terminate()
+        {
+        }
+
+        public bool Read(Book book, Stream stream)
+        {
+            var mem = new MemoryStream();
+            stream.CopyTo(mem);
+            var encoding = Util.DetectXmlEncoding(mem);
+            logger.Trace($"Book encoding detected, id:{book.Id}, enc:{encoding}");
+
+            using (var reader = new StreamReader(mem, encoding))
+            {
+                using (var sgmlReader = new Sgml.SgmlReader())
+                {
+                    sgmlReader.InputStream = reader;
+                    var doc = XDocument.Load(sgmlReader);
+                    logger.Trace($"Book file loaded, id:{book.Id}");
+
+                    try
+                    {
+                        UpdateAnnotation(book, doc);
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+                    try
+                    {
+                        UpdateCover(book, doc);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+
+            return true;
+        }
 
         private void UpdateAnnotation(Book book, XDocument doc)
         {
@@ -35,8 +86,7 @@ namespace DotOPDS.Parsers
             book.Cover = new Cover
             {
                 Data = bin,
-                ContentType = ctype,
-                Has = true
+                ContentType = ctype
             };
         }
 
@@ -60,48 +110,6 @@ namespace DotOPDS.Parsers
                 if (firstImage != null)
                 {
                     ExtractImage(book, doc, firstImage);
-                }
-                else
-                {
-                    book.Cover = new Cover { Has = false };
-                }
-            }
-        }
-
-        public void Update(Book book)
-        {
-            using (var stream = FileUtils.GetBookFile(book))
-            {
-                var mem = new MemoryStream();
-                stream.CopyTo(mem);
-                var encoding = Util.DetectXmlEncoding(mem);
-                logger.Trace("Book encoding detected, id:{0}, enc:{1}", book.Id, encoding);
-
-                using (var reader = new StreamReader(mem, encoding))
-                {
-                    using (var sgmlReader = new Sgml.SgmlReader())
-                    {
-                        sgmlReader.InputStream = reader;
-                        var doc = XDocument.Load(sgmlReader);
-                        logger.Trace("Book file loaded, id:{0}", book.Id);
-
-                        try
-                        {
-                            UpdateAnnotation(book, doc);
-                        }
-                        catch (Exception)
-                        {
-                        }
-
-                        try
-                        {
-                            UpdateCover(book, doc);
-                        }
-                        catch (Exception)
-                        {
-                            book.Cover = new Cover { Has = false };
-                        }
-                    }
                 }
             }
         }

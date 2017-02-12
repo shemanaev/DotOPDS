@@ -26,13 +26,14 @@ namespace DotOPDS
         public int Pagination { get; set; }
         public List<SettingsConverter> Converters { get; set; }
         [JsonIgnore]
-        public Dictionary<Guid, SettingsLibrary> Libraries { get; set; } = new Dictionary<Guid, SettingsLibrary>();
+        public Dictionary<Guid, SettingsLibrary> Libraries => librariesIndex.Libraries;
 
         #region Static routines
         public static string FileName { get; private set; }
         private static string bannedFileName;
         private static string librariesFileName;
         private static Settings instance;
+        private static LibrariesIndex librariesIndex = new LibrariesIndex();
         private static JsonSerializerSettings jsonSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private static string build = ((AssemblyInformationalVersionAttribute)Assembly
@@ -60,7 +61,7 @@ namespace DotOPDS
             if (!File.Exists(FileName))
             {
                 Console.Error.WriteLine("Config file {0} does not exists.", FileName);
-                Console.Error.WriteLine("Try using 'init' command first:", FileName);
+                Console.Error.WriteLine("Try using 'init' command first:");
                 Console.Error.WriteLine("\tDotOPDS init -c \"{0}\"", FileName);
                 Environment.Exit(1);
             }
@@ -76,7 +77,13 @@ namespace DotOPDS
             {
                 using (var reader = File.OpenText(librariesFileName))
                 {
-                    instance.Libraries = JsonConvert.DeserializeObject<Dictionary<Guid, SettingsLibrary>>(reader.ReadToEnd(), jsonSettings);
+                    librariesIndex = JsonConvert.DeserializeObject<LibrariesIndex>(reader.ReadToEnd(), jsonSettings);
+                    if (librariesIndex.Version != LuceneIndexStorage.VERSION)
+                    {
+                        Console.Error.WriteLine($"Wrong libraries index version: {librariesIndex.Version}, expected: {LuceneIndexStorage.VERSION}.");
+                        Environment.Exit(-1);
+                        return;
+                    }
                 }
             }
 
@@ -103,7 +110,8 @@ namespace DotOPDS
 
             using (var writer = File.CreateText(librariesFileName))
             {
-                var s = JsonConvert.SerializeObject(instance.Libraries, Formatting.Indented, jsonSettings);
+                if (librariesIndex.Version == -1) librariesIndex.Version = LuceneIndexStorage.VERSION;
+                var s = JsonConvert.SerializeObject(librariesIndex, Formatting.Indented, jsonSettings);
                 writer.Write(s);
             }
 
@@ -183,5 +191,11 @@ namespace DotOPDS
     public class SettingsLibrary
     {
         public string Path { get; set; }
+    }
+
+    class LibrariesIndex
+    {
+        public int Version { get; set; } = -1;
+        public Dictionary<Guid, SettingsLibrary> Libraries { get; set; } = new Dictionary<Guid, SettingsLibrary>();
     }
 }

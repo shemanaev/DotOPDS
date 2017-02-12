@@ -1,0 +1,88 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DotOPDS 1.0\n"
+"POT-Creation-Date: 2017-02-09 22:09+0300\n"
+"PO-Revision-Date: 2017-02-09 22:09+0300\n"
+"Last-Translator: Denis Shemanaev <denis.shemanaev@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: GetString;GetPluralString:1,2;"
+"GetParticularString:1c,2;GetParticularPluralString:1c,2,3;_;_n:1,2;"
+"_p:1c,2;_pn:1c,2,3\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Controllers/SearchController.cs:22
+msgid "title"
+msgstr "названиях"
+
+#: Controllers/SearchController.cs:23
+msgid "author"
+msgstr "авторах"
+
+#: Controllers/SearchController.cs:24
+msgid "series"
+msgstr "сериях"
+
+#: Controllers/SearchController.cs:53 Controllers/SearchController.cs:260
+msgid "Books by genres"
+msgstr "Книги по жанрам"
+
+#: Controllers/SearchController.cs:55
+msgid "Browse books by genres"
+msgstr "Просмотр книг по жанрам"
+
+#: Controllers/SearchController.cs:73
+msgid "Search everywhere"
+msgstr "Искать везде"
+
+#: Controllers/SearchController.cs:75
+msgid "Search in titles, authors and series"
+msgstr "Искать в названиях, авторах и сериях"
+
+#: Controllers/SearchController.cs:82 Controllers/SearchController.cs:84
+#, csharp-format
+msgid "Search in {0}"
+msgstr "Искать в {0}"
+
+#: Controllers/SearchController.cs:90 Controllers/SearchController.cs:92
+msgid "Advanced search"
+msgstr "Расширенный поиск"
+
+#: Controllers/SearchController.cs:111 Controllers/SearchController.cs:140
+#: Controllers/SearchController.cs:165
+#, csharp-format
+msgid "Search results: {0}"
+msgstr "Результаты поиска: {0}"
+
+#: Controllers/SearchController.cs:189 Controllers/SearchController.cs:260
+#: Controllers/SearchController.cs:274
+#, csharp-format
+msgid "Books in the genre of {0}"
+msgstr "Книги жанра {0}"
+
+#: Controllers/SearchController.cs:214
+#, csharp-format
+msgid "Books by {0}"
+msgstr "Книги автора {0}"
+
+#: Controllers/SearchController.cs:239
+#, csharp-format
+msgid "Books in the series {0}"
+msgstr "Книги серии {0}"
+
+#: Controllers/SearchController.cs:360
+#, csharp-format
+msgid "All books by {0}"
+msgstr "Все книги автора {0}"
+
+#: Controllers/SearchController.cs:380
+msgid "All books in the series"
+msgstr "Все книги из серии"

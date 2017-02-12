@@ -11,6 +11,7 @@ before_build:
   - ps: nuget restore
 after_build:
   - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml -x!FSharp.Core.dll
+  - 7z a DotOPDS-pdb.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.xml -x!*.dll -x!*.exe -x!*.config
 
 assembly_info:
   patch: true
@@ -28,3 +29,15 @@ test: off
 artifacts:
   - path: 'DotOPDS.zip'
     name: release_archive
+  - path: 'DotOPDS-pdb.zip'
+    name: debug_symbols
+
+deploy:
+- provider: GitHub
+  auth_token:
+    secure: TxP8eEzFcS3XuTx/zRKV4Pev1x6D4egsnIoonP6ArBpqFy5V50DwgrRnIMETEN56
+  artifact: release_archive,debug_symbols
+  draft: true
+  force_update: true
+  on:
+    appveyor_repo_tag: true

@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using DotOPDS.Plugins;
 using DotOPDS.Tasks;
 using NLog;
 
@@ -18,6 +19,7 @@ namespace DotOPDS.Commands
         {
             var opts = (ServeOptions)options;
             Settings.Load(opts.Config);
+            PluginProvider.Instance.Initialize();
 
             logger.Info("Hit Ctrl+C to stop");
             using (var task = new ServeTask())
