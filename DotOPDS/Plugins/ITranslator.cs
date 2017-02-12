@@ -1,5 +1,9 @@
 ﻿namespace DotOPDS.Plugins
 {
+    /// <summary>
+    /// Provides access to gettext localization files.
+    /// Localization files should be in "./locale/{lang}/{plugin name}.mo" along with plugin.
+    /// </summary>
     public interface ITranslator
     {
         string _(string text);

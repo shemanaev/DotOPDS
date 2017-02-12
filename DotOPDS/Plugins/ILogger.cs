@@ -1,5 +1,8 @@
 ﻿namespace DotOPDS.Plugins
 {
+    /// <summary>
+    /// Logging capabilities.
+    /// </summary>
     public interface ILogger
     {
         void Debug(string message);
