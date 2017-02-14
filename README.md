@@ -19,6 +19,10 @@ full archive of [lib.rus.ec][2] or [Flibusta][3].
 * `BookProvider.Inpx` - import `.inpx` files
 * `FileFormat.Fb2` - extracts annotation and cover from fb2 books
 
+## Third-party plugins
+
+* [Pdf tree import](https://github.com/GerritV/DotOPDS) - import `.pdf` files with genres tree from filesystem
+
 ## Getting started
 
 Download [latest release][4] and extract somewhere.
