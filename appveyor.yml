@@ -1,6 +1,6 @@
-version: 1.1.{build}
+version: 2.0.{build}
 
-os: Visual Studio 2015
+os: Visual Studio 2019
 platform: Any CPU
 configuration: Release
 build:
@@ -10,21 +10,19 @@ init:
 before_build:
   - ps: nuget restore
 after_build:
-  - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml -x!FSharp.Core.dll
+  - 7z a DotOPDS.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.pdb -x!*.xml
   - 7z a DotOPDS-pdb.zip %APPVEYOR_BUILD_FOLDER%\DotOPDS\bin\Release\* -r -x!*.xml -x!*.dll -x!*.exe -x!*.config
 
-assembly_info:
+dotnet_csproj:
   patch: true
-  file: AssemblyInfo.*
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
   assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}-$(GIT_HASH)-$(APPVEYOR_REPO_BRANCH)'
+  file_version: '{version}'
+  informational_version: '{version}-$(GIT_HASH)-$(APPVEYOR_REPO_BRANCH)'
 
 shallow_clone: true
-cache:
-  - packages -> **\packages.config
-
-test: off
 
 artifacts:
   - path: 'DotOPDS.zip'

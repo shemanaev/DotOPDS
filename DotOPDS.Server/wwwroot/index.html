@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DotOPDS Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico"> <!-- icons8.com http://www.iconsdb.com/royal-blue-icons/book-stack-icon.html -->
+  <link rel="stylesheet" href="/vendor/nprogress/nprogress.css">
+  <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <base href="/">
+</head>
+<body>
+  <div class="vertical-center" id="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <a href="/">
+          <h3 class="title">DotOPDS Catalog</h3>
+        </a>
+      </div>
+    </div>
+
+    <form>
+      <div class="row">
+        <div class="col-sm-10 col-xs-12">
+          <div class="input-group" id="search-holder">
+            <input class="form-control" type="text" name="q" placeholder="Поиск по книгам, сериям, авторам..." autofocus onfocus="this.value = this.value;">
+            <div class="spinner input-group-addon" role="spinner"><div class="spinner-icon"></div></div>
+            <span class="input-group-btn hidden-lg hidden-md hidden-sm">
+              <button class="btn btn-info" type="submit">Искать!</button>
+            </span>
+          </div>
+        </div>
+        <div class="col-sm-2 hidden-xs">
+          <button class="btn btn-info form-control" type="submit">Искать!</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row" id="search-info-found">
+          <div class="search-info">Найдено <span id="search-info-total"></span> книг.</div>
+          <nav class="pagination-fix">
+          </nav>
+        </div>
+        <div class="row" id="search-info-not-found">
+          <div class="search-info" id="search-info">Ничего не найдено :(</div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div id="entries"></div>
+
+        <div class="row">
+          <nav class="pagination-fix">
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/vendor/nprogress/nprogress.js"></script>
+  <script src="/vendor/handlebars/handlebars.js"></script>
+  <script src="/vendor/historyjs/jquery.history.js"></script>
+  <script src="/vendor/jquery/jquery.binarytransport.js"></script>
+  <script src="/vendor/content-disposition/emailjs-mime-codec.js"></script>
+  <script src="/js/main.js"></script>
+
+
+  <script id="entry-template" type="text/x-handlebars-template">
+    <div class="book" itemscope itemtype="http://schema.org/Book">
+      <img itemprop="cover" class="book-details--cover" src="{{#if cover}}{{cover}}{{else}}data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs={{/if}}"/>
+      <div class="book-details book-details-img">
+        <h1 itemprop="name" class="book-details--title">{{title}}</h1>
+
+      {{#if authors.length}}
+        <div class="book-details--author">
+          <label class="author-name">
+            {{#ifCond authors.length '==' 1}}
+              <text>Автор</text>
+            {{else}}
+              <text>Авторы</text>
+            {{/ifCond}}
+            книги:
+          </label>
+          {{#each authors as |author|}}
+            <a class="comma-separated" href="{{author.name}}">
+              <span itemprop="author">{{author.name}}</span>
+            </a>
+          {{/each}}
+        </div>
+      {{/if}}
+
+        <div class="book-details--row pull-left">
+          <label class="row-label">
+            <span>
+            {{#ifCond categories.length '==' 1}}
+              <text>жанр:</text>
+            {{else}}
+              <text>жанры:</text>
+            {{/ifCond}}
+            </span>
+          </label>
+          <span class="row-value">
+          {{#each categories as |genre|}}
+            <a class="comma-separated" href="{{genre.label}}">
+              <span itemprop="genre">{{genre.label}}</span>
+            </a>
+          {{/each}}
+          </span>
+        </div>
+
+      {{#if series}}
+        <div class="book-details--row pull-left">
+          <label class="row-label">
+            <span>серия книг:</span>
+          </label>
+          <span class="row-value">
+            <a itemprop="series" href="{{series.name}}">{{series.name}}</a>
+            {{#if series.number}}
+              <text>({{series.number}}-я книга)</text>
+            {{/if}}
+          </span>
+        </div>
+      {{/if}}
+
+      {{#if content}}
+      <div class="clearfix"></div>
+      <div class="book-details--summary">{{{content.text}}}</div>
+      {{/if}}
+
+      </div>
+
+      <div class="btn-group pull-right download">
+        <a class="btn btn-default" href="{{downloadMain.href}}" data-index="{{idx}}" data-main="{{idx}}" role="download">
+          <div class="btn-checkmark">
+            <div class="btn-checkmark_stem"></div>
+            <div class="btn-checkmark_kick"></div>
+          </div>
+          <div class="btn-cross">
+            <div class="btn-cross_stem"></div>
+            <div class="btn-cross_kick"></div>
+          </div>
+          <div class="btn-spinner"><div class="spinner-icon"></div></div>
+          <span>Скачать</span>
+        </a>
+        {{#if downloads.length}}
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            {{#each downloads as |download|}}
+              <li><a href="{{download.href}}" data-index="{{../idx}}" role="download">Скачать в <b class="uppercase">{{download.format}}</b></a></li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </script>
+
+
+</body>
+</html>

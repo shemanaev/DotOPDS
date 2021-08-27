@@ -9,104 +9,98 @@ full archive of [lib.rus.ec][2] or [Flibusta][3].
 * Plugins support
 * Support for external converters
 * OPDS catalog localization
-* Basic authentication support
-* Works on Windows (.NET 4.5.2) and Linux (mono 4.2.3) *(not tested on OS X)*
 * Cover and annotation extraction *(experimental)*
-* Web interface support (not included, see example [here][6])
-
-## Included plugins
-
-* `BookProvider.Inpx` - import `.inpx` files
-* `FileFormat.Fb2` - extracts annotation and cover from fb2 books
-
-## Third-party plugins
-
-* [Pdf tree import](https://github.com/GerritV/DotOPDS) - import `.pdf` files with genres tree from filesystem
+* Web interface
 
 ## Getting started
 
 Download [latest release][4] and extract somewhere.
-Now create default configuration file:
+Copy `appsettings.json` to `appsettings.Production.json` and customize it or use any other method to configure [ASP.NET Core Application][6]
 
-    DotOPDS init -c path/to/config
-
-`-c` parameter is optional and can be used with any command.
-By default configuration stored in
-`%APPDATA%\DotOPDS\default.json` on Windows
-and in `$HOME/.config/DotOPDS/default.json` on Linux.
-
-Now edit configuration file if needed:
+Settings description:
 
 ```js
 {
-    "port": 8080,
-    "title": "DotOPDS Library", // OPDS title
-    "language": "en", // OPDS language
-    "lazyInfoExtract": false, // should server try to extract cover and annotation from book?
-    "database": "%APPDATA%/DotOPDS/database", // path to database storage
-    "web": "", // path to web interface files
-    "log": {
-        "level": "info", // log level
-        "enabled": true, // should server write log to files?
-        "path": "%APPDATA%/DotOPDS/logs"
-    },
-    "authentication": {
-        "enabled": false, // enable basic authentication
-        "attempts": 3, // how many wrong auth attempts before ban. Banned ips stored in banned.json near config file
-        "users": {
-            "user": "pass"
-        }
-    },
-    "pagination": 10, // how many books per page
-    "converters": [
-        {
-            "from": "fb2", // file extension
-            "to": "epub",
-            "command": "Fb2ePub",
-            "arguments": "{0} {1}" // {0} - from, {1} - to
-        }
-    ]
+  "Presentation": {
+    "DefaultLanguage": "en", // language used to index texts
+    "PageSize": 10, // how many items per page to show
+    "Title": "DotOPDS Library", // OPDS title
+    "LazyInfoExtract": false, // try to extract cover and annotation from book before displaying
+    "Converters": [
+      {
+        "From": "fb2", // file extension
+        "To": "epub", // file extension
+        "Command": "fb2epub.exe", // path to converter
+        "Arguments": "{0} {1}" // {0} - from, {1} - to
+      }
+    ],
+  },
+  "IndexStorage": {
+    "Path": "./database" // path to database storage
+  }
 }
 ```
 
 Import library index from `.inpx` file:
 
-    DotOPDS import inpx D:\library D:\lib.inpx
+```shell
+DotOPDS import inpx C:\library C:\lib.inpx
+```
 
 To see available import plugins type:
 
-    DotOPDS import help
-    DotOPDS import help inpx # plugin help
+```shell
+DotOPDS import help
+DotOPDS import help inpx # plugin help
+```
 
 Now just start server:
 
-    DotOPDS serve
+```shell
+DotOPDS.Server
+```
 
-and OPDS will be available at [http://localhost:8080/opds](http://localhost:8080/opds)
+and OPDS will be available at [http://localhost:5000/opds](http://localhost:5000/opds)
 
 You always can use `help` command to get more info.
 
-### Install as windows service
+## Docker
 
-Use [NSSM][5], Luke!
+### Build the image
 
-## TODO
+```shell
+docker build . -t dotopds
+```
 
-* support for more file formats (epub)
+### Run the image
 
-## License
+```shell
+docker run -it -p 5000:80 -v databasePath:/app/database dotopds
+```
 
-[MIT](LICENSE)
+### Manage data in docker
+
+Find container id with `docker ps` and get into it
+
+```shell
+docker exec -it CONTAINER_ID /bin/bash
+```
+
+## Included plugins
+
+* `BookProvider.Inpx` - import `.inpx` files
+* `FileFormat.Fb2` - extract annotation and cover from fb2 books
 
 ## Preparing release
- * Bump version in `appveyor.yml`
- * Make tag with version number
- * Wait for ci build completed and edit draft description
- * Publish
+
+* Bump version in `appveyor.yml`
+* Make tag with version number
+* Wait for ci build completed and edit draft description
+* Publish
 
 [1]: https://en.wikipedia.org/wiki/OPDS
 [2]: http://lib.rus.ec
 [3]: http://flibusta.is
-[4]: https://github.com/DeniSix/DotOPDS/releases
+[4]: https://github.com/shemanaev/DotOPDS/releases
 [5]: https://nssm.cc
-[6]: https://github.com/DeniSix/DotOPDS-web
+[6]: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0#configuration-providers

@@ -1,15 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26127.3
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS", "DotOPDS\DotOPDS.csproj", "{3848799E-C3FF-4811-8831-4BEBF41EAC6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.Server", "DotOPDS.Server\DotOPDS.Server.csproj", "{3848799E-C3FF-4811-8831-4BEBF41EAC6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Tests", "DotOPDS.Tests\DotOPDS.Tests.csproj", "{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.Server.Tests", "DotOPDS.Server.Tests\DotOPDS.Server.Tests.csproj", "{DA9E5154-E386-4D17-A6E1-2F6CD7A3A051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Plugin.FileFormat.Fb2", "DotOPDS.Plugin.FileFormat.Fb2\DotOPDS.Plugin.FileFormat.Fb2.csproj", "{BF1AAC79-02DD-4075-B675-1EA19439B810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.FileFormat.Fb2", "DotOPDS.FileFormat.Fb2\DotOPDS.FileFormat.Fb2.csproj", "{BF1AAC79-02DD-4075-B675-1EA19439B810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotOPDS.Plugin.BookProvider.Inpx", "DotOPDS.Plugin.BookProvider.Inpx\DotOPDS.Plugin.BookProvider.Inpx.csproj", "{CE8035AC-186F-4090-96E7-4D186F5F3D0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.BookProvider.Inpx", "DotOPDS.BookProvider.Inpx\DotOPDS.BookProvider.Inpx.csproj", "{CE8035AC-186F-4090-96E7-4D186F5F3D0B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.Contract", "DotOPDS.Contract\DotOPDS.Contract.csproj", "{52A55AB6-BEBD-484D-BCA2-341BD06CAC5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS", "DotOPDS\DotOPDS.csproj", "{6318F30F-6F3D-41F9-B703-CA23F6EC894C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.Shared", "DotOPDS.Shared\DotOPDS.Shared.csproj", "{1C6A71CC-3191-4563-B532-BC1C2BBFEA84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.BookProvider.Inpx.Tests", "DotOPDS.BookProvider.Inpx.Tests\DotOPDS.BookProvider.Inpx.Tests.csproj", "{90AC5989-53F0-4AA3-B12E-84209147952F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotOPDS.Server.Tests.Helper", "DotOPDS.Server.Tests.Helper\DotOPDS.Server.Tests.Helper.csproj", "{0DA9FE89-1E2A-4402-9AA3-BEF3BA3F472A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +43,31 @@ Global
 		{CE8035AC-186F-4090-96E7-4D186F5F3D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE8035AC-186F-4090-96E7-4D186F5F3D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE8035AC-186F-4090-96E7-4D186F5F3D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A55AB6-BEBD-484D-BCA2-341BD06CAC5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A55AB6-BEBD-484D-BCA2-341BD06CAC5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A55AB6-BEBD-484D-BCA2-341BD06CAC5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A55AB6-BEBD-484D-BCA2-341BD06CAC5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6318F30F-6F3D-41F9-B703-CA23F6EC894C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6318F30F-6F3D-41F9-B703-CA23F6EC894C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6318F30F-6F3D-41F9-B703-CA23F6EC894C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6318F30F-6F3D-41F9-B703-CA23F6EC894C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C6A71CC-3191-4563-B532-BC1C2BBFEA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C6A71CC-3191-4563-B532-BC1C2BBFEA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C6A71CC-3191-4563-B532-BC1C2BBFEA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C6A71CC-3191-4563-B532-BC1C2BBFEA84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90AC5989-53F0-4AA3-B12E-84209147952F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90AC5989-53F0-4AA3-B12E-84209147952F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90AC5989-53F0-4AA3-B12E-84209147952F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90AC5989-53F0-4AA3-B12E-84209147952F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA9FE89-1E2A-4402-9AA3-BEF3BA3F472A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA9FE89-1E2A-4402-9AA3-BEF3BA3F472A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA9FE89-1E2A-4402-9AA3-BEF3BA3F472A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA9FE89-1E2A-4402-9AA3-BEF3BA3F472A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEC8CCD6-4AE5-46B1-856C-98A3439CCC0B}
 	EndGlobalSection
 EndGlobal

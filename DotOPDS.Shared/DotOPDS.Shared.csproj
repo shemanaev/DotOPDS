@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GetText.NET" Version="0.12.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0-preview.7.21377.19" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0-preview.7.21377.19" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0-preview.7.21377.19" />
+    <PackageReference Include="Lucene.Net.Contrib" Version="3.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0-preview.7.21377.19" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0-preview.7.21377.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotOPDS.BookProvider.Inpx\DotOPDS.BookProvider.Inpx.csproj" />
+    <ProjectReference Include="..\DotOPDS.FileFormat.Fb2\DotOPDS.FileFormat.Fb2.csproj" />
+    <ProjectReference Include="..\DotOPDS.Contract\DotOPDS.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

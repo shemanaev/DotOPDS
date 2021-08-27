@@ -1,0 +1,1121 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: DotOPDS.BookProvider.Inpx 1.0\n"
+"POT-Creation-Date: 2017-02-09 19:18+0300\n"
+"PO-Revision-Date: 2017-02-09 19:27+0300\n"
+"Last-Translator: Denis Shemanaev <denis.shemanaev@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: GetString;GetPluralString:1,2;"
+"GetParticularString:1c,2;GetParticularPluralString:1c,2,3;_;_n:1,2;"
+"_p:1c,2;_pn:1c,2,3\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: Genres.cs:37
+msgid "Accounting"
+msgstr "Бухучет и аудит"
+
+#: Genres.cs:38
+msgid "Nature & Animals"
+msgstr "Природа и животные"
+
+#: Genres.cs:39
+msgid "Travel & Geography"
+msgstr "Путешествия и география"
+
+#: Genres.cs:40
+msgid "Historical adventures"
+msgstr "Исторические приключения"
+
+#: Genres.cs:41
+msgid "Indians"
+msgstr "Приключения про индейцев"
+
+#: Genres.cs:42
+msgid "Maritime Fiction"
+msgstr "Морские приключения"
+
+#: Genres.cs:43
+msgid "Western"
+msgstr "Вестерн"
+
+#: Genres.cs:44
+msgid "Misk Adventures"
+msgstr "Приключения: прочее"
+
+#: Genres.cs:45
+msgid "Other Antique"
+msgstr "Старинная литература: прочее"
+
+#: Genres.cs:46
+msgid "Antique Literature"
+msgstr "Античная литература"
+
+#: Genres.cs:47
+msgid "Antique East Literature"
+msgstr "Древневосточная литература"
+
+#: Genres.cs:48
+msgid "Antique European Literature"
+msgstr "Древнеевропейская литература"
+
+#: Genres.cs:49
+msgid "Myths. Legends. Epos"
+msgstr "Мифы. Легенды. Эпос"
+
+#: Genres.cs:50
+msgid "Antique Russian Literature"
+msgstr "Древнерусская литература"
+
+#: Genres.cs:51
+msgid "Aphorisms"
+msgstr "Афоризмы"
+
+#: Genres.cs:52
+msgid "Architecture"
+msgstr "Архитектура"
+
+#: Genres.cs:53
+msgid "Astrology"
+msgstr "Астрология"
+
+#: Genres.cs:54
+msgid "Auto regulations"
+msgstr "Автомобили и ПДД"
+
+#: Genres.cs:55
+msgid "Banking"
+msgstr "Банковское дело"
+
+#: Genres.cs:56
+msgid "Adventures for Kids"
+msgstr "Детские приключения"
+
+#: Genres.cs:57
+msgid "Detective for Kids"
+msgstr "Детские остросюжетные"
+
+#: Genres.cs:58
+msgid "Education for Kids"
+msgstr "Образовательная литература"
+
+#: Genres.cs:59
+msgid "Child Folklore"
+msgstr "Детский фольклор"
+
+#: Genres.cs:60
+msgid "Prose for Kids"
+msgstr "Детская проза"
+
+#: Genres.cs:61
+msgid "Science Fiction for Kids"
+msgstr "Детская фантастика"
+
+#: Genres.cs:62
+msgid "Fairy Tales"
+msgstr "Сказка"
+
+#: Genres.cs:63
+msgid "Verses for Kids"
+msgstr "Детские стихи"
+
+#: Genres.cs:64
+msgid "For Kids: Misk"
+msgstr "Детская литература: прочее"
+
+#: Genres.cs:65
+msgid "Cine"
+msgstr "Кино"
+
+#: Genres.cs:66
+msgid "Comedy"
+msgstr "Комедия"
+
+#: Genres.cs:67
+msgid "Databases"
+msgstr "Базы данных"
+
+#: Genres.cs:68
+msgid "DSP"
+msgstr "Цифровая обработка сигналов"
+
+#: Genres.cs:69
+msgid "Hardware"
+msgstr "Аппаратное обеспечение"
+
+#: Genres.cs:70
+msgid "OS & Networking"
+msgstr "ОС и Сети"
+
+#: Genres.cs:71
+msgid "Programming"
+msgstr "Программирование"
+
+#: Genres.cs:72
+msgid "Software"
+msgstr "Программы"
+
+#: Genres.cs:73
+msgid "Internet"
+msgstr "Интернет"
+
+#: Genres.cs:74
+msgid "Computers: Misk"
+msgstr "Околокомпьютерная литература"
+
+#: Genres.cs:75
+msgid "Art, Design"
+msgstr "Искусство и Дизайн"
+
+#: Genres.cs:76
+msgid "Action"
+msgstr "Боевик"
+
+#: Genres.cs:77
+msgid "Classical Detective"
+msgstr "Классический детектив"
+
+#: Genres.cs:78
+msgid "Cozy Mysteries"
+msgstr "Дамский детективный роман"
+
+#: Genres.cs:79
+msgid "Crime Detective"
+msgstr "Криминальный детектив"
+
+#: Genres.cs:80
+msgid "Espionage Detective"
+msgstr "Шпионский детектив"
+
+#: Genres.cs:81
+msgid "Hard-boiled Detective"
+msgstr "Крутой детектив"
+
+#: Genres.cs:82
+msgid "Historical Detective"
+msgstr "Исторический детектив"
+
+#: Genres.cs:83
+msgid "Ironical Detective"
+msgstr "Иронический детектив"
+
+#: Genres.cs:84
+msgid "Maniacs"
+msgstr "Маньяки"
+
+#: Genres.cs:85
+msgid "Police Stories"
+msgstr "Полицейский детектив"
+
+#: Genres.cs:86
+msgid "Political Detective"
+msgstr "Политический детектив"
+
+#: Genres.cs:87
+msgid "Detective"
+msgstr "Детективы: прочее"
+
+#: Genres.cs:88
+msgid "Anti-Soviet fiction"
+msgstr "Антисоветская литература"
+
+#: Genres.cs:89
+msgid "Drama"
+msgstr "Драма"
+
+#: Genres.cs:90
+msgid "Dramaturgy"
+msgstr "Драматургия: прочее"
+
+#: Genres.cs:91
+msgid "Economics"
+msgstr "Экономика"
+
+#: Genres.cs:92
+msgid "Epic"
+msgstr "Былины"
+
+#: Genres.cs:93
+msgid "Epic Poetry"
+msgstr "Эпическая поэзия"
+
+#: Genres.cs:94
+msgid "Epistolary"
+msgstr "Эпистолярная проза"
+
+#: Genres.cs:95
+msgid "Essay"
+msgstr "Эссе, очерк, этюд, набросок"
+
+#: Genres.cs:96
+msgid "Experimental Poetry"
+msgstr "Экспериментальная поэзия"
+
+#: Genres.cs:97
+msgid "Extravaganza"
+msgstr "Феерия"
+
+#: Genres.cs:98
+msgid "Fable"
+msgstr "Басни"
+
+#: Genres.cs:99
+msgid "Fairy SF"
+msgstr "Сказочная фантастика"
+
+#: Genres.cs:100
+msgid "Fan fiction"
+msgstr "Фанфик"
+
+#: Genres.cs:101
+msgid "Folk Songs"
+msgstr "Народные песни"
+
+#: Genres.cs:102
+msgid "Folk tales"
+msgstr "Народные сказки"
+
+#: Genres.cs:103
+msgid "Folklore"
+msgstr "Фольклор: прочее"
+
+#: Genres.cs:104
+msgid "Foreign languages"
+msgstr "Иностранные языки"
+
+#: Genres.cs:105
+msgid "Guides"
+msgstr "Путеводители"
+
+#: Genres.cs:106
+msgid "Global Economy"
+msgstr "Внешняя торговля"
+
+#: Genres.cs:107
+msgid "Gothic novel"
+msgstr "Готический роман"
+
+#: Genres.cs:108
+msgid "Great story"
+msgstr "Повесть"
+
+#: Genres.cs:109
+msgid "Historical fantasy"
+msgstr "Историческое фэнтези"
+
+#: Genres.cs:110
+msgid "Home: Other"
+msgstr "Домоводство"
+
+#: Genres.cs:111
+msgid "Collecting"
+msgstr "Коллекционирование"
+
+#: Genres.cs:112
+msgid "Cooking"
+msgstr "Кулинария"
+
+#: Genres.cs:113
+msgid "Hobbies & Crafts"
+msgstr "Хобби и ремесла"
+
+#: Genres.cs:114
+msgid "Do it yourself"
+msgstr "Сделай сам"
+
+#: Genres.cs:115
+msgid "Entertaining"
+msgstr "Развлечения"
+
+#: Genres.cs:116
+msgid "Garden"
+msgstr "Сад и огород"
+
+#: Genres.cs:117
+msgid "Health"
+msgstr "Здоровье"
+
+#: Genres.cs:118
+msgid "Pets"
+msgstr "Домашние животные"
+
+#: Genres.cs:119
+msgid "Erotica, Sex"
+msgstr "Эротика, Секс"
+
+#: Genres.cs:120
+msgid "Sports"
+msgstr "Спорт"
+
+#: Genres.cs:121
+msgid "Misk Humor"
+msgstr "Юмор: прочее"
+
+#: Genres.cs:122
+msgid "Anecdote"
+msgstr "Анекдоты"
+
+#: Genres.cs:123
+msgid "Humorous fantasy"
+msgstr "Юмористическое фэнтези"
+
+#: Genres.cs:124
+msgid "Humor Prose"
+msgstr "Юмористическая проза"
+
+#: Genres.cs:125
+msgid "Satire"
+msgstr "Сатира"
+
+#: Genres.cs:126
+msgid "Humor Verses"
+msgstr "Юмористические стихи"
+
+#: Genres.cs:127
+msgid "In verse"
+msgstr "В стихах"
+
+#: Genres.cs:128
+msgid "Industries"
+msgstr "Отраслевые издания"
+
+#: Genres.cs:129
+msgid "Job Hunting"
+msgstr "Поиск работы, карьера"
+
+#: Genres.cs:130
+msgid "Limerick"
+msgstr "Частушки, прибаутки, потешки"
+
+#: Genres.cs:131
+msgid "About love"
+msgstr "О любви"
+
+#: Genres.cs:132
+msgid "Contemporary Romance"
+msgstr "Современные любовные романы"
+
+#: Genres.cs:133
+msgid "Detective Romance"
+msgstr "Любовные детективы"
+
+#: Genres.cs:134
+msgid "Erotica"
+msgstr "Эротика"
+
+#: Genres.cs:135
+msgid "Porno"
+msgstr "Порно"
+
+#: Genres.cs:136
+msgid "Historical Romance"
+msgstr "Исторические любовные романы"
+
+#: Genres.cs:137
+msgid "Love SF"
+msgstr "Любовная фантастика"
+
+#: Genres.cs:138
+msgid "Short Romance"
+msgstr "Короткие любовные романы"
+
+#: Genres.cs:139
+msgid "Lyrics"
+msgstr "Лирика"
+
+#: Genres.cs:140
+msgid "Management"
+msgstr "Управление, подбор персонала"
+
+#: Genres.cs:141
+msgid "Marketing, PR, Adv"
+msgstr "Маркетинг, PR, реклама"
+
+#: Genres.cs:142
+msgid "Military"
+msgstr "Военное дело: прочее"
+
+#: Genres.cs:143
+msgid "Military Arts"
+msgstr "Боевые искусства"
+
+#: Genres.cs:144
+msgid "Military History"
+msgstr "Военная история"
+
+#: Genres.cs:145
+msgid "Military special"
+msgstr "Cпецслужбы"
+
+#: Genres.cs:146
+msgid "Weapon"
+msgstr "Военная техника и вооружение"
+
+#: Genres.cs:147
+msgid "Music"
+msgstr "Музыка"
+
+#: Genres.cs:148
+msgid "Mystery"
+msgstr "Мистерия"
+
+#: Genres.cs:149
+msgid "Biography & Memoirs"
+msgstr "Биографии и Мемуары"
+
+#: Genres.cs:150
+msgid "Criticism"
+msgstr "Критика"
+
+#: Genres.cs:151
+msgid "Military docs"
+msgstr "Военная документалистика"
+
+#: Genres.cs:152
+msgid "Publicism"
+msgstr "Публицистика"
+
+#: Genres.cs:153
+msgid "Misk Nonfiction"
+msgstr "Документальная литература"
+
+#: Genres.cs:154
+msgid "Notes"
+msgstr "Партитуры"
+
+#: Genres.cs:155
+msgid "Non Science Fiction"
+msgstr "Ненаучная фантастика"
+
+#: Genres.cs:156
+msgid "Corporate Culture"
+msgstr "Корпоративная культура"
+
+#: Genres.cs:157
+msgid "Other"
+msgstr "Неотсортированное"
+
+#: Genres.cs:158
+msgid "Palindromes"
+msgstr "Палиндромы"
+
+#: Genres.cs:159
+msgid "Palmistry"
+msgstr "Хиромантия"
+
+#: Genres.cs:160
+msgid "Paper Work"
+msgstr "Делопроизводство"
+
+#: Genres.cs:161
+msgid "Periodic"
+msgstr "Газеты и журналы"
+
+#: Genres.cs:162
+msgid "Personal Finance"
+msgstr "Личные финансы"
+
+#: Genres.cs:163
+msgid "Poetry"
+msgstr "Поэзия: прочее"
+
+#: Genres.cs:164
+msgid "Trappee"
+msgstr "Попаданцы"
+
+#: Genres.cs:165
+msgid "Popular Business"
+msgstr "О бизнесе популярно"
+
+#: Genres.cs:166
+msgid "Prose"
+msgstr "Проза"
+
+#: Genres.cs:167
+msgid "Classical Prose"
+msgstr "Классическая проза"
+
+#: Genres.cs:168
+msgid "Contemporary Prose"
+msgstr "Современная проза"
+
+#: Genres.cs:169
+msgid "Counterculture"
+msgstr "Контркультура"
+
+#: Genres.cs:170
+msgid "Epopee"
+msgstr "Эпопея"
+
+#: Genres.cs:171
+msgid "Game book"
+msgstr "Книга-игра"
+
+#: Genres.cs:172
+msgid "Historical Prose"
+msgstr "Историческая проза"
+
+#: Genres.cs:173
+msgid "Magic realism"
+msgstr "Магический реализм"
+
+#: Genres.cs:174
+msgid "Military Prose"
+msgstr "О войне"
+
+#: Genres.cs:175
+msgid "Russian Classics"
+msgstr "Русская классическая проза"
+
+#: Genres.cs:176
+msgid "Sentimental Prose"
+msgstr "Сентиментальная проза"
+
+#: Genres.cs:177
+msgid "Soviet Classics"
+msgstr "Советская классическая проза"
+
+#: Genres.cs:178
+msgid "Proverbs"
+msgstr "Пословицы, поговорки"
+
+#: Genres.cs:179
+msgid "Child Psychology"
+msgstr "Детская психология"
+
+#: Genres.cs:180
+msgid "Sex and family"
+msgstr "Секс и семейная психология"
+
+#: Genres.cs:181
+msgid "Psychotherapy and counselling"
+msgstr "Психотерапия и консультирование"
+
+#: Genres.cs:182
+msgid "Real Estate"
+msgstr "Недвижимость"
+
+#: Genres.cs:183
+msgid "Dictionaries"
+msgstr "Словари"
+
+#: Genres.cs:184
+msgid "Encyclopedias"
+msgstr "Энциклопедии"
+
+#: Genres.cs:185
+msgid "Guidebooks"
+msgstr "Руководства"
+
+#: Genres.cs:186
+msgid "Reference"
+msgstr "Справочники"
+
+#: Genres.cs:187
+msgid "Misk References"
+msgstr "Справочная литература"
+
+#: Genres.cs:188
+msgid "Religion: Other"
+msgstr "Религиозная литература: прочее"
+
+#: Genres.cs:189
+msgid "Buddha"
+msgstr "Буддизм"
+
+#: Genres.cs:190
+msgid "Catholicism"
+msgstr "Католицизм"
+
+#: Genres.cs:191
+msgid "Christianity"
+msgstr "Христианство"
+
+#: Genres.cs:192
+msgid "Esoterics"
+msgstr "Эзотерика"
+
+#: Genres.cs:193
+msgid "Hinduism"
+msgstr "Индуизм"
+
+#: Genres.cs:194
+msgid "Islam"
+msgstr "Ислам"
+
+#: Genres.cs:195
+msgid "Judaism"
+msgstr "Иудаизм"
+
+#: Genres.cs:196
+msgid "Orthodoxy"
+msgstr "Православие"
+
+#: Genres.cs:197
+msgid "Paganism"
+msgstr "Язычество"
+
+#: Genres.cs:198
+msgid "Protestantism"
+msgstr "Протестантизм"
+
+#: Genres.cs:199
+msgid "Religion"
+msgstr "Религия"
+
+#: Genres.cs:200
+msgid "Self-perfection"
+msgstr "Самосовершенствование"
+
+#: Genres.cs:201
+msgid "Riddles"
+msgstr "Загадки"
+
+#: Genres.cs:202
+msgid "Roman"
+msgstr "Роман"
+
+#: Genres.cs:203
+msgid "Sagas"
+msgstr "Семейный роман/Семейная сага"
+
+#: Genres.cs:204
+msgid "Scenarios"
+msgstr "Сценарии"
+
+#: Genres.cs:205
+msgid "Abstract"
+msgstr "Рефераты"
+
+#: Genres.cs:206
+msgid "Analitic Chemistry"
+msgstr "Аналитическая химия"
+
+#: Genres.cs:207
+msgid "Biochemistry"
+msgstr "Биохимия"
+
+#: Genres.cs:208
+msgid "Biology"
+msgstr "Биология"
+
+#: Genres.cs:209
+msgid "Biophysics"
+msgstr "Биофизика"
+
+#: Genres.cs:210
+msgid "Botany"
+msgstr "Ботаника"
+
+#: Genres.cs:211
+msgid "Building"
+msgstr "Строительство и сопромат"
+
+#: Genres.cs:212
+msgid "Business"
+msgstr "Деловая литература"
+
+#: Genres.cs:213
+msgid "Chemistry"
+msgstr "Химия"
+
+#: Genres.cs:214
+msgid "Cosmos"
+msgstr "Астрономия и Космос"
+
+#: Genres.cs:215
+msgid "Cribs"
+msgstr "Шпаргалки"
+
+#: Genres.cs:216
+msgid "Cultural Science"
+msgstr "Культурология"
+
+#: Genres.cs:217
+msgid "Ecology"
+msgstr "Экология"
+
+#: Genres.cs:218
+msgid "Economy"
+msgstr "Экономика"
+
+#: Genres.cs:219
+msgid "Geology"
+msgstr "Геология и география"
+
+#: Genres.cs:220
+msgid "History"
+msgstr "История"
+
+#: Genres.cs:221
+msgid "Jurisprudence"
+msgstr "Юриспруденция"
+
+#: Genres.cs:222
+msgid "Linguistics"
+msgstr "Языкознание"
+
+#: Genres.cs:223
+msgid "Mathematics"
+msgstr "Математика"
+
+#: Genres.cs:224
+msgid "Medicine"
+msgstr "Медицина"
+
+#: Genres.cs:225
+msgid "Alternative medicine"
+msgstr "Альтернативная медицина"
+
+#: Genres.cs:226
+msgid "Metallurgy"
+msgstr "Металлургия"
+
+#: Genres.cs:227
+msgid "Organic Chemistry"
+msgstr "Органическая химия"
+
+#: Genres.cs:228
+msgid "Pedagogy"
+msgstr "Педагогика"
+
+#: Genres.cs:229
+msgid "Philology"
+msgstr "Литературоведение"
+
+#: Genres.cs:230
+msgid "Philosophy"
+msgstr "Философия"
+
+#: Genres.cs:231
+msgid "Physics"
+msgstr "Физика"
+
+#: Genres.cs:232
+msgid "Physical chemistry"
+msgstr "Физическая химия"
+
+#: Genres.cs:233
+msgid "Politics"
+msgstr "Политика"
+
+#: Genres.cs:234
+msgid "Science popular"
+msgstr "Научпоп"
+
+#: Genres.cs:235
+msgid "Psychology"
+msgstr "Психология"
+
+#: Genres.cs:236
+msgid "Radio"
+msgstr "Радиоэлектроника"
+
+#: Genres.cs:237
+msgid "Religious Studies"
+msgstr "Религиоведение"
+
+#: Genres.cs:238
+msgid "Social studies"
+msgstr "Обществознание"
+
+#: Genres.cs:239
+msgid "State science"
+msgstr "Государство и право"
+
+#: Genres.cs:240
+msgid "Technical"
+msgstr "Технические науки"
+
+#: Genres.cs:241
+msgid "Textbook"
+msgstr "Учебники"
+
+#: Genres.cs:242
+msgid "Transport"
+msgstr "Транспорт и авиация"
+
+#: Genres.cs:243
+msgid "Veterinary"
+msgstr "Ветеринария"
+
+#: Genres.cs:244
+msgid "Zoology"
+msgstr "Зоология"
+
+#: Genres.cs:245
+msgid "Misk Science, Education"
+msgstr "Научная литература: прочее"
+
+#: Genres.cs:246
+msgid "Screenplays"
+msgstr "Киносценарии"
+
+#: Genres.cs:247
+msgid "Science Fiction"
+msgstr "Научная фантастика"
+
+#: Genres.cs:248
+msgid "Action SF"
+msgstr "Боевая фантастика"
+
+#: Genres.cs:249
+msgid "Cyberpunk"
+msgstr "Киберпанк"
+
+#: Genres.cs:250
+msgid "Detective SF"
+msgstr "Детективная фантастика"
+
+#: Genres.cs:251
+msgid "Epic SF"
+msgstr "Эпическая фантастика"
+
+#: Genres.cs:252
+msgid "Other SF"
+msgstr "Фантастика: прочее"
+
+#: Genres.cs:253
+msgid "Fantasy"
+msgstr "Фэнтези"
+
+#: Genres.cs:254
+msgid "Fantasy city"
+msgstr "Городское фэнтези"
+
+#: Genres.cs:255
+msgid "Ironyc female fantasy"
+msgstr "Ироническое фэнтези"
+
+#: Genres.cs:256
+msgid "Heroic SF"
+msgstr "Героическая фантастика"
+
+#: Genres.cs:257
+msgid "Alternative history"
+msgstr "Альтернативная история"
+
+#: Genres.cs:258
+msgid "Horror"
+msgstr "Ужасы"
+
+#: Genres.cs:259
+msgid "Humor SF"
+msgstr "Юмористическая фантастика"
+
+#: Genres.cs:260
+msgid "Ironical SF"
+msgstr "Ироническая фантастика"
+
+#: Genres.cs:261
+msgid "Mystic"
+msgstr "Мистика"
+
+#: Genres.cs:262
+msgid "Postapocalyptic"
+msgstr "Постапокалипсис"
+
+#: Genres.cs:263
+msgid "Social SF"
+msgstr "Социальная фантастика"
+
+#: Genres.cs:264
+msgid "Space SF"
+msgstr "Космическая фантастика"
+
+#: Genres.cs:265
+msgid "Space Opera"
+msgstr "Космоопера"
+
+#: Genres.cs:266
+msgid "Stimpank"
+msgstr "Стимпанк"
+
+#: Genres.cs:267
+msgid "Technofantasy"
+msgstr "Технофэнтези"
+
+#: Genres.cs:268
+msgid "Short story"
+msgstr "Рассказ"
+
+#: Genres.cs:269
+msgid "Small Business"
+msgstr "Малый бизнес"
+
+#: Genres.cs:270
+msgid "Song Poetry"
+msgstr "Песенная поэзия"
+
+#: Genres.cs:271
+msgid "Stock"
+msgstr "Ценные бумаги, инвестиции"
+
+#: Genres.cs:272
+msgid "Story"
+msgstr "Новелла"
+
+#: Genres.cs:273
+msgid "Theatre"
+msgstr "Театр"
+
+#: Genres.cs:274
+msgid "Thrillers"
+msgstr "Триллер"
+
+#: Genres.cs:275
+msgid "Legal thriller"
+msgstr "Юридический триллер"
+
+#: Genres.cs:276
+msgid "Medical thriller"
+msgstr "Медицинский триллер"
+
+#: Genres.cs:277
+msgid "Techno Thriller"
+msgstr "Техно триллер"
+
+#: Genres.cs:278
+msgid "Trade"
+msgstr "Торговля"
+
+#: Genres.cs:279
+msgid "Tragedy"
+msgstr "Трагедия"
+
+#: Genres.cs:280
+msgid "Unfinished"
+msgstr "Недописанное"
+
+#: Genres.cs:281
+msgid "Vaudeville"
+msgstr "Водевиль"
+
+#: Genres.cs:282
+msgid "Vers libre"
+msgstr "Верлибры"
+
+#: Genres.cs:283
+msgid "Visual Arts"
+msgstr "Изобразительное искусство, фотография"
+
+#: Genres.cs:284
+msgid "Visual Poetry"
+msgstr "Визуальная поэзия"
+
+#: Genres.cs:285
+msgid "Young-adult fiction"
+msgstr "Подростковая литература"
+
+#: Genres.cs:287
+msgctxt "Genres|Category|"
+msgid "SF, Fantasy"
+msgstr "Фантастика"
+
+#: Genres.cs:288
+msgctxt "Genres|Category|"
+msgid "Detectives, Thrillers"
+msgstr "Детективы и Триллеры"
+
+#: Genres.cs:289
+msgctxt "Genres|Category|"
+msgid "Prose"
+msgstr "Проза"
+
+#: Genres.cs:290
+msgctxt "Genres|Category|"
+msgid "Love"
+msgstr "Любовные романы"
+
+#: Genres.cs:291
+msgctxt "Genres|Category|"
+msgid "Adventures"
+msgstr "Приключения"
+
+#: Genres.cs:292
+msgctxt "Genres|Category|"
+msgid "Children's"
+msgstr "Детское"
+
+#: Genres.cs:293
+msgctxt "Genres|Category|"
+msgid "Poetry, Dramaturgy"
+msgstr "Поэзия"
+
+#: Genres.cs:294
+msgctxt "Genres|Category|"
+msgid "Antique"
+msgstr "Старинное"
+
+#: Genres.cs:295
+msgctxt "Genres|Category|"
+msgid "Science, Education"
+msgstr "Наука, Образование"
+
+#: Genres.cs:296
+msgctxt "Genres|Category|"
+msgid "Computers"
+msgstr "Компьютеры и Интернет"
+
+#: Genres.cs:297
+msgctxt "Genres|Category|"
+msgid "Reference"
+msgstr "Справочная литература"
+
+#: Genres.cs:298
+msgctxt "Genres|Category|"
+msgid "Religion"
+msgstr "Религия и духовность"
+
+#: Genres.cs:299
+msgctxt "Genres|Category|"
+msgid "Humor"
+msgstr "Юмор"
+
+#: Genres.cs:300
+msgctxt "Genres|Category|"
+msgid "Home, Family"
+msgstr "Домоводство (Дом и семья)"
+
+#: Genres.cs:301
+msgctxt "Genres|Category|"
+msgid "Technics"
+msgstr "Техника"
+
+#: Genres.cs:302
+msgctxt "Genres|Category|"
+msgid "Other"
+msgstr "Прочее"
+
+#: Genres.cs:303
+msgctxt "Genres|Category|"
+msgid "Economy, Business"
+msgstr "Деловая литература"
+
+#: Genres.cs:304
+msgctxt "Genres|Category|"
+msgid "Nonfiction"
+msgstr "Документальная литература"
+
+#: Genres.cs:305
+msgctxt "Genres|Category|"
+msgid "Dramaturgy"
+msgstr "Драматургия"
+
+#: Genres.cs:306
+msgctxt "Genres|Category|"
+msgid "Folklore"
+msgstr "Фольклор"
+
+#: Genres.cs:307
+msgctxt "Genres|Category|"
+msgid "Military"
+msgstr "Военное дело"

@@ -1,102 +1,43 @@
-﻿using CommandLine;
-using DotOPDS.Commands;
-using DotOPDS.Utils;
-using NLog;
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+using DotOPDS.Manage;
+using DotOPDS.Manage.Commands;
+using DotOPDS.Shared;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace DotOPDS
+var builder = Host.CreateDefaultBuilder(args);
+
+// Make console use fancy unicode on Windows
+System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+// Suppress Lifetime logging
+builder.ConfigureAppConfiguration((hostContext, config) =>
 {
-    class Program
+    config.AddInMemoryCollection(new Dictionary<string, string>
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-        private static ManualResetEvent exitEvent = new ManualResetEvent(false);
-        public static ManualResetEvent Exit { get { return exitEvent; } }
+        {"Logging:LogLevel:Microsoft.Hosting.Lifetime", "None"}
+    });
+});
 
-        static int Main(string[] args)
-        {
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+builder.ConfigureServices((hostContext, services) =>
+{
+    services.Configure<MainServiceOptions>(options =>
+    {
+        options.Args = args;
+    });
 
-            Console.CancelKeyPress += Console_CancelKeyPress;
+    SharedServices.ConfigureServices(services, hostContext.Configuration);
 
-            var result = Parser.Default.ParseArguments<
-                ImportOptions,
-                ServeOptions,
-                LsOptions,
-                MvOptions,
-                RmOptions,
-                InitOptions
-                #if DEBUG_FIXTURE
-                ,FixtureOptions
-                #endif
-                >(args).MapResult(
-                    (ImportOptions opts) => RunCommand(typeof(ImportCommand), opts),
-                    (ServeOptions opts) => RunCommand(typeof(ServeCommand), opts),
-                    (LsOptions opts) => RunCommand(typeof(LsCommand), opts),
-                    (MvOptions opts) => RunCommand(typeof(MvCommand), opts),
-                    (RmOptions opts) => RunCommand(typeof(RmCommand), opts),
-                    (InitOptions opts) => RunCommand(typeof(InitCommand), opts),
-                    #if DEBUG_FIXTURE
-                    (FixtureOptions opts) => RunCommand(typeof(FixtureCommand), opts),
-                    #endif
-                    errs => 1);
+    services.AddScoped<ListCommand>();
+    services.AddScoped<MoveCommand>();
+    services.AddScoped<RemoveCommand>();
+    services.AddScoped<ImportCommand>();
+    //services.AddScoped<FixtureCommand>();
 
-            return result;
-        }
+    services.AddSingleton<IHostedService, MainService>();
+});
 
-        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
-        {
-            e.Cancel = true;
-            exitEvent.Set();
-        }
-
-        private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
-        {
-            HandleException(e.Exception);
-        }
-
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            HandleException((Exception)e.ExceptionObject);
-        }
-
-        public static void HandleException(Exception e)
-        {
-            Console.WriteLine();
-
-            if (Util.IsLinux)
-            {
-                logger.Error(e, "Unhandled exception");
-            }
-            else
-            {
-                var dump = Path.Combine(Path.GetTempPath(), string.Format("DotOPDS_{0}.mdmp", Guid.NewGuid()));
-                using (var fs = new FileStream(dump, FileMode.Create, FileAccess.ReadWrite, FileShare.Write))
-                {
-#if DEBUG
-                    var flags = MiniDump.Option.WithFullMemory
-                              | MiniDump.Option.WithFullMemoryInfo
-                              | MiniDump.Option.WithThreadInfo;
-#else
-                    var flags = MiniDump.Option.WithThreadInfo
-                              | MiniDump.Option.WithProcessThreadData
-                              | MiniDump.Option.WithHandleData;
-#endif
-                    MiniDump.Write(fs.SafeFileHandle, flags);
-                }
-                logger.Error("Something bad happened... Dump written to {0}", dump);
-            }
-
-            Environment.Exit(1);
-        }
-
-        private static int RunCommand(Type command, BaseOptions options)
-        {
-            var cmd = (ICommand)Activator.CreateInstance(command);
-            return cmd.Run(options);
-        }
-    }
-}
+var app = builder.Build();
+await app.RunAsync();
+//var mainService = app.Services.GetRequiredService<MainService>();
+//await mainService.StartAsync();
