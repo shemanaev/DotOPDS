@@ -93,7 +93,6 @@ docker exec -it CONTAINER_ID /bin/bash
 
 ## Preparing release
 
-* Bump version in `appveyor.yml`
 * Make tag with version number
 * Wait for ci build completed and edit draft description
 * Publish

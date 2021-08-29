@@ -20,7 +20,7 @@ public class DownloadControllerTest : Fixtures.IntegrationTest
         data.Length.Should().Be(1820);
     }
 
-    [Fact]
+    [Fact(Skip = "Find a better way to launch converter cross-platform")]
     public async Task Get_Fb2_Converted_Book()
     {
         var file = await _client.GetAsync("/download/file/24ce7b01-ca08-4c7a-99b5-594e967eb8b0/epub");
