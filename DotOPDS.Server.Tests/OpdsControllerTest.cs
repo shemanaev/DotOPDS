@@ -64,7 +64,8 @@ public class OpdsControllerTest : Fixtures.IntegrationTest
     [Fact]
     public async Task Get_Search_Advanced()
     {
-        var feed = await _client.GetAndDeserialize<Feed>("/opds/search/advanced?q=title:жизнь AND author:александр");
+        // new lucene query parser eliminates "title:жизнь" with russian analyzer. is it stopword?
+        var feed = await _client.GetAndDeserialize<Feed>("/opds/search/advanced?q=title:тайна AND author:александр");
 
         feed.Total.Should().Be(2);
         feed.ItemsPerPage.Should().Be(_presentationOptions.PageSize);

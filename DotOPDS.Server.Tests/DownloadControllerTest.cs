@@ -11,7 +11,7 @@ public class DownloadControllerTest : Fixtures.IntegrationTest
     [Fact]
     public async Task Get_Fb2_Book()
     {
-        var file = await _client.GetAsync("/download/file/24ce7b01-ca08-4c7a-99b5-594e967eb8b0/fb2");
+        var file = await _client.GetAsync("/download/file/798a5d93-e5e5-48c0-9af6-b1e76ee20ee1/fb2");
 
         file.Content.Headers.ContentType?.MediaType.Should().Be("application/fb2");
         file.Content.Headers.ContentDisposition!.FileNameStar.Should().Be("Владимир Казимирович Венгловский - Хардкор.fb2");
@@ -23,7 +23,7 @@ public class DownloadControllerTest : Fixtures.IntegrationTest
     [Fact(Skip = "Find a better way to launch converter cross-platform")]
     public async Task Get_Fb2_Converted_Book()
     {
-        var file = await _client.GetAsync("/download/file/24ce7b01-ca08-4c7a-99b5-594e967eb8b0/epub");
+        var file = await _client.GetAsync("/download/file/798a5d93-e5e5-48c0-9af6-b1e76ee20ee1/epub");
 
         file.Content.Headers.ContentType?.MediaType.Should().Be("application/epub+zip");
         file.Content.Headers.ContentDisposition!.FileNameStar.Should().Be("Владимир Казимирович Венгловский - Хардкор.epub");

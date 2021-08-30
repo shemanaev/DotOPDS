@@ -1,0 +1,4 @@
+{
+  "Version": 1,
+  "Libraries": { "1ba192fe-6e8a-4864-8424-76d8bd00904e": { "Path": "../../../TestData/books" } }
+}
